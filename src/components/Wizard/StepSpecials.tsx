@@ -30,39 +30,28 @@ export default function StepSpecials() {
             </div>
 
             <div className="flex gap-4 mb-6">
-                <Button onClick={() => handleAddAddon('Carpet Extraction')} className="bg-blue-900/40 text-blue-300 hover:bg-blue-800/60 border border-blue-800">
-                    <Plus className="w-4 h-4 mr-2" /> Agregar Alfombras
-                </Button>
-                <Button onClick={() => handleAddAddon('Floor Scrub')} className="bg-emerald-900/40 text-emerald-300 hover:bg-emerald-800/60 border border-emerald-800">
-                    <Plus className="w-4 h-4 mr-2" /> Agregar Pisos Duros
-                </Button>
-                <Button onClick={() => handleAddAddon('Window Cleaning')} className="bg-cyan-900/40 text-cyan-300 hover:bg-cyan-800/60 border border-cyan-800">
-                    <Plus className="w-4 h-4 mr-2" /> Agregar Vidrios
-                </Button>
+                <CardTitle className="text-2xl font-bold text-slate-900 mb-2">Paso 6: Servicios Especiales</CardTitle>
+                <CardDescription className="text-slate-500">Add-ons y servicios adicionales (Upsells).</CardDescription>
             </div>
 
             <div className="space-y-4">
                 {state.addons.map(addon => (
-                    <div key={addon.id} className="p-4 border border-slate-800 rounded-xl bg-slate-950 flex justify-between items-center">
+                    <div key={addon.id} className="p-4 border border-slate-200 rounded-xl bg-white shadow-sm flex justify-between items-center">
                         <div>
-                            <div className="font-bold text-white text-lg">{addon.name}</div>
-                            <div className="text-sm text-slate-400 flex gap-4 mt-1">
-                                <span className="text-blue-400">{addon.frequency}</span>
-                                <span className="text-amber-500">Interest: {addon.clientInterest}</span>
-                                <span>{addon.sqft} sqft</span>
+                            <div className="font-bold text-slate-900">{addon.name}</div>
+                            <div className="text-sm text-slate-500">
+                                {addon.frequency} - Interés: {addon.clientInterest} - {addon.sqft} sqft
                             </div>
                         </div>
-                        <Button size="sm" variant="outline" className="text-red-400 border-red-900 hover:bg-red-900/50" onClick={() => removeAddon(addon.id)}>
+                        <Button size="sm" variant="outline" className="text-red-500 border-red-200 hover:bg-red-50" onClick={() => removeAddon(addon.id)}>
                             <Trash2 className="w-4 h-4" />
                         </Button>
                     </div>
                 ))}
 
-                {state.addons.length === 0 && (
-                    <div className="text-center p-8 border border-dashed border-slate-800 rounded-xl text-slate-500">
-                        No has ofrecido Add-ons. Un upsell promedio incrementa el contrato anual en 15%.
-                    </div>
-                )}
+                <Button onClick={() => handleAddAddon('Carpet Extraction')} className="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-300 border-dashed">
+                    <Plus className="w-4 h-4 mr-2" /> Sugerir Upsell (Ej. Carpet Extraction)
+                </Button>
             </div>
         </div>
     );

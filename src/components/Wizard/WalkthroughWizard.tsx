@@ -53,21 +53,21 @@ export function WalkthroughWizard() {
     };
 
     return (
-        <div className="w-full max-w-7xl mx-auto flex flex-col min-h-screen bg-slate-950 text-slate-100">
+        <div className="w-full max-w-7xl mx-auto flex flex-col min-h-screen bg-slate-50 text-slate-900">
             {/* 1. FIXED HEADER */}
-            <div className="sticky top-0 z-50 bg-slate-900 border-b border-slate-800 px-6 py-4 shadow-xl flex flex-col gap-2">
+            <div className="sticky top-0 z-50 bg-white border-b border-slate-200 px-6 py-4 shadow-sm flex flex-col gap-2">
                 <div className="flex justify-between items-center">
                     <div>
-                        <h2 className="text-xl font-bold tracking-tight text-white">
+                        <h2 className="text-xl font-bold tracking-tight text-slate-900">
                             {client.company ? `${client.company} - Walkthrough` : "New Client Walkthrough"}
                         </h2>
-                        <span className="text-xs font-bold uppercase tracking-widest bg-amber-500/20 text-amber-500 px-2 py-1 rounded-md mt-1 inline-block">
+                        <span className="text-xs font-bold uppercase tracking-widest bg-amber-100 text-amber-600 px-2 py-1 rounded-md mt-1 inline-block">
                             Draft Status
                         </span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <span className="text-sm font-medium text-slate-400">Step {currentStep} of 8</span>
-                        <div className="w-32 h-2 bg-slate-800 rounded-full overflow-hidden">
+                        <span className="text-sm font-bold text-slate-500">Step {currentStep} of 8</span>
+                        <div className="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
                             <div className="h-full bg-blue-600 transition-all duration-300" style={{ width: `${progressPercentage}%` }} />
                         </div>
                     </div>
@@ -79,22 +79,22 @@ export function WalkthroughWizard() {
 
                 {/* LEFT: STEP CONTENT */}
                 <div className="lg:col-span-8 flex flex-col space-y-6">
-                    <div className="flex-grow bg-slate-900 border border-slate-800 rounded-2xl shadow-lg p-6 overflow-hidden">
+                    <div className="flex-grow bg-white border border-slate-200 rounded-2xl shadow-sm p-6 overflow-hidden">
                         {!pricingModel && (
-                            <div className="mb-4 text-xs font-bold text-blue-400 bg-blue-900/20 p-3 rounded-lg flex items-center gap-2">
-                                <div className="w-2 h-2 rounded-full bg-blue-400 animate-pulse"></div> Syncing Pricing from Database...
+                            <div className="mb-4 text-xs font-bold text-blue-700 bg-blue-50 p-3 rounded-lg flex items-center gap-2 border border-blue-100">
+                                <div className="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></div> Syncing Pricing from Database...
                             </div>
                         )}
                         {getStepComponent()}
                     </div>
 
                     {/* NAVIGATION CONTROLS */}
-                    <div className="flex justify-between items-center bg-slate-900 p-4 rounded-xl border border-slate-800">
+                    <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-slate-200 shadow-sm">
                         <Button
                             variant="outline"
                             disabled={currentStep === 1}
                             onClick={prevStep}
-                            className="bg-slate-950 border-slate-700 hover:bg-slate-800 text-slate-200"
+                            className="bg-white border-slate-300 hover:bg-slate-50 text-slate-700"
                         >
                             Volver Atrás
                         </Button>

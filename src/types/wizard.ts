@@ -12,15 +12,10 @@ export type ClientProfile = {
 
 export type SiteProfile = {
     siteType: string;
+    buildingClass: 'A' | 'B' | 'C';
     sqft: number;
     cleaningFrequency: string; // e.g. "Weekly"
     accessHours: string;
-};
-
-export type InventoryItem = {
-    id: string; // unique
-    type: string; // 'Restroom', 'Kitchen', 'Stairwell', etc
-    count: number;
 };
 
 export type Area = {
@@ -28,7 +23,11 @@ export type Area = {
     name: string; // e.g. "Main Floor"
     sqft: number;
     floorType: string; // 'Carpet', 'Hardwood', 'VCT'
-    inventory: InventoryItem[];
+    fixtures: {
+        toilets: number;
+        urinals: number;
+        sinks: number;
+    };
 };
 
 export type Addon = {

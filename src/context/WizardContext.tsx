@@ -10,7 +10,7 @@ import type {
 const defaultState: WizardState = {
     currentStep: 1,
     client: { name: '', email: '', phone: '', company: '' },
-    site: { siteType: 'Office', sqft: 0, cleaningFrequency: 'Weekly', accessHours: 'After 6 PM' },
+    site: { siteType: 'Office', buildingClass: 'B', sqft: 0, cleaningFrequency: 'Weekly', accessHours: 'After 6 PM' },
     areas: [],
     addons: [],
     compliance: { needsSecurityClearance: false, hasAlarmCode: false, alarmNotes: '' },
@@ -90,7 +90,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
 
     const recalculateTotals = () => {
         setState(prev => {
-            const { areas, addons, pricingModel, financials } = prev;
+            const { areas, addons, pricingModel, financials, site } = prev;
             if (!pricingModel) return prev;
 
             let totalSqft = 0;
@@ -100,14 +100,23 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const hstRateStr = pricingModel.assumptions.find(a => a.key === 'HST')?.value || 0.13;
             const hstRate = Number(hstRateStr);
 
+            // Determine Production Rate based on Building Class
+            let productionRate = 2500; // Default Class B
+            if (site.buildingClass === 'A') productionRate = 2000;
+            if (site.buildingClass === 'C') productionRate = 3000;
+
             // 1. Calculate Areas base hours
             areas.forEach(area => {
                 totalSqft += area.sqft;
-                const bathCount = area.inventory.find(i => i.type === 'Restroom')?.count || 0;
-                totalBathrooms += bathCount;
 
-                // Estimate hours: 2500 sqft per hour + 15 mins (0.25 hrs) per bathroom
-                totalHours += (area.sqft / 2500) + (bathCount * 0.25);
+                // Fixture counts
+                const { toilets, urinals, sinks } = area.fixtures || { toilets: 0, urinals: 0, sinks: 0 };
+                totalBathrooms += (toilets + urinals + sinks);
+
+                // Estimate hours: (Area / Production Rate) + (Fixtures * Mins/Unit / 60)
+                // Timings: Toilet: 3 mins, Urinal: 2 mins, Sink: 1 min
+                const fixtureHours = ((toilets * 3) + (urinals * 2) + (sinks * 1)) / 60;
+                totalHours += (area.sqft / productionRate) + fixtureHours;
             });
 
             // 2. Add Add-ons hours
@@ -168,7 +177,12 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
     const duplicateArea = (id: string) => setState(prev => {
         const target = prev.areas.find(a => a.id === id);
         if (!target) return prev;
-        const copy = { ...target, id: crypto.randomUUID(), name: `${target.name} (Copy)` };
+        const copy: Area = {
+            ...target,
+            id: crypto.randomUUID(),
+            name: `${target.name} (Copy)`,
+            fixtures: { ...target.fixtures }
+        };
         return { ...prev, areas: [...prev.areas, copy] };
     });
 
