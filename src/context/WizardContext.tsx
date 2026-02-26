@@ -15,10 +15,19 @@ const defaultState: WizardState = {
     addons: [],
     compliance: { needsSecurityClearance: false, hasAlarmCode: false, alarmNotes: '' },
     evidence: { walkthroughNotes: '', photosAttached: false },
+    financials: {
+        laborRate: 17.60,
+        remittances: 2.50,
+        overheadMargin: 0.15,
+        profitMargin: 0.20
+    },
     pricingModel: null,
     totals: {
         totalSqft: 0,
         totalBathrooms: 0,
+        totalHours: 0,
+        baseCost: 0,
+        costWithOverhead: 0,
         subtotal: 0,
         tax: 0,
         finalTotal: 0
@@ -45,6 +54,8 @@ type WizardContextType = {
 
     updateCompliance: (data: Partial<ComplianceData>) => void;
     updateEvidence: (data: Partial<EvidenceData>) => void;
+
+    updateFinancials: (data: Partial<WizardState['financials']>) => void;
 
     calculateTotals: () => void;
 };
@@ -75,51 +86,61 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
         if (state.pricingModel) {
             recalculateTotals();
         }
-    }, [state.areas, state.addons, state.site.cleaningFrequency, state.pricingModel]);
+    }, [state.areas, state.addons, state.site.cleaningFrequency, state.pricingModel, state.financials]);
 
     const recalculateTotals = () => {
         setState(prev => {
-            const { areas, addons, pricingModel } = prev;
+            const { areas, addons, pricingModel, financials } = prev;
             if (!pricingModel) return prev;
 
             let totalSqft = 0;
             let totalBathrooms = 0;
-            let rawSubtotal = 0; // Simple mock calculation logic for the frontend until matched with specific Task IDs
+            let totalHours = 0;
 
             const hstRateStr = pricingModel.assumptions.find(a => a.key === 'HST')?.value || 0.13;
             const hstRate = Number(hstRateStr);
 
-            // 1. Calculate Areas base cost
+            // 1. Calculate Areas base hours
             areas.forEach(area => {
                 totalSqft += area.sqft;
                 const bathCount = area.inventory.find(i => i.type === 'Restroom')?.count || 0;
                 totalBathrooms += bathCount;
 
-                // Base 0.05 per sqft + 15 per bathroom (Simulated using dynamic logic rules, real app uses exact Task values from the fetched pricingModel)
-                // In a true M5 calculation, this iterates the Engine rules using pricingModel.taskPrices values
-                rawSubtotal += (area.sqft * 0.05) + (bathCount * 15.0);
+                // Estimate hours: 2500 sqft per hour + 15 mins (0.25 hrs) per bathroom
+                totalHours += (area.sqft / 2500) + (bathCount * 0.25);
             });
 
-            // 2. Add Add-ons cost
+            // 2. Add Add-ons hours
             addons.forEach(addon => {
-                if (addon.frequency === 'Recurring') {
-                    // e.g. Carpet Extraction recurring
-                    rawSubtotal += (addon.sqft * 0.15);
-                } else {
-                    // One-time is separated, but we can add to a unique 'Setup Fee' or keep in subtotal based on business rules
-                    rawSubtotal += (addon.sqft * 0.20);
-                }
+                // Estimate 1 hour per 500 sqft for addons as a baseline
+                totalHours += (addon.sqft / 500);
             });
 
-            const tax = rawSubtotal * hstRate;
-            const finalTotal = rawSubtotal + tax;
+            // Financial Calculation: 4-Step Logic
+            const { laborRate, remittances, overheadMargin, profitMargin } = financials;
+
+            // Step 1: Base Cost (Labor + Remittances)
+            const baseCost = (laborRate + remittances) * totalHours;
+
+            // Step 2: Overhead
+            const costWithOverhead = baseCost + (baseCost * overheadMargin);
+
+            // Step 3: Profit Margin (Subtotal)
+            const subtotal = costWithOverhead + (costWithOverhead * profitMargin);
+
+            // Step 4: Tax and Total
+            const tax = subtotal * hstRate;
+            const finalTotal = subtotal + tax;
 
             return {
                 ...prev,
                 totals: {
                     totalSqft,
                     totalBathrooms,
-                    subtotal: Number(rawSubtotal.toFixed(2)),
+                    totalHours: Number(totalHours.toFixed(2)),
+                    baseCost: Number(baseCost.toFixed(2)),
+                    costWithOverhead: Number(costWithOverhead.toFixed(2)),
+                    subtotal: Number(subtotal.toFixed(2)),
                     tax: Number(tax.toFixed(2)),
                     finalTotal: Number(finalTotal.toFixed(2))
                 }
@@ -166,6 +187,9 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
     const updateCompliance = (data: Partial<ComplianceData>) => setState(prev => ({ ...prev, compliance: { ...prev.compliance, ...data } }));
     const updateEvidence = (data: Partial<EvidenceData>) => setState(prev => ({ ...prev, evidence: { ...prev.evidence, ...data } }));
 
+    // Financials
+    const updateFinancials = (data: Partial<WizardState['financials']>) => setState(prev => ({ ...prev, financials: { ...prev.financials, ...data } }));
+
     return (
         <WizardContext.Provider value={{
             state, setStep, nextStep, prevStep,
@@ -173,6 +197,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             addArea, updateArea, removeArea, duplicateArea,
             addAddon, updateAddon, removeAddon,
             updateCompliance, updateEvidence,
+            updateFinancials,
             calculateTotals: recalculateTotals
         }}>
             {children}

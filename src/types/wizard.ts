@@ -59,6 +59,14 @@ export type WizardState = {
     compliance: ComplianceData;
     evidence: EvidenceData;
 
+    // Financial Variables (Editable in Sidebar)
+    financials: {
+        laborRate: number;
+        remittances: number;
+        overheadMargin: number; // Percentage (e.g., 0.15 for 15%)
+        profitMargin: number; // Percentage (e.g., 0.20 for 20%)
+    };
+
     // Dynamic Pricing (fetched from API)
     pricingModel: PricingData | null;
 
@@ -66,6 +74,9 @@ export type WizardState = {
     totals: {
         totalSqft: number;
         totalBathrooms: number;
+        totalHours: number;
+        baseCost: number;
+        costWithOverhead: number;
         subtotal: number;
         tax: number;
         finalTotal: number;

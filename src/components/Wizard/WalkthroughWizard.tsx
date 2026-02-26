@@ -4,6 +4,8 @@ import React from 'react';
 import { useWizard } from '@/context/WizardContext';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
 import { Save, AlertCircle, CheckCircle2 } from 'lucide-react';
 import StepClientProfile from './StepClientProfile';
 import StepSiteProfile from './StepSiteProfile';
@@ -14,8 +16,8 @@ import StepCompliance from './StepCompliance';
 import StepEvidence from './StepEvidence';
 
 export function WalkthroughWizard() {
-    const { state, setStep, nextStep, prevStep } = useWizard();
-    const { currentStep, client, totals, areas, pricingModel } = state;
+    const { state, setStep, nextStep, prevStep, updateFinancials } = useWizard();
+    const { currentStep, client, totals, areas, pricingModel, financials } = state;
 
     const progressPercentage = (currentStep / 8) * 100;
 
@@ -146,16 +148,50 @@ export function WalkthroughWizard() {
                                 </div>
                             )}
 
+                            {/* ADJUSTABLE FINANCIALS */}
+                            <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-4">
+                                <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100 pb-2 mb-2">Variables Financieras</h4>
+
+                                <div className="grid grid-cols-2 gap-4">
+                                    <div className="space-y-1">
+                                        <Label className="text-[10px] font-bold uppercase text-slate-500">Labor Rate ($/hr)</Label>
+                                        <Input type="number" step="0.01" value={financials.laborRate} onChange={e => updateFinancials({ laborRate: Number(e.target.value) })} className="h-8 text-sm bg-slate-50 border-slate-200 font-medium" />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label className="text-[10px] font-bold uppercase text-slate-500">Remittances ($/hr)</Label>
+                                        <Input type="number" step="0.01" value={financials.remittances} onChange={e => updateFinancials({ remittances: Number(e.target.value) })} className="h-8 text-sm bg-slate-50 border-slate-200 font-medium" />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label className="text-[10px] font-bold uppercase text-slate-500">Overhead (%)</Label>
+                                        <Input type="number" step="0.01" value={financials.overheadMargin} onChange={e => updateFinancials({ overheadMargin: Number(e.target.value) })} className="h-8 text-sm bg-slate-50 border-slate-200 font-medium" />
+                                    </div>
+                                    <div className="space-y-1">
+                                        <Label className="text-[10px] font-bold uppercase text-slate-500">Profit (%)</Label>
+                                        <Input type="number" step="0.01" value={financials.profitMargin} onChange={e => updateFinancials({ profitMargin: Number(e.target.value) })} className="h-8 text-sm bg-slate-50 border-slate-200 font-medium" />
+                                    </div>
+                                </div>
+                            </div>
+
                             {/* COST BREAKDOWN (Requested feature) */}
                             <div className="bg-white p-4 rounded-xl border border-slate-200 shadow-sm space-y-3">
                                 <h4 className="text-xs font-bold uppercase tracking-widest text-slate-400 border-b border-slate-100 pb-2 mb-2">Desglose Financiero</h4>
 
-                                <div className="flex justify-between text-sm items-center text-slate-600 font-medium">
-                                    <span>Subtotal Serv. Constante</span>
-                                    <span className="text-lg font-bold text-slate-800">${totals.subtotal.toFixed(2)}</span>
+                                <div className="flex justify-between text-xs items-center text-slate-600 font-medium">
+                                    <span>Labor & Remit ({totals.totalHours} hrs)</span>
+                                    <span>${totals.baseCost.toFixed(2)}</span>
                                 </div>
 
-                                <div className="flex justify-between text-sm items-center text-slate-500">
+                                <div className="flex justify-between text-xs items-center text-slate-600 font-medium">
+                                    <span>+ Overhead Margin ({(financials.overheadMargin * 100).toFixed(0)}%)</span>
+                                    <span>${totals.costWithOverhead.toFixed(2)}</span>
+                                </div>
+
+                                <div className="flex justify-between text-sm items-center text-slate-800 font-bold border-t border-slate-100 pt-2 mt-2">
+                                    <span>+ Profit Margin ({(financials.profitMargin * 100).toFixed(0)}%) = Subtotal</span>
+                                    <span className="text-lg">${totals.subtotal.toFixed(2)}</span>
+                                </div>
+
+                                <div className="flex justify-between text-xs items-center text-slate-500">
                                     <span>HST (13%)</span>
                                     <span>${totals.tax.toFixed(2)}</span>
                                 </div>
