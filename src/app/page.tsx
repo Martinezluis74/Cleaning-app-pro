@@ -1,5 +1,6 @@
 import { UploadZip } from "@/components/UploadZip";
-import { QuoteBuilder } from "@/components/QuoteBuilder";
+import { WalkthroughWizard } from "@/components/Wizard/WalkthroughWizard";
+import { WizardProvider } from "@/context/WizardContext";
 
 export default function Home() {
     return (
@@ -11,13 +12,15 @@ export default function Home() {
                     Cleaning <span className="text-blue-600">Pro</span> Quotes
                 </h1>
                 <p className="text-lg md:text-xl text-slate-400 font-medium tracking-widest uppercase">
-                    Ontario's Trusted Commercial Cleaning Engine
+                    Professional Walkthrough Wizard
                 </p>
             </div>
 
-            {/* M5 LIVE ENGINE */}
+            {/* M5 LIVE WIZARD (State context provided here) */}
             <div className="w-full">
-                <QuoteBuilder />
+                <WizardProvider>
+                    <WalkthroughWizard />
+                </WizardProvider>
             </div>
 
             {/* M3 UPLOAD ENGINE (Admin View) */}
