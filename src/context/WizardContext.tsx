@@ -10,7 +10,15 @@ import type {
 const defaultState: WizardState = {
     currentStep: 1,
     client: { name: '', email: '', phone: '', company: '' },
-    site: { siteType: 'Office', buildingClass: 'B', sqft: 0, cleaningFrequency: 'Weekly', accessHours: 'After 6 PM' },
+    site: {
+        siteType: 'Office',
+        buildingClass: 'B',
+        sqft: 2000,
+        cleaningFrequency: 5,
+        floorType: 'Carpet',
+        fixtures: { toilets: 2, urinals: 0, sinks: 2 },
+        accessHours: 'After 6 PM'
+    },
     areas: [],
     addons: [],
     compliance: { needsSecurityClearance: false, hasAlarmCode: false, alarmNotes: '' },
@@ -86,15 +94,14 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
         if (state.pricingModel) {
             recalculateTotals();
         }
-    }, [state.areas, state.addons, state.site.cleaningFrequency, state.pricingModel, state.financials]);
+    }, [state.areas, state.addons, state.site, state.pricingModel, state.financials]);
 
     const recalculateTotals = () => {
         setState(prev => {
             const { areas, addons, pricingModel, financials, site } = prev;
             if (!pricingModel) return prev;
 
-            let totalSqft = 0;
-            let totalBathrooms = 0;
+            let totalSqft = site.sqft || 0;
             let totalHours = 0;
 
             const hstRateStr = pricingModel.assumptions.find(a => a.key === 'HST')?.value || 0.13;
@@ -105,19 +112,38 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             if (site.buildingClass === 'A') productionRate = 2000;
             if (site.buildingClass === 'C') productionRate = 3000;
 
-            // 1. Calculate Areas base hours
+            // 1. Calculate Base Building Hours
+            const { toilets, urinals, sinks } = site.fixtures || { toilets: 0, urinals: 0, sinks: 0 };
+            const totalBathrooms = toilets + urinals + sinks;
+
+            // Estimate hours: (Area / Production Rate) + (Fixtures * Mins/Unit / 60)
+            // Timings: Toilet: 3 mins, Urinal: 2 mins, Sink: 1 min
+            const fixtureHours = ((toilets * 3) + (urinals * 2) + (sinks * 1)) / 60;
+
+            // Si hay áreas detalladas (Paso 3 y 4 se mantienen temporalmente), las sumamos.
+            // Pero la base principal ahora viene del Step 2 (Levantamiento Técnico).
+            let areasSqft = 0;
+            let areasFixtureHours = 0;
+            let areasBathrooms = 0;
             areas.forEach(area => {
-                totalSqft += area.sqft;
-
-                // Fixture counts
-                const { toilets, urinals, sinks } = area.fixtures || { toilets: 0, urinals: 0, sinks: 0 };
-                totalBathrooms += (toilets + urinals + sinks);
-
-                // Estimate hours: (Area / Production Rate) + (Fixtures * Mins/Unit / 60)
-                // Timings: Toilet: 3 mins, Urinal: 2 mins, Sink: 1 min
-                const fixtureHours = ((toilets * 3) + (urinals * 2) + (sinks * 1)) / 60;
-                totalHours += (area.sqft / productionRate) + fixtureHours;
+                areasSqft += area.sqft;
+                const { toilets: aT, urinals: aU, sinks: aS } = area.fixtures || { toilets: 0, urinals: 0, sinks: 0 };
+                areasBathrooms += (aT + aU + aS);
+                areasFixtureHours += ((aT * 3) + (aU * 2) + (aS * 1)) / 60;
             });
+
+            // Usar áreas detalladas si existen, si no, usar el total del edificio
+            const effectiveSqft = areas.length > 0 ? areasSqft : totalSqft;
+            const effectiveBathrooms = areas.length > 0 ? areasBathrooms : totalBathrooms;
+            const effectiveFixtureHours = areas.length > 0 ? areasFixtureHours : fixtureHours;
+
+            // Base Hours per Day
+            const baseDailyHours = (effectiveSqft / productionRate) + effectiveFixtureHours;
+
+            // Adjust Total Hours based on Frequency (assuming rate is hourly, frequency affects weekly/monthly totals. For this mock, we calculate per visit)
+            // If the quote is per month, it would be baseDailyHours * (site.cleaningFrequency * 4.33).
+            // For now, we simulate a single visit or a week's snapshot as `totalHours`. Let's assume daily snapshot to match standard rate cards.
+            totalHours += baseDailyHours;
 
             // 2. Add Add-ons hours
             addons.forEach(addon => {
@@ -144,8 +170,8 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             return {
                 ...prev,
                 totals: {
-                    totalSqft,
-                    totalBathrooms,
+                    totalSqft: effectiveSqft,
+                    totalBathrooms: effectiveBathrooms,
                     totalHours: Number(totalHours.toFixed(2)),
                     baseCost: Number(baseCost.toFixed(2)),
                     costWithOverhead: Number(costWithOverhead.toFixed(2)),

@@ -14,7 +14,13 @@ export type SiteProfile = {
     siteType: string;
     buildingClass: 'A' | 'B' | 'C';
     sqft: number;
-    cleaningFrequency: string; // e.g. "Weekly"
+    cleaningFrequency: number; // e.g. 1 to 7
+    floorType: string; // 'Carpet', 'Hardwood', 'VCT', 'Ceramic', 'Concrete'
+    fixtures: {
+        toilets: number;
+        urinals: number;
+        sinks: number;
+    };
     accessHours: string;
 };
 
