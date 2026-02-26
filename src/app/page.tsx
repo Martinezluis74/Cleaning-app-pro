@@ -1,0 +1,38 @@
+import { UploadZip } from "@/components/UploadZip";
+import { QuoteBuilder } from "@/components/QuoteBuilder";
+
+export default function Home() {
+    return (
+        <div className="flex flex-col items-center justify-start min-h-screen p-4 text-center pb-24 bg-slate-950">
+
+            {/* PREMIUM HEADER */}
+            <div className="mt-16 mb-8">
+                <h1 className="text-5xl font-black tracking-tighter lg:text-7xl text-slate-50 mb-4 drop-shadow-2xl">
+                    Cleaning <span className="text-blue-600">Pro</span> Quotes
+                </h1>
+                <p className="text-lg md:text-xl text-slate-400 font-medium tracking-widest uppercase">
+                    Ontario's Trusted Commercial Cleaning Engine
+                </p>
+            </div>
+
+            {/* M5 LIVE ENGINE */}
+            <div className="w-full">
+                <QuoteBuilder />
+            </div>
+
+            {/* M3 UPLOAD ENGINE (Admin View) */}
+            <div className="w-full max-w-lg text-left mx-auto mt-24 pt-12 border-t border-slate-800">
+                <div className="flex flex-col items-center justify-center mb-8">
+                    <div className="text-center text-xs text-slate-500 font-black uppercase tracking-[0.2em] bg-slate-900 px-4 py-1.5 rounded-full ring-1 ring-slate-800">
+                        Admin / Datasets
+                    </div>
+                    <p className="text-slate-600 text-sm mt-3">Upload TSV Data ZIP to update calculation rules</p>
+                </div>
+                <div className="bg-slate-900 ring-1 ring-slate-800 p-6 rounded-2xl shadow-xl">
+                    <UploadZip />
+                </div>
+            </div>
+
+        </div>
+    );
+}

@@ -1,0 +1,50 @@
+PriceID	TaskID	Billable_UOM	PriceMin	PriceMax	CurrencyCode	Region	EffectiveFrom	EffectiveTo	ConditionCode	BuildingType	SourceDocID	SourceRef	ConfidenceCode	QA_Flags	NotesShort
+BP-001	TSK-164	SQFT	0.30	0.40	USD	US_BENCHMARK					D002	p8_l18	HIGH	CENTS_NOTATION	Strip/Wax range; note: may go to 0.50 for bad initial jobs.
+BP-002	TSK-165	SQFT	0.20	0.25	USD	US_BENCHMARK					D002	p8_l20	HIGH	CENTS_NOTATION	
+BP-003	TSK-166	SQFT	0.25		USD	US_BENCHMARK					D002	p8_l21	HIGH	CENTS_NOTATION	
+BP-004	TSK-167	SQFT	0.04	0.12	USD	US_BENCHMARK					D002	p8_l22	HIGH	CENTS_NOTATION	
+BP-005	TSK-168	SQFT	0.12		USD	US_BENCHMARK					D002	p8_l23	HIGH	CENTS_NOTATION	
+BP-006	TSK-169	SQFT	0.50	1.25	USD	US_BENCHMARK					D002	p8_l25	MEDIUM	MIXED_CURRENCY_NOTATION	Lower bound says 'cents'; upper uses '$'. Stored as USD $/sqft per RULE-001.
+BP-007	TSK-171	SQFT	0.25		USD	US_BENCHMARK					D002	p9_l2	HIGH	CENTS_NOTATION	
+BP-008	TSK-172	SQFT	0.12	0.18	USD	US_BENCHMARK					D002	p9_l3	HIGH	CENTS_NOTATION	Applies to 20K+ sqft jobs (per text).
+BP-009	TSK-173	SQFT	0.13		USD	US_BENCHMARK					D002	p9_l4	HIGH	CENTS_NOTATION	
+BP-010	TSK-174	HOUR	25	40	USD	US_BENCHMARK					D002	p9_l5	HIGH		
+BP-011	TSK-175	HOUR	75	125	USD	US_BENCHMARK					D002	p9_l10	HIGH		Minimum charge for first hour.
+BP-012	TSK-176	HOUR	65	75	USD	US_BENCHMARK					D002	p9_l12	HIGH		Non-environment hourly rate.
+BP-013	TSK-176	HOUR	75	85	USD	US_BENCHMARK					D002	p9_l12	HIGH		Environmental hourly rate.
+BP-014	TSK-177	HOUR	45	55	USD	US_BENCHMARK					D002	p9_l14	HIGH		Non-environmental part-timer without insurance/WC.
+BP-015	TSK-177	HOUR	50	70	USD	US_BENCHMARK					D002	p9_l14	HIGH		Environmental part-timer without insurance/WC.
+BP-016	TSK-178	SQFT	0.10		USD	US_BENCHMARK					D002	p9_l17	MEDIUM	NO_DOLLAR_SIGN	Flat work pricing per square foot.
+BP-017	TSK-179	SQFT	0.28		USD	US_BENCHMARK					D002	p9_l18	MEDIUM	NO_DOLLAR_SIGN	Dumpster pads per square foot.
+BP-018	TSK-180	SQFT	0.125		USD	US_BENCHMARK					D002	p9_l19	MEDIUM	NO_DOLLAR_SIGN	Grocery stores; depends on chewing gum quantity.
+BP-019	TSK-181	SQFT	0.15	0.20	USD	US_BENCHMARK					D002	p9_l21	HIGH	CENTS_NOTATION	Sidewalks/Concrete walkways.
+BP-020	TSK-182	LINEAR_FT	1.00		USD	US_BENCHMARK					D002	p9_l23	HIGH		Single story buildings; 'running foot' treated as linear foot.
+BP-021	TSK-183	LINEAR_FT	2.00		USD	US_BENCHMARK					D002	p9_l24	HIGH		Double story buildings; 'running foot' treated as linear foot.
+BP-022	TSK-184	LINEAR_FT	2.50		USD	US_BENCHMARK					D002	p9_l26	HIGH		1 story awning per linear foot.
+BP-023	TSK-185	SQFT	0.35	0.45	USD	US_BENCHMARK					D002	p9_l26	MEDIUM	NO_DOLLAR_SIGN	1 story awning per square foot range.
+BP-024	TSK-186	LINEAR_FT	3.50		USD	US_BENCHMARK					D002	p9_l27	HIGH		2 story awning per linear foot.
+BP-025	TSK-187	SQFT	0.45	0.55	USD	US_BENCHMARK					D002	p9_l27	MEDIUM	NO_DOLLAR_SIGN	2 story awning per square foot range.
+BP-026	TSK-188	HOUR	65	85	USD	US_BENCHMARK					D002	p10_l7	HIGH		Avg professional window washers hourly.
+BP-027	TSK-189	PANE	1.50	5.00	USD	US_BENCHMARK					D002	p10_l8	HIGH		Per pane per side (per text).
+BP-028	TSK-190	PANE	4.0		USD	US_BENCHMARK					D002	p10_l11	HIGH		Double hung windows $4.00
+BP-029	TSK-191	PANE	4.0		USD	US_BENCHMARK					D002	p10_l12	HIGH		Single hung windows $4.00
+BP-030	TSK-192	PANE	4.0		USD	US_BENCHMARK					D002	p10_l13	HIGH		Casement windows $4.00
+BP-031	TSK-193	PANE	3.5	5.5	USD	US_BENCHMARK					D002	p10_l14	HIGH		Geometric shapes sm. $3.50 – med. $5.50 – lg. $8.00
+BP-032	TSK-196	PANE	4.0		USD	US_BENCHMARK					D002	p10_l15	HIGH		Double hung bay & bow windows $4.00
+BP-033	TSK-197	PANE	4.0		USD	US_BENCHMARK					D002	p10_l16	HIGH		Single & double sliding windows $4.00
+BP-034	TSK-198	PANE	4.0		USD	US_BENCHMARK					D002	p10_l17	HIGH		Awning windows $4.00
+BP-035	TSK-199	PANE	5.0		USD	US_BENCHMARK					D002	p10_l18	HIGH		Sliding patio windows $5.00
+BP-036	TSK-200	PANE	4.25		USD	US_BENCHMARK					D002	p10_l19	HIGH		Swinging patio windows $4.25
+BP-037	TSK-201	PANE	5.0	12.0	USD	US_BENCHMARK					D002	p10_l20	HIGH		Large picture window $5.00 - $12.00
+BP-038	TSK-202	PANE	1.25		USD	US_BENCHMARK					D002	p10_l21	HIGH		French windows or Jalousie doors $1.25
+BP-039	TSK-203	PANE	3.25		USD	US_BENCHMARK					D002	p10_l22	HIGH		Deck railing glass $3.25
+BP-040	TSK-204	PANE	5.0	10.0	USD	US_BENCHMARK					D002	p10_l23	HIGH		Storm windows $5.00 - $10.00
+BP-041	TSK-205	PANE	3.0	5.0	USD	US_BENCHMARK					D002	p10_l24	HIGH		Screen Cleaning $3.00 - $5.00 ea.
+BP-042	TSK-206	PANE	16.0		USD	US_BENCHMARK					D002	p10_l25	HIGH		Storms on picture windows 1st floor $16.00
+BP-043	TSK-207	PANE	26.0		USD	US_BENCHMARK					D002	p10_l26	HIGH		Storms on picture windows 2nd floor $26.00
+BP-044	TSK-208	PANE	15.0	20.0	USD	US_BENCHMARK					D002	p10_l27	HIGH		Garden windows $15.00 - $20.00
+BP-045	TSK-209	PANE	15.0	25.0	USD	US_BENCHMARK					D002	p10_l28	HIGH		Skylight windows $15.00 - $25.00
+BP-200	TSK-222	APPLIANCE	15	35	USD	US_BENCHMARK					D002	p11_l13	HIGH		Generic per appliance range (plus).
+BP-201	TSK-223	APPLIANCE	10		USD	US_BENCHMARK					D002	p11_l15	HIGH		Microwave inside/outside.
+BP-202	TSK-224	APPLIANCE	25		USD	US_BENCHMARK					D002	p11_l15	HIGH		Fridge inside/outside.
+BP-203	TSK-225	APPLIANCE	35		USD	US_BENCHMARK					D002	p11_l15	HIGH		Stove/Oven inside/outside.

@@ -1,0 +1,8 @@
+Metric	Value	Target	Status	NotesShort
+TotalTasks	163	>=1	PASS	
+ActiveTasks	163	=163	PASS	
+DuplicateTaskIDs	0	0	PASS	
+TasksMissingBaseTime	0	0	PASS	ActiveFlag=TRUE requires BaseTime_Min
+AmbiguousNumericValues	0	0	PASS	Resolve formats like 1:30
+ZeroOrNegativeTimes	0	0	PASS	
+ConflictsDetected	0	0	PASS	Multiple sources disagree

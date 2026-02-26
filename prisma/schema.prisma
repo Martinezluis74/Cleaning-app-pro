@@ -1,0 +1,156 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ---------------------------------------------------------
+// 1. MULTI-TENANCY & USERS
+// ---------------------------------------------------------
+
+model Tenant {
+  id        String   @id @default(uuid())
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  users     AppUser[]
+  datasets  DatasetVersion[]
+  quotes    Quote[]
+}
+
+model AppUser {
+  id        String   @id @default(uuid())
+  tenantId  String
+  email     String   @unique
+  name      String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  tenant    Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+// ---------------------------------------------------------
+// 2. DATASET VERSIONING
+// ---------------------------------------------------------
+
+model DatasetVersion {
+  id          String   @id @default(uuid())
+  tenantId    String
+  versionName String   // e.g., "v1.0" or "Dataset Oct 2024"
+  status      String   @default("DRAFT") // "DRAFT", "ACTIVE", "ARCHIVED"
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  tenant      Tenant   @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  inventories    Inventory[]
+  tasks          DimTask[]
+  taskRates      FactTaskRate[]
+  taskPrices     FactTaskPrice[]
+  assumptions    DimAssumptions[]
+  quotes         Quote[]
+}
+
+// ---------------------------------------------------------
+// 3. TSV MIRROR TABLES (SOURCE OF TRUTH)
+// ---------------------------------------------------------
+
+model Inventory {
+  id               String   @id @default(uuid())
+  datasetVersionId String
+  itemName         String
+  cost             Float
+  sourceDocId      String?  // Traceability to original TSV
+  sourceRef        String?  // Row or Line reference
+  
+  datasetVersion   DatasetVersion @relation(fields: [datasetVersionId], references: [id], onDelete: Cascade)
+}
+
+model DimTask {
+  id               String   @id @default(uuid())
+  datasetVersionId String
+  taskName         String
+  description      String?
+  sourceDocId      String?
+  sourceRef        String?
+  
+  datasetVersion   DatasetVersion @relation(fields: [datasetVersionId], references: [id], onDelete: Cascade)
+}
+
+model FactTaskRate {
+  id               String   @id @default(uuid())
+  datasetVersionId String
+  taskId           String
+  rateValue        Float
+  sourceDocId      String?
+  sourceRef        String?
+  
+  datasetVersion   DatasetVersion @relation(fields: [datasetVersionId], references: [id], onDelete: Cascade)
+}
+
+model FactTaskPrice {
+  id               String   @id @default(uuid())
+  datasetVersionId String
+  taskId           String
+  priceValue       Float
+  sourceDocId      String?
+  sourceRef        String?
+  
+  datasetVersion   DatasetVersion @relation(fields: [datasetVersionId], references: [id], onDelete: Cascade)
+}
+
+model DimAssumptions {
+  id               String   @id @default(uuid())
+  datasetVersionId String
+  key              String   // e.g., "HST", "BASE_SALARY", "OVERHEAD_MARGIN"
+  value            Float
+  sourceDocId      String?
+  sourceRef        String?
+
+  datasetVersion   DatasetVersion @relation(fields: [datasetVersionId], references: [id], onDelete: Cascade)
+}
+
+// ---------------------------------------------------------
+// 4. QUOTATION TABLES
+// ---------------------------------------------------------
+
+model Quote {
+  id               String   @id @default(uuid())
+  tenantId         String
+  datasetVersionId String
+  clientName       String
+  totalPrice       Float?
+  status           String   @default("DRAFT") // "DRAFT", "NEEDS_INPUT", "SENT", "ACCEPTED", "REJECTED"
+  createdAt        DateTime @default(now())
+  updatedAt        DateTime @updatedAt
+
+  tenant           Tenant         @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  datasetVersion   DatasetVersion @relation(fields: [datasetVersionId], references: [id])
+  lines            QuoteLine[]
+  snapshot         QuoteSnapshot?
+}
+
+model QuoteLine {
+  id          String   @id @default(uuid())
+  quoteId     String
+  description String
+  quantity    Float
+  unitPrice   Float
+  totalPrice  Float
+
+  quote       Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+}
+
+model QuoteSnapshot {
+  id          String   @id @default(uuid())
+  quoteId     String   @unique
+  snapshotData String   // JSON stringified data to freeze prices and assumptions at Quote time
+  createdAt   DateTime @default(now())
+
+  quote       Quote    @relation(fields: [quoteId], references: [id], onDelete: Cascade)
+}

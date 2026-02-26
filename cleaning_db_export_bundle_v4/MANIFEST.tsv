@@ -1,0 +1,169 @@
+TableName	ColumnName	DataType	Nullable	UnitOrEnum	PrimaryKey	UniqueKeyGroup	ForeignKeyTo	ValidationRule	NotesShort
+INVENTORY.tsv	DocID	text	FALSE		TRUE			^D\d{3}$	
+INVENTORY.tsv	FileName	text	FALSE		FALSE				
+INVENTORY.tsv	FileType	text	FALSE	PDF/DOCX/DOC	FALSE				
+INVENTORY.tsv	Extractability	text	FALSE	HIGH/MEDIUM/LOW	FALSE				
+INVENTORY.tsv	Nature	text	FALSE	Manual/Tabla tiempos/Tabla pricing/Mixto	FALSE				
+INVENTORY.tsv	HasTables	bool	FALSE	TRUE/FALSE	FALSE				
+INVENTORY.tsv	CurrencyMentioned	text	FALSE	USD/CAD/UNKNOWN	FALSE				
+INVENTORY.tsv	UnitsMentioned	text	FALSE	IMPERIAL/METRIC/MIXED/UNKNOWN	FALSE				
+INVENTORY.tsv	Risks	text	TRUE		FALSE				
+INVENTORY.tsv	Recommendation	text	FALSE	PRIMARY_SOURCE/SECONDARY/TRACE_ONLY	FALSE				
+DOC_META.tsv	DocID	text	FALSE		FALSE		INVENTORY.DocID		
+DOC_META.tsv	DocumentTitle	text	TRUE		FALSE				
+DOC_META.tsv	DocumentVersionOrEdition	text	TRUE		FALSE				
+DOC_META.tsv	PublishDate	date	TRUE	YYYY-MM-DD	FALSE			ISO date	
+DOC_META.tsv	RegionMentioned	text	TRUE		FALSE				
+DOC_META.tsv	NotesShort	text	TRUE		FALSE				
+RAW_TASK_SNIPPETS.tsv	DocID	text	FALSE		FALSE		INVENTORY.DocID		
+RAW_TASK_SNIPPETS.tsv	SourceRef	text	FALSE		FALSE			non-empty	
+RAW_TASK_SNIPPETS.tsv	TaskName_Source	text	FALSE		FALSE				
+RAW_TASK_SNIPPETS.tsv	Category_Source	text	TRUE		FALSE				
+RAW_TASK_SNIPPETS.tsv	Subcategory_Source	text	TRUE		FALSE				
+RAW_TASK_SNIPPETS.tsv	UnitText_Source	text	TRUE	UnitCode or text	FALSE				
+RAW_TASK_SNIPPETS.tsv	TimeText_Source	text	TRUE	raw	FALSE				
+RAW_TASK_SNIPPETS.tsv	ProductionRateText_Source	text	TRUE	raw	FALSE				
+RAW_TASK_SNIPPETS.tsv	PriceText_Source	text	TRUE	raw	FALSE				
+RAW_TASK_SNIPPETS.tsv	CurrencyText_Source	text	TRUE	raw	FALSE				
+RAW_TASK_SNIPPETS.tsv	ConditionText_Source	text	TRUE	<=20 words parts	FALSE				
+RAW_TASK_SNIPPETS.tsv	BuildingTypeText_Source	text	TRUE		FALSE				
+RAW_TASK_SNIPPETS.tsv	Notes_Source	text	TRUE	short	FALSE				
+RAW_TASK_SNIPPETS.tsv	ExtractConfidence	text	FALSE	HIGH/MEDIUM/LOW	FALSE				
+RAW_VALUES.tsv	DocID	text	FALSE		FALSE		INVENTORY.DocID		
+RAW_VALUES.tsv	SourceRef	text	FALSE		FALSE				
+RAW_VALUES.tsv	FieldType	text	FALSE	TIME_MIN/TIME_AVG/TIME_MAX/PROD_RATE/PRICE_MIN/PRICE_MAX/FX/WAGE/BURDEN/MIN_HOURS/OTHER	FALSE				
+RAW_VALUES.tsv	Value_Raw	text	FALSE		FALSE				
+RAW_VALUES.tsv	Value_Normalized	number	TRUE		FALSE			numeric if OK	
+RAW_VALUES.tsv	RangeMin_Normalized	number	TRUE		FALSE				
+RAW_VALUES.tsv	RangeMax_Normalized	number	TRUE		FALSE				
+RAW_VALUES.tsv	UnitText_Raw	text	TRUE		FALSE				
+RAW_VALUES.tsv	CurrencyCode	text	FALSE	USD/CAD/UNKNOWN	FALSE				
+RAW_VALUES.tsv	ParseStatus	text	FALSE	OK/AMBIGUOUS/NOT_NUMERIC	FALSE				
+RAW_VALUES.tsv	ParseNotesShort	text	TRUE		FALSE				
+DIM_UNIT.tsv	UnitCode	text	FALSE		TRUE			unique	PK
+DIM_UNIT.tsv	UnitLabel	text	FALSE		FALSE				
+DIM_UNIT.tsv	UnitFamily	text	FALSE	AREA/COUNT/LENGTH/TIME/VISIT/RATE/UNKNOWN	FALSE				
+DIM_UNIT.tsv	NotesShort	text	TRUE		FALSE				
+DIM_UNIT_CONVERSION.tsv	FromUnitCode	text	FALSE		FALSE	FromTo	DIM_UNIT.UnitCode		
+DIM_UNIT_CONVERSION.tsv	ToUnitCode	text	FALSE		FALSE	FromTo	DIM_UNIT.UnitCode		
+DIM_UNIT_CONVERSION.tsv	MultiplyFactor	number	FALSE		FALSE				
+DIM_UNIT_CONVERSION.tsv	AddFactor	number	FALSE		FALSE				
+DIM_UNIT_CONVERSION.tsv	RuleNotesShort	text	TRUE		FALSE				
+DIM_TASK.tsv	TaskID	text	FALSE	TSK-###	TRUE			unique	PK
+DIM_TASK.tsv	TaskName_Canonical_EN	text	FALSE		FALSE				
+DIM_TASK.tsv	Category	text	TRUE		FALSE				
+DIM_TASK.tsv	Subcategory	text	TRUE		FALSE				
+DIM_TASK.tsv	DefaultTime_UOM	text	TRUE	UnitCode	FALSE		DIM_UNIT.UnitCode		
+DIM_TASK.tsv	DefaultBillable_UOM	text	TRUE	UnitCode	FALSE		DIM_UNIT.UnitCode		
+DIM_TASK.tsv	BuildingType	text	TRUE		FALSE				
+DIM_TASK.tsv	ActiveFlag	bool	FALSE	TRUE/FALSE	FALSE				
+DIM_TASK.tsv	Status	text	FALSE	OK/NEEDS_INPUT_TIME/NEEDS_INPUT_UNIT/NEEDS_INPUT_PRICE/NEEDS_HUMAN_REVIEW	FALSE				
+DIM_TASK.tsv	NotesShort	text	TRUE		FALSE				
+MAP_TASK_VARIANTS.tsv	VariantName	text	FALSE		FALSE				
+MAP_TASK_VARIANTS.tsv	TaskID	text	FALSE		FALSE		DIM_TASK.TaskID		
+MAP_TASK_VARIANTS.tsv	DocID	text	FALSE		FALSE		INVENTORY.DocID		
+MAP_TASK_VARIANTS.tsv	SourceRef	text	FALSE		FALSE				
+MAP_TASK_VARIANTS.tsv	RuleApplied	text	FALSE	trim/clean/synonym/split/manual_review	FALSE				
+MAP_TASK_VARIANTS.tsv	ConfidenceCode	text	FALSE	HIGH/MEDIUM/LOW	FALSE				
+DIM_SOURCE.tsv	SourceCode	text	FALSE	DOC_D###	TRUE			unique	PK
+DIM_SOURCE.tsv	DocID	text	FALSE		FALSE		INVENTORY.DocID		
+DIM_SOURCE.tsv	FileName	text	FALSE		FALSE				
+DIM_SOURCE.tsv	Recommendation	text	FALSE	PRIMARY_SOURCE/SECONDARY/TRACE_ONLY	FALSE				
+BRIDGE_TASK_SOURCE.tsv	TaskID	text	FALSE		FALSE	TaskSource	DIM_TASK.TaskID		
+BRIDGE_TASK_SOURCE.tsv	SourceCode	text	FALSE		FALSE	TaskSource	DIM_SOURCE.SourceCode		
+BRIDGE_TASK_SOURCE.tsv	SourceRef	text	FALSE		FALSE	TaskSource			
+FACT_TASK_RATES.tsv	RateID	text	FALSE	RTE-####	TRUE			unique	PK
+FACT_TASK_RATES.tsv	TaskID	text	FALSE		FALSE		DIM_TASK.TaskID		
+FACT_TASK_RATES.tsv	Time_UOM	text	FALSE	UnitCode	FALSE		DIM_UNIT.UnitCode		
+FACT_TASK_RATES.tsv	BaseTime_Min	number	TRUE	minutes per Time_UOM	FALSE				
+FACT_TASK_RATES.tsv	Time_Min_Minutes	number	TRUE		FALSE				
+FACT_TASK_RATES.tsv	Time_Max_Minutes	number	TRUE		FALSE				
+FACT_TASK_RATES.tsv	ProductionRate_Value	number	TRUE		FALSE				
+FACT_TASK_RATES.tsv	ProductionRate_UOM	text	TRUE	UnitCode or text	FALSE		DIM_UNIT.UnitCode		
+FACT_TASK_RATES.tsv	Region	text	TRUE		FALSE				
+FACT_TASK_RATES.tsv	EffectiveFrom	date	TRUE	YYYY-MM-DD	FALSE				
+FACT_TASK_RATES.tsv	EffectiveTo	date	TRUE	YYYY-MM-DD	FALSE				
+FACT_TASK_RATES.tsv	ConditionCode	text	TRUE	LIGHT/NORMAL/HEAVY	FALSE				
+FACT_TASK_RATES.tsv	BuildingType	text	TRUE		FALSE				
+FACT_TASK_RATES.tsv	SourceDocID	text	FALSE		FALSE		INVENTORY.DocID		
+FACT_TASK_RATES.tsv	SourceRef	text	FALSE		FALSE				
+FACT_TASK_RATES.tsv	ConfidenceCode	text	FALSE	HIGH/MEDIUM/LOW	FALSE				
+FACT_TASK_RATES.tsv	ConflictFlag	bool	FALSE	TRUE/FALSE	FALSE				
+FACT_TASK_RATES.tsv	ConflictGroupID	text	TRUE	CFG-###	FALSE				
+FACT_TASK_RATES.tsv	QA_Flags	text	TRUE	; separated	FALSE				
+FACT_TASK_PRICES.tsv	PriceID	text	FALSE	PRC-####	TRUE			unique	PK
+FACT_TASK_PRICES.tsv	TaskID	text	FALSE		FALSE		DIM_TASK.TaskID		
+FACT_TASK_PRICES.tsv	Billable_UOM	text	FALSE	UnitCode	FALSE		DIM_UNIT.UnitCode		
+FACT_TASK_PRICES.tsv	PriceMin	number	TRUE		FALSE				
+FACT_TASK_PRICES.tsv	PriceMax	number	TRUE		FALSE			PriceMax>=PriceMin	
+FACT_TASK_PRICES.tsv	CurrencyCode	text	TRUE	USD/CAD	FALSE			required if price exists	
+FACT_TASK_PRICES.tsv	Region	text	TRUE		FALSE				
+FACT_TASK_PRICES.tsv	EffectiveFrom	date	TRUE		FALSE				
+FACT_TASK_PRICES.tsv	EffectiveTo	date	TRUE		FALSE				
+FACT_TASK_PRICES.tsv	ConditionCode	text	TRUE		FALSE				
+FACT_TASK_PRICES.tsv	BuildingType	text	TRUE		FALSE				
+FACT_TASK_PRICES.tsv	SourceDocID	text	TRUE		FALSE		INVENTORY.DocID		
+FACT_TASK_PRICES.tsv	SourceRef	text	TRUE		FALSE				
+FACT_TASK_PRICES.tsv	ConfidenceCode	text	TRUE	HIGH/MEDIUM/LOW	FALSE				
+FACT_TASK_PRICES.tsv	ConflictFlag	bool	TRUE	TRUE/FALSE	FALSE				
+FACT_TASK_PRICES.tsv	ConflictGroupID	text	TRUE	CFG-###	FALSE				
+FACT_TASK_PRICES.tsv	QA_Flags	text	TRUE	; separated	FALSE				
+DIM_FREQUENCY.tsv	FrequencyCode	text	FALSE	DAILY/2XWEEK/WEEKLY/BIWEEKLY/MONTHLY/QUARTERLY/ONCE	TRUE			unique	PK
+DIM_FREQUENCY.tsv	VisitsPerMonth	number	FALSE		FALSE				skeleton
+DIM_FREQUENCY.tsv	Label_EN	text	FALSE		FALSE				
+DIM_FREQUENCY.tsv	SourceDocID	text	TRUE		FALSE		INVENTORY.DocID		
+DIM_FREQUENCY.tsv	SourceRef	text	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	AssumptionSetID	text	FALSE		TRUE			unique	PK
+DIM_ASSUMPTIONS.tsv	Region	text	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	EffectiveFrom	date	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	EffectiveTo	date	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	WageAllIn_CAD	number	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	FX_USD_to_CAD	number	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	MinBillableHours	number	TRUE	hours	FALSE				
+DIM_ASSUMPTIONS.tsv	TravelBuffer_Min	number	TRUE	minutes	FALSE				
+DIM_ASSUMPTIONS.tsv	MarkupTarget	number	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	MarginTarget	number	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	RoundingIncrement_CAD	number	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	SourceDocID	text	TRUE		FALSE		INVENTORY.DocID		
+DIM_ASSUMPTIONS.tsv	SourceRef	text	TRUE		FALSE				
+DIM_ASSUMPTIONS.tsv	NotesShort	text	TRUE		FALSE				
+QA_TASKS.tsv	TaskID	text	TRUE		FALSE		DIM_TASK.TaskID		
+QA_TASKS.tsv	TaskName_Canonical_EN	text	TRUE		FALSE				
+QA_TASKS.tsv	IssueCode	text	FALSE	MissingTime/MissingUnit/MissingPrice/UnitMismatch/Conflict/Outlier/NonNumeric/ZeroOrNegative/DuplicateTaskID	FALSE				
+QA_TASKS.tsv	Severity	text	FALSE	HIGH/MEDIUM/LOW	FALSE				
+QA_TASKS.tsv	WhereFound	text	FALSE	table.field	FALSE				
+QA_TASKS.tsv	SourceDocID	text	TRUE		FALSE		INVENTORY.DocID		
+QA_TASKS.tsv	SourceRef	text	TRUE		FALSE				
+QA_TASKS.tsv	RecommendedAction	text	FALSE	1 line	FALSE				
+QA_TASKS.tsv	NeedsInput	bool	FALSE	TRUE/FALSE	FALSE				
+QA_SUMMARY.tsv	Metric	text	FALSE		FALSE				
+QA_SUMMARY.tsv	Value	text	FALSE		FALSE				
+QA_SUMMARY.tsv	Target	text	FALSE		FALSE				
+QA_SUMMARY.tsv	Status	text	FALSE	PASS/FAIL	FALSE				
+QA_SUMMARY.tsv	NotesShort	text	TRUE		FALSE				
+BENCH_TASK_PRICES	PriceID	text	FALSE		TRUE			^BP-\d+$	PK
+BENCH_TASK_PRICES	TaskID	text	FALSE		FALSE		DIM_TASK.TaskID		FK to DIM_TASK
+BENCH_TASK_PRICES	Billable_UOM	text	FALSE	UnitCode	FALSE		DIM_UNIT.UnitCode		Billing unit
+BENCH_TASK_PRICES	PriceMin	number	TRUE	USD					
+BENCH_TASK_PRICES	PriceMax	number	TRUE	USD					PriceMax >= PriceMin when both
+BENCH_TASK_PRICES	CurrencyCode	text	FALSE	USD	FALSE			^USD$	Benchmark stored in USD
+BENCH_TASK_PRICES	Region	text	FALSE	US_BENCHMARK	FALSE			^US_BENCHMARK$	Benchmark region tag
+BENCH_TASK_PRICES	SourceDocID	text	FALSE		FALSE			^D002$	Source doc
+BENCH_TASK_PRICES	SourceRef	text	FALSE		FALSE			^p\d+_l\d+$	Page/line reference
+BENCH_TASK_RATES	RateID	text	FALSE		TRUE			^BR-\d+$	PK
+BENCH_TASK_RATES	TaskID	text	FALSE		FALSE		DIM_TASK.TaskID		FK to DIM_TASK
+BENCH_TASK_RATES	Time_UOM	text	FALSE	UnitCode	FALSE		DIM_UNIT.UnitCode		Time unit
+BENCH_TASK_RATES	BaseTime_Min	number	TRUE	minutes per Time_UOM					
+BENCH_TASK_RATES	ProductionRate_Value	number	TRUE						
+BENCH_TASK_RATES	ProductionRate_UOM	text	TRUE						e.g., SQFT_PER_HOUR
+BENCH_TASK_RATES	CurrencyCode	text	TRUE						No currency (rates)
+BENCH_TASK_RATES	Region	text	FALSE	US_BENCHMARK				^US_BENCHMARK$	Benchmark region tag
+BENCH_TASK_RATES	SourceDocID	text	FALSE					^D002$	Source doc
+BENCH_TASK_RATES	SourceRef	text	FALSE					^p\d+_l\d+$	Page/line reference
+BENCH_TASK_RULES	RuleID	text	FALSE		TRUE			^RULE-\d+$	PK
+BENCH_TASK_RULES	TaskID	text	TRUE		FALSE		DIM_TASK.TaskID		Nullable for global rules
+BENCH_TASK_RULES	RuleType	text	FALSE		FALSE				Enum-like: INTERPRETATION/PRICING_RULE
+BENCH_TASK_RULES	RuleTextShort	text	FALSE		FALSE				<= 200 chars
+BENCH_TASK_RULES	Region	text	FALSE	US_BENCHMARK	FALSE			^US_BENCHMARK$	Benchmark region tag
+BENCH_TASK_RULES	SourceDocID	text	FALSE		FALSE				D002 or USER_INPUT
+BENCH_TASK_RULES	SourceRef	text	FALSE		FALSE				pX_lY or CHAT_YYYY-MM-DD

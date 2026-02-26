@@ -1,0 +1,7 @@
+RateID	TaskID	Time_UOM	BaseTime_Min	Time_Min_Minutes	Time_Max_Minutes	ProductionRate_Value	ProductionRate_UOM	Region	EffectiveFrom	EffectiveTo	ConditionCode	BuildingType	SourceDocID	SourceRef	ConfidenceCode	QA_Flags	NotesShort
+BR-001	TSK-170	SQFT	0.3			200	SQFT_PER_HOUR	US_BENCHMARK					D002	p8_l26	HIGH		Converted: BaseTime_Min=60/200=0.3 min per sqft.
+BR-002	TSK-226	FIXTURE		2	3			US_BENCHMARK					D002	p11_l6	HIGH		Avg time per fixture (sink/toilet/urinal).
+BR-003	TSK-227	VISIT		10	10			US_BENCHMARK					D002	p11_l10	HIGH		Small 2 sink 2 stall: light clean ~10 min.
+BR-004	TSK-227	VISIT		12	15			US_BENCHMARK					D002	p11_l11	HIGH		Once per week deep clean 12-15 min.
+BR-005	TSK-227	SQFT				200	SQFT_PER_HOUR	US_BENCHMARK					D002	p11_l8	MEDIUM	RANGE_PARTIAL	Lower end production rate range (200-500 sqft/hr).
+BR-006	TSK-227	SQFT				500	SQFT_PER_HOUR	US_BENCHMARK					D002	p11_l8	MEDIUM	RANGE_PARTIAL	Upper end production rate range (200-500 sqft/hr).

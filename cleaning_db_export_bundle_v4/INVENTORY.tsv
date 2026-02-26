@@ -1,0 +1,3 @@
+DocID	FileName	FileType	Extractability	Nature	HasTables	CurrencyMentioned	UnitsMentioned	Risks	Recommendation
+D001	Cleaning_Times_Production_Rates.doc	DOC	HIGH	Tabla tiempos	TRUE	UNKNOWN	IMPERIAL	No explicit Ontario mention; No pricing data; One ambiguous time format (1:30)	PRIMARY_SOURCE
+D002	Benchmarking Report.pdf	PDF	HIGH	Mixto	FALSE	USD	MIXED	US benchmark; cents notation ambiguous; mixed pricing bases; narrative sections	SECONDARY

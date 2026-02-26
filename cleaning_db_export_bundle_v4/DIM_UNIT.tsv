@@ -1,0 +1,18 @@
+UnitCode	UnitLabel	UnitFamily	NotesShort
+COAT	Coat	COUNT	
+EA	Each (item/unit)	COUNT	
+FIXTURE	Fixture	COUNT	
+FLOOR	Floor	COUNT	
+LINEAR_FT	Linear feet	LENGTH	base unit
+MINUTE	Minute	TIME	base unit
+PER_1000_LINEAR_FT	Per 1,000 linear feet	LENGTH	
+PER_1000_SQFT	Per 1,000 square feet	AREA	
+PER_100_LINEAR_FT	Per 100 linear feet	LENGTH	
+PER_200_SQFT	Per 200 square feet	AREA	
+PER_6_SQFT	Per 6 square feet	AREA	
+SPOT	Spot	COUNT	
+SQFT	Square feet	AREA	base unit
+SQFT_PER_HOUR	Square feet per hour	RATE	base unit
+STALL	Stall	COUNT	
+PANE	Window pane	COUNT	Benchmark pack: used for per-pane window pricing.
+APPLIANCE	Appliance	COUNT	Benchmark pack: used for per-appliance pricing.

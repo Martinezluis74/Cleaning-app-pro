@@ -1,0 +1,228 @@
+TaskID	TaskName_Canonical_EN	Category	Subcategory	DefaultTime_UOM	DefaultBillable_UOM	BuildingType	ActiveFlag	Status	NotesShort
+TSK-001	"18"" T-bar"	APPLY FLOOR FINISH		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-002	"28"" Pad application system"	APPLY FLOOR FINISH		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-003	"Gravity feed applicator - microfiber bucketless flat mop 20"""	APPLY FLOOR FINISH		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-004	Standard finish mop head and bucket	APPLY FLOOR FINISH		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-005	Mop on using 24 oz. mop head with bucket & wringer	APPLY SOLUTION TO FLOOR		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-006	"Using 36-gallon solution applicator with 26""-52"" adjustable spreader width"	APPLY SOLUTION TO FLOOR		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-007	Dusting by hand using microfiber cloth	BASEBOARD CLEANING		PER_1000_LINEAR_FT	PER_1000_LINEAR_FT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-008	Dusting with extension pole with microfiber cloth and fixi clamp.	BASEBOARD CLEANING		PER_1000_LINEAR_FT	PER_1000_LINEAR_FT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-009	Apply stripper to baseboard, scrub by hand with pad, scape edging with putty knife, rinse with cloth of mop.	BASEBOARD STRIPPING		PER_100_LINEAR_FT	PER_100_LINEAR_FT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-010	"17"" 2000 rpm floor machine"	BURNISHING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-011	"20"" 2000 rpm floor machine"	BURNISHING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-012	"24"" 2000 rpm battery powered floor machine"	BURNISHING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-013	"27"" 2000 rpm propane floor machine"	BURNISHING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-014	"17"" rotary floor machine"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-015	"20"" rotary floor machine"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-016	Apply carpet pre-spray in-line hydro-force sprayer	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-017	Apply carpet pre-spray with electric sprayer	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-018	Apply carpet pre-spray with pump-up sprayer	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-019	Apply dry clean compound to carpet	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-020	"Apply dry clean compound to carpet, agitate dry cleaning compound with 24"" brush machine vacuum dry cleaning compound"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-021	Apply soil protection in-line hydro-force sprayer	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-022	Apply soil protection with electric sprayer	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-023	Apply soil protection with pump-up sprayer	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-024	"Bonnet cleaning with 17"" floor machine"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-025	"Bonnet cleaning with 20"" floor machine"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-026	Cimex machine	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-027	"Portable extractor 13"" floor tool"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-028	RX-20 rotary machine	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-029	"Rotary shampoo with 17"" 175 rpm floor machine"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-030	"Rotary shampoo with 20"" 175 rpm floor machine"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-031	"Self-contained extraction with 16"" floor tool"	CARPET CARE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-032	Remove hardened material, dry vacuum, apply chemical, blot with cloth	CARPET SPOTTING		SPOT	SPOT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-033	Using 3-gallon extractor, dry vacuum, apply chemical, extract with carpet claw	CARPET SPOTTING		SPOT	SPOT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-034	"12"" Upright vacuum"	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-035	"16"" Upright vacuum"	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-036	"28"" Battery vacuum"	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-037	"Backpack vacuum 14"" floor tool"	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-038	"Backpack vacuum 20"" floor tool"	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-039	Spot vacuuming - backpack vacuum	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-040	Spot vacuuming - upright vacuum	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-041	Traffic lanes - backpack vacuum	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-042	Traffic lanes - upright vacuum	CARPET VACUUMING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-043	Damp wipe using extension pole with cloth and fixi clamp	CEILING AIR VENTS		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-044	Dust with extension pole using brush duster	CEILING AIR VENTS		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-045	Hand wipe exterior surface with cloth on a ladder	CEILING AIR VENTS		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-046	Vacuum w/backpack with brush attachment	CEILING AIR VENTS		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-047	"Floor cleaning using 12"" spinner floor wand with 1200 psi"	CERAMIC TILE CLEANING USING HIGH		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-048	"Wall cleaning using 7"" spinner hand held wall wand with 1200 psi, wipe dry with 18"" flat mop."	CERAMIC TILE CLEANING USING HIGH		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-049	Overheads, behind computers, behind doors, etc.	DETAIL DUSTING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-050	Edging along wall - backpack vacuum	DETAIL VACUUM		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-051	detail vacuum corners, edges, under furniture	DETAIL VACUUM		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-052	"18"" microfiber flat mop"	DUST MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-053	"24"" Dust mop"	DUST MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-054	"24"" microfiber flat mop"	DUST MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-055	"36"" Dust mop"	DUST MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-056	"48"" Dust mop"	DUST MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-057	"72"" Dust mop"	DUST MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-058	Apply wood polish to desk, wipe with cloth	DUSTING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-059	High dusting - vents, corners, lights	DUSTING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-060	Horizontal dusting - microfiber cloth	DUSTING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-061	Horizontal dusting - spot cleaning using microfiber cloth, desktops, pictures, computers	DUSTING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-062	Low dusting - chair legs, base boards	DUSTING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-063	Spot clean desk top (remove coffee rings and finger prints from cleared areas using a microfiber cloth	DUSTING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-064	"Using 18"" Microfiber flat mop"	DUSTING WALLS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-065	Apply polish by hand to panels	ELEVATOR CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-066	"Apply polish with hand-held microfiber applicator (4""x18"")"	ELEVATOR CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-067	Carpeted floor - detail clean wall panels and door tracks	ELEVATOR CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-068	Hand dust panels, ceiling, clean door tracks	ELEVATOR CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-069	Hard floor elevator - detail clean wall panels and door tracks	ELEVATOR CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-070	7' Sofa	FABRIC AND UPHOLSTERY CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-071	Arm chair	FABRIC AND UPHOLSTERY CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-072	Armless chair	FABRIC AND UPHOLSTERY CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-073	Office Partitions - 4' x 6' one side	FABRIC AND UPHOLSTERY CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-074	Recliner	FABRIC AND UPHOLSTERY CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-075	Average 30 minutes per coat	FINISH DRY TIME		COAT	COAT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-076	Clean / dust / sanitize telephone	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-077	Clean blinds with ultra-sonic machine 4' x 3' (remove, clean, dry, re-hang)	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-078	Clean microwave - deep clean outside/inside	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-079	Clean microwave - spot clean inside	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-080	Clean refrigerator - damp wipe outside-spot clean inside	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-081	Clean refrigerator - remove items and deep clean	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-082	Dust blind slats by hand with microfiber cloth 4' x 3'	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-083	Dust/vacuum blinds 4' by 3'	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-084	Empty and damp wipe ash tray	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-085	Empty trash can (28 qt.), replace liner (or see sq. ft. rate - next section)	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-086	Empty trash can, replace liner (28 quart)	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-087	Lunch room chairs - damp wipe seat and back	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-088	"Lunch room table tops - apply solution with 18"" applicator and squeegee clean"	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-089	Lunch room table tops - apply solution with spray trigger and hand wipe	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-090	Sanitize/polish drinking fountain	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-091	Vacuum blind slats using backpack vacuum with brush attachment 4' x 3'	GENERAL CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-092	Remove trash from building	GENERAL CLEANING	TRASH	PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-093	"12"" ceiling light - hand dust outside/remove lens and wipe using step ladder"	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-094	"16"" dia. Hanging light - hand wipe lens and mounting"	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-095	2'x4' fixture - remove tubes-clean lens and reflectors	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-096	"24"" vanity light - wipe cover and lens"	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-097	"48"" ceiling fanlight - hand wipe blades top/bottom-clean lens and mountings"	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-098	Desk lamp - dust	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-099	Table lamp and shade - dust	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-100	Vacuum with backpack with brush attachment on ladder	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-101	Wall fixtures - dust	LIGHT FIXTURES		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-102	Field and edges	MACHINE SCREEN WOOD FLOOR		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-103	Sanding	MACHINE SCREEN WOOD FLOOR		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-104	"17"" 175 rpm floor machine Apply solution/scrub/pickup/rinse"	MACHINE SCRUBBING HARD FLOORS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-105	"20"" 175 rpm floor machine Apply solution/scrub/pickup/rinse"	MACHINE SCRUBBING HARD FLOORS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-106	"20"" Auto scrubber Apply solution/scrub/pickup/rinse"	MACHINE SCRUBBING HARD FLOORS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-107	"30"" Propane machine with brush - scrub only"	MACHINE SCRUBBING HARD FLOORS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-108	"17"" 175 rpm floor machine Apply stripper/scrub/pick-up/rinse"	MACHINE STRIPPING HARD FLOORS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-109	"20"" 175 rpm floor machine Apply stripper/scrub/pick-up/rinse"	MACHINE STRIPPING HARD FLOORS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-110	"20"" Auto scrubber Apply stripper/scrub/pick-up/rinse"	MACHINE STRIPPING HARD FLOORS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-111	"30"" Propane machine with brush - strip only"	MACHINE STRIPPING HARD FLOORS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-112	Clean and polish by hand with cloth	METAL CLEANING		PER_6_SQFT	PER_6_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-113	16-oz. mop head w/bucket wringer	MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-114	"18"" Microfiber flat mop and charging bucket"	MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-115	24-oz. mop head	MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-116	32-oz. mop head	MOPPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-117	Using 3000 psi spinner machine with 4 gallons per minute machine	PERIODIC AND RESTORATIVE CONCRETE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-118	Using 3000 psi spinner machine with 6 gallons per minute machine	PERIODIC AND RESTORATIVE CONCRETE		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-119	Clean fixtures, mirrors, counter tops, empty trash, wet mop, fill supplies	RESTROOM CLEANING		FIXTURE	FIXTURE		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-120	Clean sink	RESTROOM CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-121	Clean sink - detail clean	RESTROOM CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-122	Clean toilet - detail clean	RESTROOM CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-123	Clean toilet - wipe top/bottom	RESTROOM CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-124	Clean urinal - detail clean	RESTROOM CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-125	Clean urinal wipe top/bottom	RESTROOM CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-126	Clean/disinfect shower stall	RESTROOM CLEANING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-127	Restroom partition (wipe down)	RESTROOM CLEANING		STALL	STALL		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-128	Hand wash ceramic tile walls	RESTROOM CLEANING CONTINUED		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-129	Machine scrub ceramic tile restroom floor - apply solution/scrub/pick-up and rinse	RESTROOM CLEANING CONTINUED		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-130	Grout stick	SEALING GROUT		PER_200_SQFT	PER_200_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-131	"Paint brush Rule of thumb: 1 quart of sealer will seal approximately 200 square feet of grout with 12 inch tiles and 1/8"" grout lines. Smaller 4-6"" tiles you will need 24 oz. ¼"" or larger joint lines you will need 25% more sealer."	SEALING GROUT		PER_200_SQFT	PER_200_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-132	"Manually-powered, 36 gallon solution retriever with 30"" squeegee path"	SOLUTION PICK-UP		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-133	Pick up solution using 24 oz. mop head with bucket & wringer	SOLUTION PICK-UP		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-134	"Wet vacuum (electric) 28"" front mounted squeegee"	SOLUTION PICK-UP		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-135	Wet vacuum with floor wand	SOLUTION PICK-UP		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-136	switches, doors using Microfiber cloth	SPOT CLEAN WALLS		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-137	"17"" 175 rpm floor machine"	SPRAY BUFFING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-138	"17"" 2000 rpm floor machine"	SPRAY BUFFING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-139	"20"" 175 rpm floor machine"	SPRAY BUFFING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-140	"20"" 2000 rpm floor machine"	SPRAY BUFFING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-141	Check stairwell for litter & debris	STAIRWAYS & LANDINGS		FLOOR	FLOOR		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-142	"Damp mop w/18"" microfiber flat mop"	STAIRWAYS & LANDINGS		FLOOR	FLOOR		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-143	Damp mop with mop/wringer	STAIRWAYS & LANDINGS		FLOOR	FLOOR		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-144	Dust & spot clean all handrails	STAIRWAYS & LANDINGS		FLOOR	FLOOR		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-145	Hand scrub stairs and risers	STAIRWAYS & LANDINGS		FLOOR	FLOOR		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-146	Pre-spray and extract carpeted stairs	STAIRWAYS & LANDINGS		FLOOR	FLOOR		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-147	Vacuum carpeted stairs / clean handrails	STAIRWAYS & LANDINGS		FLOOR	FLOOR		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-148	Vacuum stairs, landings with backpack vacuum	STAIRWAYS & LANDINGS		FLOOR	FLOOR		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-149	"24"" Push broom"	SWEEPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-150	"48"" Push broom"	SWEEPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-151	Pickup piles of dirt with house broom and dust pan	SWEEPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-152	Sweeping edges with house broom	SWEEPING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-153	"Unobstructed using 18"" microfiber flat mop"	WALL WASHING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-154	Unobstructed using cloth, sponge, bucket and extension pole	WALL WASHING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-155	"Using 18"" Microfiber flat mop"	WASHING		PER_1000_SQFT	PER_1000_SQFT		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-156	1' x 6' office door side light, spray and wipe	WINDOW WASHING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-157	1' x 6' office door side light, using a squeegee and applicator	WINDOW WASHING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-158	"32"" x 6' patio door, spray and wipe (moderately soiled) Inside & out"	WINDOW WASHING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-159	"32"" x 6' patio door, using squeegee and applicator Inside & out"	WINDOW WASHING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-160	4' x 3' clean window, frame and ledge with squeegee and applicator, wipe with microfiber cloth (per side)	WINDOW WASHING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-161	Spot clean entrance door glass (inside & out)	WINDOW WASHING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-162	Spray/wipe 4' by 3' window one side using microfiber cloth	WINDOW WASHING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-163	Wash with squeegee/applicator 4' by 3' window	WINDOW WASHING		EA	EA		TRUE	OK	Billable_UOM defaulted = Time_UOM (internal quoting default; override per contract)
+TSK-164	Hard floor care - Strip/Wax (benchmark)	Specialty	Hard Floor Care	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-165	Hard floor care - Scrub/Recoat (benchmark)	Specialty	Hard Floor Care	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-166	Hard floor care - Ceramic tile machine scrub (benchmark)	Specialty	Hard Floor Care	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-167	Hard floor care - Spray buff / burnish (benchmark)	Specialty	Hard Floor Care	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-168	Hard floor care - Scrub (benchmark)	Specialty	Hard Floor Care	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-169	Tile & grout cleaning incl sealing (benchmark)	Specialty	Tile & Grout	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-170	Grout sealing (benchmark)	Specialty	Tile & Grout	SQFT	SQFT		FALSE	NEEDS_INPUT_PRICE	US benchmark
+TSK-171	Carpet extraction (benchmark)	Specialty	Carpet Care	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-172	Carpet extraction 20K+ sqft (benchmark)	Specialty	Carpet Care	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-173	Carpet bonnet cleaning (benchmark)	Specialty	Carpet Care	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-174	Carpet spotting (benchmark)	Specialty	Carpet Care	HOUR	HOUR		FALSE	OK	US benchmark
+TSK-175	Power washing - minimum charge first hour (benchmark)	Specialty	Power Washing	HOUR	HOUR		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-176	Power washing - hourly rate (benchmark)	Specialty	Power Washing	HOUR	HOUR		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-177	Power washing - part-timer hourly (benchmark)	Specialty	Power Washing	HOUR	HOUR		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-178	Power washing - flatwork general (benchmark)	Specialty	Power Washing	SQFT	SQFT		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-179	Power washing - dumpster pads (benchmark)	Specialty	Power Washing	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-180	Power washing - grocery store sidewalks (benchmark)	Specialty	Power Washing	SQFT	SQFT		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-181	Power washing - sidewalks/concrete walkways (benchmark)	Specialty	Power Washing	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-182	Power washing - building single story (benchmark)	Specialty	Power Washing	LINEAR_FT	LINEAR_FT		FALSE	OK	US benchmark
+TSK-183	Power washing - building double story (benchmark)	Specialty	Power Washing	LINEAR_FT	LINEAR_FT		FALSE	OK	US benchmark
+TSK-184	Awning cleaning quarterly - 1 story linear ft (benchmark)	Specialty	Power Washing	LINEAR_FT	LINEAR_FT		FALSE	OK	US benchmark
+TSK-185	Awning cleaning quarterly - 1 story per sqft (benchmark)	Specialty	Power Washing	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-186	Awning cleaning quarterly - 2 story linear ft (benchmark)	Specialty	Power Washing	LINEAR_FT	LINEAR_FT		FALSE	OK	US benchmark
+TSK-187	Awning cleaning quarterly - 2 story per sqft (benchmark)	Specialty	Power Washing	SQFT	SQFT		FALSE	OK	US benchmark
+TSK-188	Window cleaning - hourly (benchmark)	Specialty	Window Cleaning	HOUR	HOUR		FALSE	OK	US benchmark
+TSK-189	Window cleaning - per pane per side (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-190	Window cleaning - Double hung windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-191	Window cleaning - Single hung windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-192	Window cleaning - Casement windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-193	Window cleaning - Geometric shapes sm (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-194	Window cleaning - Geometric shapes med (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-195	Window cleaning - Geometric shapes lg (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-196	Window cleaning - Double hung bay & bow windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-197	Window cleaning - Single & double sliding windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-198	Window cleaning - Awning windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-199	Window cleaning - Sliding patio windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-200	Window cleaning - Swinging patio windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-201	Window cleaning - Large picture window (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-202	Window cleaning - French windows or Jalousie doors (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-203	Window cleaning - Deck railing glass (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-204	Window cleaning - Storm windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-205	Window cleaning - Screen cleaning (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-206	Window cleaning - Storms on picture windows 1st floor (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-207	Window cleaning - Storms on picture windows 2nd floor (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-208	Window cleaning - Garden windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-209	Window cleaning - Skylight windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-210	Window cleaning - Inside ladder work 3-5 story add per window (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-211	Window cleaning - 3rd story exterior ladder/roof add (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-212	Window cleaning - 4th story exterior ladder/roof add (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-213	Window cleaning - All pole work hourly (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-214	Window cleaning - Paint & sticker removal per pane per side (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-215	Window cleaning - Large skylights tempered (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-216	Window cleaning - Garden tempered windows (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-217	Window cleaning - Tracks/frames each side per pane (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-218	Window cleaning - Complete track frames each side per pane (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-219	Window cleaning - Tempered glass paint removal sm (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-220	Window cleaning - Tempered glass paint removal med (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-221	Window cleaning - Tempered glass paint removal lg (benchmark)	Specialty	Window Cleaning	PANE	PANE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-222	Appliance cleaning - generic (benchmark)	Specialty	Misc	APPLIANCE	APPLIANCE		FALSE	OK	US benchmark
+TSK-223	Appliance cleaning - Microwave (benchmark)	Specialty	Misc	APPLIANCE	APPLIANCE		FALSE	OK	US benchmark
+TSK-224	Appliance cleaning - Fridge (benchmark)	Specialty	Misc	APPLIANCE	APPLIANCE		FALSE	OK	US benchmark
+TSK-225	Appliance cleaning - Stove/Oven (benchmark)	Specialty	Misc	APPLIANCE	APPLIANCE		FALSE	OK	US benchmark
+TSK-226	Restroom cleaning - per fixture (benchmark)	Specialty	Restrooms	FIXTURE	FIXTURE		FALSE	NEEDS_HUMAN_REVIEW	US benchmark
+TSK-227	Restroom cleaning - small 2 sink 2 stall (benchmark)	Specialty	Restrooms	VISIT	VISIT		FALSE	NEEDS_HUMAN_REVIEW	US benchmark

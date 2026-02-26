@@ -1,0 +1,10 @@
+const fs = require('fs');
+if (!fs.existsSync('public/icons')) fs.mkdirSync('public/icons', { recursive: true });
+
+const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512">
+  <rect width="512" height="512" fill="#1e3a8a" rx="100"/>
+  <text x="50%" y="50%" font-family="Helvetica, Arial, sans-serif" font-size="240" font-weight="bold" fill="white" text-anchor="middle" dy=".35em">CP</text>
+</svg>`;
+
+fs.writeFileSync('public/icon.svg', svg);
+console.log('Saved public/icon.svg');

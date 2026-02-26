@@ -1,0 +1,229 @@
+VariantName	TaskID	DocID	SourceRef	RuleApplied	ConfidenceCode
+Empty trash can (28 qt.), replace liner (or see sq. ft. rate - next section)	TSK-085	D001	aw_L17-18	trim/clean	HIGH
+Empty trash can, replace liner (28 quart)	TSK-086	D001	aw_L19	trim/clean	HIGH
+Empty and damp wipe ash tray	TSK-084	D001	aw_L20	trim/clean	HIGH
+Sanitize/polish drinking fountain	TSK-090	D001	aw_L21	trim/clean	HIGH
+Dust/vacuum blinds 4' by 3'	TSK-083	D001	aw_L22	trim/clean	HIGH
+Clean blinds with ultra-sonic machine 4' x 3' (remove, clean, dry, re-hang)	TSK-077	D001	aw_L23-24	trim/clean	HIGH
+Dust blind slats by hand with microfiber cloth 4' x 3'	TSK-082	D001	aw_L25	trim/clean	HIGH
+Vacuum blind slats using backpack vacuum with brush attachment 4' x 3'	TSK-091	D001	aw_L26-27	trim/clean	HIGH
+Clean refrigerator - damp wipe outside-spot clean inside	TSK-080	D001	aw_L28	trim/clean	HIGH
+Clean refrigerator - remove items and deep clean	TSK-081	D001	aw_L29	trim/clean	HIGH
+Clean microwave - spot clean inside	TSK-079	D001	aw_L30	trim/clean	HIGH
+Clean microwave - deep clean outside/inside	TSK-078	D001	aw_L31	trim/clean	HIGH
+Lunch room chairs - damp wipe seat and back	TSK-087	D001	aw_L32	trim/clean	HIGH
+Lunch room table tops - apply solution with spray trigger and hand wipe	TSK-089	D001	aw_L33-34	trim/clean	HIGH
+"Lunch room table tops - apply solution with 18"" applicator and squeegee clean"	TSK-088	D001	aw_L35-36	trim/clean	HIGH
+Clean / dust / sanitize telephone	TSK-076	D001	aw_L37	trim/clean	HIGH
+Empty trash can, replace liner (28 quart)	TSK-086	D001	aw_L41-42	trim/clean	HIGH
+Remove trash from building	TSK-092	D001	aw_L43	trim/clean	HIGH
+High dusting - vents, corners, lights	TSK-059	D001	aw_L47-48	trim/clean	HIGH
+Low dusting - chair legs, base boards	TSK-062	D001	aw_L49-50	trim/clean	HIGH
+Horizontal dusting - spot cleaning using microfiber cloth, desktops, pictures, computers	TSK-061	D001	aw_L51-53	trim/clean	HIGH
+Horizontal dusting - microfiber cloth	TSK-060	D001	aw_L54-55	trim/clean	HIGH
+Apply wood polish to desk, wipe with cloth	TSK-058	D001	aw_L56-57	trim/clean	HIGH
+Spot clean desk top (remove coffee rings and finger prints from cleared areas using a microfiber cloth	TSK-063	D001	aw_L58-61	trim/clean	HIGH
+Overheads, behind computers, behind doors, etc.	TSK-049	D001	aw_L65-66	trim/clean	HIGH
+Clean toilet - wipe top/bottom	TSK-123	D001	aw_L69	trim/clean	HIGH
+Clean toilet - detail clean	TSK-122	D001	aw_L70	trim/clean	HIGH
+Clean sink	TSK-120	D001	aw_L71	trim/clean	HIGH
+Clean sink - detail clean	TSK-121	D001	aw_L72	trim/clean	HIGH
+Clean urinal wipe top/bottom	TSK-125	D001	aw_L73	trim/clean	HIGH
+Clean urinal - detail clean	TSK-124	D001	aw_L74	trim/clean	HIGH
+Clean/disinfect shower stall	TSK-126	D001	aw_L75	trim/clean	HIGH
+Restroom partition (wipe down)	TSK-127	D001	aw_L76	trim/clean	HIGH
+Clean fixtures, mirrors, counter tops, empty trash, wet mop, fill supplies	TSK-119	D001	aw_L77-78	trim/clean	HIGH
+Machine scrub ceramic tile restroom floor - apply solution/scrub/pick-up and rinse	TSK-129	D001	aw_L82-84	trim/clean	HIGH
+Hand wash ceramic tile walls	TSK-128	D001	aw_L85	trim/clean	HIGH
+Sweeping edges with house broom	TSK-152	D001	aw_L89	trim/clean	HIGH
+"24"" Push broom"	TSK-149	D001	aw_L90	trim/clean	HIGH
+"48"" Push broom"	TSK-150	D001	aw_L91	trim/clean	HIGH
+Pickup piles of dirt with house broom and dust pan	TSK-151	D001	aw_L92-93	trim/clean	HIGH
+"18"" microfiber flat mop"	TSK-052	D001	aw_L97	trim/clean	HIGH
+"24"" microfiber flat mop"	TSK-054	D001	aw_L98	trim/clean	HIGH
+"24"" Dust mop"	TSK-053	D001	aw_L99	trim/clean	HIGH
+"36"" Dust mop"	TSK-055	D001	aw_L100	trim/clean	HIGH
+"48"" Dust mop"	TSK-056	D001	aw_L101	trim/clean	HIGH
+"72"" Dust mop"	TSK-057	D001	aw_L102	trim/clean	HIGH
+"18"" Microfiber flat mop and charging bucket"	TSK-114	D001	aw_L106-107	trim/clean	HIGH
+16-oz. mop head w/bucket wringer	TSK-113	D001	aw_L108	trim/clean	HIGH
+24-oz. mop head	TSK-115	D001	aw_L109	trim/clean	HIGH
+32-oz. mop head	TSK-116	D001	aw_L110	trim/clean	HIGH
+Dusting by hand using microfiber cloth	TSK-007	D001	aw_L113-114	trim/clean	HIGH
+Dusting with extension pole with microfiber cloth and fixi clamp.	TSK-008	D001	aw_L115-116	trim/clean	HIGH
+"12"" Upright vacuum"	TSK-034	D001	aw_L122	trim/clean	HIGH
+"16"" Upright vacuum"	TSK-035	D001	aw_L123	trim/clean	HIGH
+"Backpack vacuum 14"" floor tool"	TSK-037	D001	aw_L124	trim/clean	HIGH
+"Backpack vacuum 20"" floor tool"	TSK-038	D001	aw_L125	trim/clean	HIGH
+"28"" Battery vacuum"	TSK-036	D001	aw_L126	trim/clean	HIGH
+Spot vacuuming - upright vacuum	TSK-040	D001	aw_L127	trim/clean	HIGH
+Spot vacuuming - backpack vacuum	TSK-039	D001	aw_L128	trim/clean	HIGH
+Traffic lanes - upright vacuum	TSK-042	D001	aw_L129	trim/clean	HIGH
+Traffic lanes - backpack vacuum	TSK-041	D001	aw_L130	trim/clean	HIGH
+detail vacuum corners, edges, under furniture	TSK-051	D001	aw_L135-136	trim/clean	HIGH
+Edging along wall - backpack vacuum	TSK-050	D001	aw_L137	trim/clean	HIGH
+Dust & spot clean all handrails	TSK-144	D001	aw_L142	trim/clean	HIGH
+Vacuum stairs, landings with backpack vacuum	TSK-148	D001	aw_L143-144	trim/clean	HIGH
+Damp mop with mop/wringer	TSK-143	D001	aw_L145	trim/clean	HIGH
+"Damp mop w/18"" microfiber flat mop"	TSK-142	D001	aw_L146	trim/clean	HIGH
+Check stairwell for litter & debris	TSK-141	D001	aw_L147	trim/clean	HIGH
+Vacuum carpeted stairs / clean handrails	TSK-147	D001	aw_L148-149	trim/clean	HIGH
+Pre-spray and extract carpeted stairs	TSK-146	D001	aw_L150-151	trim/clean	HIGH
+Hand scrub stairs and risers	TSK-145	D001	aw_L152	trim/clean	HIGH
+2'x4' fixture - remove tubes-clean lens and reflectors	TSK-095	D001	aw_L156-157	trim/clean	HIGH
+Vacuum with backpack with brush attachment on ladder	TSK-100	D001	aw_L158-159	trim/clean	HIGH
+Wall fixtures - dust	TSK-101	D001	aw_L160	trim/clean	HIGH
+Desk lamp - dust	TSK-098	D001	aw_L161	trim/clean	HIGH
+Table lamp and shade - dust	TSK-099	D001	aw_L162	trim/clean	HIGH
+"24"" vanity light - wipe cover and lens"	TSK-096	D001	aw_L163-164	trim/clean	HIGH
+"12"" ceiling light - hand dust outside/remove lens and wipe using step ladder"	TSK-093	D001	aw_L165-167	trim/clean	HIGH
+"16"" dia. Hanging light - hand wipe lens and mounting"	TSK-094	D001	aw_L168-169	trim/clean	HIGH
+"48"" ceiling fanlight - hand wipe blades top/bottom-clean lens and mountings"	TSK-097	D001	aw_L170-172	trim/clean	HIGH
+Vacuum w/backpack with brush attachment	TSK-046	D001	aw_L179-180	trim/clean	HIGH
+Hand wipe exterior surface with cloth on a ladder	TSK-045	D001	aw_L181-182	trim/clean	HIGH
+Dust with extension pole using brush duster	TSK-044	D001	aw_L183-184	trim/clean	HIGH
+Damp wipe using extension pole with cloth and fixi clamp	TSK-043	D001	aw_L185-186	trim/clean	MEDIUM
+Clean and polish by hand with cloth	TSK-112	D001	aw_L190	trim/clean	HIGH
+Unobstructed using cloth, sponge, bucket and extension pole	TSK-154	D001	aw_L195-196	trim/clean	HIGH
+"Unobstructed using 18"" microfiber flat mop"	TSK-153	D001	aw_L197-198	trim/clean	HIGH
+"Using 18"" Microfiber flat mop"	TSK-064	D001	aw_L201	trim/clean	HIGH
+"Using 18"" Microfiber flat mop"	TSK-155	D001	aw_L204	trim/clean	HIGH
+switches, doors using Microfiber cloth	TSK-136	D001	aw_L209-210	trim/clean	HIGH
+Hand dust panels, ceiling, clean door tracks	TSK-068	D001	aw_L213-214	trim/clean	HIGH
+Carpeted floor - detail clean wall panels and door tracks	TSK-067	D001	aw_L215-216	trim/clean	HIGH
+Hard floor elevator - detail clean wall panels and door tracks	TSK-069	D001	aw_L217-218	trim/clean	HIGH
+Apply polish by hand to panels	TSK-065	D001	aw_L219	trim/clean	HIGH
+"Apply polish with hand-held microfiber applicator (4""x18"")"	TSK-066	D001	aw_L220-221	trim/clean	HIGH
+Spray/wipe 4' by 3' window one side using microfiber cloth	TSK-162	D001	aw_L231	trim/clean	HIGH
+4' x 3' clean window, frame and ledge with squeegee and applicator, wipe with microfiber cloth (per side)	TSK-160	D001	aw_L232-233	trim/clean	HIGH
+Wash with squeegee/applicator 4' by 3' window	TSK-163	D001	aw_L234	trim/clean	HIGH
+Spot clean entrance door glass (inside & out)	TSK-161	D001	aw_L235	trim/clean	HIGH
+1' x 6' office door side light, spray and wipe	TSK-156	D001	aw_L236	trim/clean	HIGH
+1' x 6' office door side light, using a squeegee and applicator	TSK-157	D001	aw_L237-238	trim/clean	HIGH
+"32"" x 6' patio door, spray and wipe (moderately soiled) Inside & out"	TSK-158	D001	aw_L239-240	trim/clean	HIGH
+"32"" x 6' patio door, using squeegee and applicator Inside & out"	TSK-159	D001	aw_L241-242	trim/clean	HIGH
+Apply carpet pre-spray with pump-up sprayer	TSK-018	D001	aw_L246-247	trim/clean	HIGH
+Apply carpet pre-spray with electric sprayer	TSK-017	D001	aw_L248-249	trim/clean	HIGH
+Apply carpet pre-spray in-line hydro-force sprayer	TSK-016	D001	aw_L250-251	trim/clean	HIGH
+Apply soil protection with pump-up sprayer	TSK-023	D001	aw_L255-256	trim/clean	HIGH
+Apply soil protection with electric sprayer	TSK-022	D001	aw_L257-258	trim/clean	HIGH
+Apply soil protection in-line hydro-force sprayer	TSK-021	D001	aw_L259-260	trim/clean	HIGH
+Apply dry clean compound to carpet	TSK-019	D001	aw_L264	trim/clean	HIGH
+"Apply dry clean compound to carpet, agitate dry cleaning compound with 24"" brush machine vacuum dry cleaning compound"	TSK-020	D001	aw_L265-268	trim/clean	HIGH
+"Rotary shampoo with 17"" 175 rpm floor machine"	TSK-029	D001	aw_L272-273	trim/clean	HIGH
+"Rotary shampoo with 20"" 175 rpm floor machine"	TSK-030	D001	aw_L274-275	trim/clean	HIGH
+"Bonnet cleaning with 17"" floor machine"	TSK-024	D001	aw_L279-280	trim/clean	HIGH
+"Bonnet cleaning with 20"" floor machine"	TSK-025	D001	aw_L281-282	trim/clean	HIGH
+"Portable extractor 13"" floor tool"	TSK-027	D001	aw_L291	trim/clean	HIGH
+"Self-contained extraction with 16"" floor tool"	TSK-031	D001	aw_L292-293	trim/clean	HIGH
+RX-20 rotary machine	TSK-028	D001	aw_L294	trim/clean	HIGH
+Cimex machine	TSK-026	D001	aw_L298	trim/clean	HIGH
+"17"" rotary floor machine"	TSK-014	D001	aw_L299	trim/clean	HIGH
+"20"" rotary floor machine"	TSK-015	D001	aw_L300	trim/clean	HIGH
+Remove hardened material, dry vacuum, apply chemical, blot with cloth	TSK-032	D001	aw_L303-305	trim/clean	HIGH
+Using 3-gallon extractor, dry vacuum, apply chemical, extract with carpet claw	TSK-033	D001	aw_L306-308	trim/clean	HIGH
+Armless chair	TSK-072	D001	aw_L312	trim/clean	HIGH
+Arm chair	TSK-071	D001	aw_L313	trim/clean	HIGH
+Recliner	TSK-074	D001	aw_L314	trim/clean	HIGH
+7' Sofa	TSK-070	D001	aw_L315	trim/clean	HIGH
+Office Partitions - 4' x 6' one side	TSK-073	D001	aw_L316-317	trim/clean	HIGH
+Mop on using 24 oz. mop head with bucket & wringer	TSK-005	D001	aw_L321-322	trim/clean	HIGH
+"Using 36-gallon solution applicator with 26""-52"" adjustable spreader width"	TSK-006	D001	aw_L323-325	trim/clean	HIGH
+Pick up solution using 24 oz. mop head with bucket & wringer	TSK-133	D001	aw_L329-330	trim/clean	HIGH
+Wet vacuum with floor wand	TSK-135	D001	aw_L331	trim/clean	HIGH
+"Wet vacuum (electric) 28"" front mounted squeegee"	TSK-134	D001	aw_L332-333	trim/clean	HIGH
+"Manually-powered, 36 gallon solution retriever with 30"" squeegee path"	TSK-132	D001	aw_L334-336	trim/clean	HIGH
+"Floor cleaning using 12"" spinner floor wand with 1200 psi"	TSK-047	D001	aw_L345-346	trim/clean	HIGH
+"Wall cleaning using 7"" spinner hand held wall wand with 1200 psi, wipe dry with 18"" flat mop."	TSK-048	D001	aw_L347-349	trim/clean	HIGH
+Grout stick	TSK-130	D001	aw_L352	trim/clean	HIGH
+"Paint brush Rule of thumb: 1 quart of sealer will seal approximately 200 square feet of grout with 12 inch tiles and 1/8"" grout lines. Smaller 4-6"" tiles you will need 24 oz. ¼"" or larger joint lines you will need 25% more sealer."	TSK-131	D001	aw_L353-358	trim/clean	HIGH
+Using 3000 psi spinner machine with 4 gallons per minute machine	TSK-117	D001	aw_L362-363	trim/clean	HIGH
+Using 3000 psi spinner machine with 6 gallons per minute machine	TSK-118	D001	aw_L364-365	trim/clean	HIGH
+Apply stripper to baseboard, scrub by hand with pad, scape edging with putty knife, rinse with cloth of mop.	TSK-009	D001	aw_L369-372	trim/clean	HIGH
+"17"" 175 rpm floor machine Apply solution/scrub/pickup/rinse"	TSK-104	D001	aw_L376-377	trim/clean	HIGH
+"20"" 175 rpm floor machine Apply solution/scrub/pickup/rinse"	TSK-105	D001	aw_L378-379	trim/clean	HIGH
+"20"" Auto scrubber Apply solution/scrub/pickup/rinse"	TSK-106	D001	aw_L380-381	trim/clean	HIGH
+"30"" Propane machine with brush - scrub only"	TSK-107	D001	aw_L382-383	trim/clean	HIGH
+Field and edges	TSK-102	D001	aw_L387	trim/clean	HIGH
+Sanding	TSK-103	D001	aw_L388	trim/clean	HIGH
+"17"" 175 rpm floor machine Apply stripper/scrub/pick-up/rinse"	TSK-108	D001	aw_L399-400	trim/clean	HIGH
+"20"" 175 rpm floor machine Apply stripper/scrub/pick-up/rinse"	TSK-109	D001	aw_L401-402	trim/clean	HIGH
+"20"" Auto scrubber Apply stripper/scrub/pick-up/rinse"	TSK-110	D001	aw_L403-404	trim/clean	HIGH
+"30"" Propane machine with brush - strip only"	TSK-111	D001	aw_L405-406	trim/clean	HIGH
+Standard finish mop head and bucket	TSK-004	D001	aw_L410	trim/clean	HIGH
+"Gravity feed applicator - microfiber bucketless flat mop 20"""	TSK-003	D001	aw_L411-412	trim/clean	HIGH
+"18"" T-bar"	TSK-001	D001	aw_L413	trim/clean	HIGH
+"28"" Pad application system"	TSK-002	D001	aw_L414	trim/clean	HIGH
+Average 30 minutes per coat	TSK-075	D001	aw_L417-421	trim/clean	HIGH
+"17"" 2000 rpm floor machine"	TSK-010	D001	aw_L426	trim/clean	HIGH
+"20"" 2000 rpm floor machine"	TSK-011	D001	aw_L427	trim/clean	HIGH
+"24"" 2000 rpm battery powered floor machine"	TSK-012	D001	aw_L428-429	trim/clean	HIGH
+"27"" 2000 rpm propane floor machine"	TSK-013	D001	aw_L430	trim/clean	HIGH
+"17"" 175 rpm floor machine"	TSK-137	D001	aw_L434	trim/clean	HIGH
+"20"" 175 rpm floor machine"	TSK-139	D001	aw_L435	trim/clean	HIGH
+"17"" 2000 rpm floor machine"	TSK-138	D001	aw_L436	trim/clean	HIGH
+"20"" 2000 rpm floor machine"	TSK-140	D001	aw_L437	trim/clean	HIGH
+Hard floor care - Strip/Wax (benchmark)	TSK-164	D002		manual_review	MEDIUM
+Hard floor care - Scrub/Recoat (benchmark)	TSK-165	D002		manual_review	MEDIUM
+Hard floor care - Ceramic tile machine scrub (benchmark)	TSK-166	D002		manual_review	MEDIUM
+Hard floor care - Spray buff / burnish (benchmark)	TSK-167	D002		manual_review	MEDIUM
+Hard floor care - Scrub (benchmark)	TSK-168	D002		manual_review	MEDIUM
+Tile & grout cleaning incl sealing (benchmark)	TSK-169	D002		manual_review	MEDIUM
+Grout sealing (benchmark)	TSK-170	D002		manual_review	MEDIUM
+Carpet extraction (benchmark)	TSK-171	D002		manual_review	MEDIUM
+Carpet extraction 20K+ sqft (benchmark)	TSK-172	D002		manual_review	MEDIUM
+Carpet bonnet cleaning (benchmark)	TSK-173	D002		manual_review	MEDIUM
+Carpet spotting (benchmark)	TSK-174	D002		manual_review	MEDIUM
+Power washing - minimum charge first hour (benchmark)	TSK-175	D002		manual_review	MEDIUM
+Power washing - hourly rate (benchmark)	TSK-176	D002		manual_review	MEDIUM
+Power washing - part-timer hourly (benchmark)	TSK-177	D002		manual_review	MEDIUM
+Power washing - flatwork general (benchmark)	TSK-178	D002		manual_review	MEDIUM
+Power washing - dumpster pads (benchmark)	TSK-179	D002		manual_review	MEDIUM
+Power washing - grocery store sidewalks (benchmark)	TSK-180	D002		manual_review	MEDIUM
+Power washing - sidewalks/concrete walkways (benchmark)	TSK-181	D002		manual_review	MEDIUM
+Power washing - building single story (benchmark)	TSK-182	D002		manual_review	MEDIUM
+Power washing - building double story (benchmark)	TSK-183	D002		manual_review	MEDIUM
+Awning cleaning quarterly - 1 story linear ft (benchmark)	TSK-184	D002		manual_review	MEDIUM
+Awning cleaning quarterly - 1 story per sqft (benchmark)	TSK-185	D002		manual_review	MEDIUM
+Awning cleaning quarterly - 2 story linear ft (benchmark)	TSK-186	D002		manual_review	MEDIUM
+Awning cleaning quarterly - 2 story per sqft (benchmark)	TSK-187	D002		manual_review	MEDIUM
+Window cleaning - hourly (benchmark)	TSK-188	D002		manual_review	MEDIUM
+Window cleaning - per pane per side (benchmark)	TSK-189	D002		manual_review	MEDIUM
+Window cleaning - Double hung windows (benchmark)	TSK-190	D002		manual_review	MEDIUM
+Window cleaning - Single hung windows (benchmark)	TSK-191	D002		manual_review	MEDIUM
+Window cleaning - Casement windows (benchmark)	TSK-192	D002		manual_review	MEDIUM
+Window cleaning - Geometric shapes sm (benchmark)	TSK-193	D002		manual_review	MEDIUM
+Window cleaning - Geometric shapes med (benchmark)	TSK-194	D002		manual_review	MEDIUM
+Window cleaning - Geometric shapes lg (benchmark)	TSK-195	D002		manual_review	MEDIUM
+Window cleaning - Double hung bay & bow windows (benchmark)	TSK-196	D002		manual_review	MEDIUM
+Window cleaning - Single & double sliding windows (benchmark)	TSK-197	D002		manual_review	MEDIUM
+Window cleaning - Awning windows (benchmark)	TSK-198	D002		manual_review	MEDIUM
+Window cleaning - Sliding patio windows (benchmark)	TSK-199	D002		manual_review	MEDIUM
+Window cleaning - Swinging patio windows (benchmark)	TSK-200	D002		manual_review	MEDIUM
+Window cleaning - Large picture window (benchmark)	TSK-201	D002		manual_review	MEDIUM
+Window cleaning - French windows or Jalousie doors (benchmark)	TSK-202	D002		manual_review	MEDIUM
+Window cleaning - Deck railing glass (benchmark)	TSK-203	D002		manual_review	MEDIUM
+Window cleaning - Storm windows (benchmark)	TSK-204	D002		manual_review	MEDIUM
+Window cleaning - Screen cleaning (benchmark)	TSK-205	D002		manual_review	MEDIUM
+Window cleaning - Storms on picture windows 1st floor (benchmark)	TSK-206	D002		manual_review	MEDIUM
+Window cleaning - Storms on picture windows 2nd floor (benchmark)	TSK-207	D002		manual_review	MEDIUM
+Window cleaning - Garden windows (benchmark)	TSK-208	D002		manual_review	MEDIUM
+Window cleaning - Skylight windows (benchmark)	TSK-209	D002		manual_review	MEDIUM
+Window cleaning - Inside ladder work 3-5 story add per window (benchmark)	TSK-210	D002		manual_review	MEDIUM
+Window cleaning - 3rd story exterior ladder/roof add (benchmark)	TSK-211	D002		manual_review	MEDIUM
+Window cleaning - 4th story exterior ladder/roof add (benchmark)	TSK-212	D002		manual_review	MEDIUM
+Window cleaning - All pole work hourly (benchmark)	TSK-213	D002		manual_review	MEDIUM
+Window cleaning - Paint & sticker removal per pane per side (benchmark)	TSK-214	D002		manual_review	MEDIUM
+Window cleaning - Large skylights tempered (benchmark)	TSK-215	D002		manual_review	MEDIUM
+Window cleaning - Garden tempered windows (benchmark)	TSK-216	D002		manual_review	MEDIUM
+Window cleaning - Tracks/frames each side per pane (benchmark)	TSK-217	D002		manual_review	MEDIUM
+Window cleaning - Complete track frames each side per pane (benchmark)	TSK-218	D002		manual_review	MEDIUM
+Window cleaning - Tempered glass paint removal sm (benchmark)	TSK-219	D002		manual_review	MEDIUM
+Window cleaning - Tempered glass paint removal med (benchmark)	TSK-220	D002		manual_review	MEDIUM
+Window cleaning - Tempered glass paint removal lg (benchmark)	TSK-221	D002		manual_review	MEDIUM
+Appliance cleaning - generic (benchmark)	TSK-222	D002		manual_review	MEDIUM
+Appliance cleaning - Microwave (benchmark)	TSK-223	D002		manual_review	MEDIUM
+Appliance cleaning - Fridge (benchmark)	TSK-224	D002		manual_review	MEDIUM
+Appliance cleaning - Stove/Oven (benchmark)	TSK-225	D002		manual_review	MEDIUM
+Restroom cleaning - per fixture (benchmark)	TSK-226	D002		manual_review	MEDIUM
+Restroom cleaning - small 2 sink 2 stall (benchmark)	TSK-227	D002		manual_review	MEDIUM

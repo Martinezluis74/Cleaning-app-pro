@@ -1,0 +1,172 @@
+DocID	SourceRef	TaskName_Source	Category_Source	Subcategory_Source	UnitText_Source	TimeText_Source	ProductionRateText_Source	PriceText_Source	CurrencyText_Source	ConditionText_Source	BuildingTypeText_Source	Notes_Source	ExtractConfidence
+D001	aw_L17-18	Empty trash can (28 qt.), replace liner (or see sq. ft. rate - next section)	GENERAL CLEANING		EA	.75							HIGH
+D001	aw_L19	Empty trash can, replace liner (28 quart)	GENERAL CLEANING		EA	.33							HIGH
+D001	aw_L20	Empty and damp wipe ash tray	GENERAL CLEANING		EA	.14							HIGH
+D001	aw_L21	Sanitize/polish drinking fountain	GENERAL CLEANING		EA	1.00							HIGH
+D001	aw_L22	Dust/vacuum blinds 4' by 3'	GENERAL CLEANING		EA	.45							HIGH
+D001	aw_L23-24	Clean blinds with ultra-sonic machine 4' x 3' (remove, clean, dry, re-hang)	GENERAL CLEANING		EA	20							HIGH
+D001	aw_L25	Dust blind slats by hand with microfiber cloth 4' x 3'	GENERAL CLEANING		EA	3.00							HIGH
+D001	aw_L26-27	Vacuum blind slats using backpack vacuum with brush attachment 4' x 3'	GENERAL CLEANING		EA	3.00							HIGH
+D001	aw_L28	Clean refrigerator - damp wipe outside-spot clean inside	GENERAL CLEANING		EA	15.00							HIGH
+D001	aw_L29	Clean refrigerator - remove items and deep clean	GENERAL CLEANING		EA	45.00							HIGH
+D001	aw_L30	Clean microwave - spot clean inside	GENERAL CLEANING		EA	2.00							HIGH
+D001	aw_L31	Clean microwave - deep clean outside/inside	GENERAL CLEANING		EA	5.00							HIGH
+D001	aw_L32	Lunch room chairs - damp wipe seat and back	GENERAL CLEANING		EA	1.00							HIGH
+D001	aw_L33-34	Lunch room table tops - apply solution with spray trigger and hand wipe	GENERAL CLEANING		EA	.31							HIGH
+D001	aw_L35-36	"Lunch room table tops - apply solution with 18"" applicator and squeegee clean"	GENERAL CLEANING		EA	.15							HIGH
+D001	aw_L37	Clean / dust / sanitize telephone	GENERAL CLEANING		EA	.20							HIGH
+D001	aw_L41-42	Empty trash can, replace liner (28 quart)	GENERAL CLEANING	TRASH	PER_1000_SQFT	2	30,000						HIGH
+D001	aw_L43	Remove trash from building	GENERAL CLEANING	TRASH	PER_1000_SQFT	1	60,000						HIGH
+D001	aw_L47-48	High dusting - vents, corners, lights	DUSTING		PER_1000_SQFT	3	20,000						HIGH
+D001	aw_L49-50	Low dusting - chair legs, base boards	DUSTING		PER_1000_SQFT	5	12,000						HIGH
+D001	aw_L51-53	Horizontal dusting - spot cleaning using microfiber cloth, desktops, pictures, computers	DUSTING		PER_1000_SQFT	5	12,000						HIGH
+D001	aw_L54-55	Horizontal dusting - microfiber cloth	DUSTING		PER_1000_SQFT	12	5,000						HIGH
+D001	aw_L56-57	Apply wood polish to desk, wipe with cloth	DUSTING		PER_1000_SQFT	5.5	10,909						HIGH
+D001	aw_L58-61	Spot clean desk top (remove coffee rings and finger prints from cleared areas using a microfiber cloth	DUSTING		PER_1000_SQFT	5.5	10,909						HIGH
+D001	aw_L65-66	Overheads, behind computers, behind doors, etc.	DETAIL DUSTING		PER_1000_SQFT	4	15,000						HIGH
+D001	aw_L69	Clean toilet - wipe top/bottom	RESTROOM CLEANING		EA	1.46							HIGH
+D001	aw_L70	Clean toilet - detail clean	RESTROOM CLEANING		EA	4.00							HIGH
+D001	aw_L71	Clean sink	RESTROOM CLEANING		EA	.44							HIGH
+D001	aw_L72	Clean sink - detail clean	RESTROOM CLEANING		EA	1.19							HIGH
+D001	aw_L73	Clean urinal wipe top/bottom	RESTROOM CLEANING		EA	1.46							HIGH
+D001	aw_L74	Clean urinal - detail clean	RESTROOM CLEANING		EA	3.00							HIGH
+D001	aw_L75	Clean/disinfect shower stall	RESTROOM CLEANING		EA	7.00							HIGH
+D001	aw_L76	Restroom partition (wipe down)	RESTROOM CLEANING		STALL	2.00/stall							HIGH
+D001	aw_L77-78	Clean fixtures, mirrors, counter tops, empty trash, wet mop, fill supplies	RESTROOM CLEANING		FIXTURE	2.5 per fixture							HIGH
+D001	aw_L82-84	Machine scrub ceramic tile restroom floor - apply solution/scrub/pick-up and rinse	RESTROOM CLEANING CONTINUED		PER_1000_SQFT	81	740						HIGH
+D001	aw_L85	Hand wash ceramic tile walls	RESTROOM CLEANING CONTINUED		PER_1000_SQFT	75	800						HIGH
+D001	aw_L89	Sweeping edges with house broom	SWEEPING		PER_1000_SQFT	4.53	13,245						HIGH
+D001	aw_L90	"24"" Push broom"	SWEEPING		PER_1000_SQFT	3.8	15,789						HIGH
+D001	aw_L91	"48"" Push broom"	SWEEPING		PER_1000_SQFT	7.6	7,894						HIGH
+D001	aw_L92-93	Pickup piles of dirt with house broom and dust pan	SWEEPING		PER_1000_SQFT	1.46	41,095						HIGH
+D001	aw_L97	"18"" microfiber flat mop"	DUST MOPPING		PER_1000_SQFT	12	5,000						HIGH
+D001	aw_L98	"24"" microfiber flat mop"	DUST MOPPING		PER_1000_SQFT	7	8,572						HIGH
+D001	aw_L99	"24"" Dust mop"	DUST MOPPING		PER_1000_SQFT	7	8,572						HIGH
+D001	aw_L100	"36"" Dust mop"	DUST MOPPING		PER_1000_SQFT	5	12,000						HIGH
+D001	aw_L101	"48"" Dust mop"	DUST MOPPING		PER_1000_SQFT	2.5	24,000						HIGH
+D001	aw_L102	"72"" Dust mop"	DUST MOPPING		PER_1000_SQFT	1.5	40,000						HIGH
+D001	aw_L106-107	"18"" Microfiber flat mop and charging bucket"	MOPPING		PER_1000_SQFT	6	10,000						HIGH
+D001	aw_L108	16-oz. mop head w/bucket wringer	MOPPING		PER_1000_SQFT	14	4,286						HIGH
+D001	aw_L109	24-oz. mop head	MOPPING		PER_1000_SQFT	9.60	6,250						HIGH
+D001	aw_L110	32-oz. mop head	MOPPING		PER_1000_SQFT	7.20	8,333						HIGH
+D001	aw_L113-114	Dusting by hand using microfiber cloth	BASEBOARD CLEANING		PER_1000_LINEAR_FT	20							HIGH
+D001	aw_L115-116	Dusting with extension pole with microfiber cloth and fixi clamp.	BASEBOARD CLEANING		PER_1000_LINEAR_FT	13							HIGH
+D001	aw_L122	"12"" Upright vacuum"	CARPET VACUUMING		PER_1000_SQFT	27	2,220						HIGH
+D001	aw_L123	"16"" Upright vacuum"	CARPET VACUUMING		PER_1000_SQFT	17.5	3,430						HIGH
+D001	aw_L124	"Backpack vacuum 14"" floor tool"	CARPET VACUUMING		PER_1000_SQFT	8	7,500						HIGH
+D001	aw_L125	"Backpack vacuum 20"" floor tool"	CARPET VACUUMING		PER_1000_SQFT	7.5	8,000						HIGH
+D001	aw_L126	"28"" Battery vacuum"	CARPET VACUUMING		PER_1000_SQFT	6	10,000						HIGH
+D001	aw_L127	Spot vacuuming - upright vacuum	CARPET VACUUMING		PER_1000_SQFT	3	20,000						HIGH
+D001	aw_L128	Spot vacuuming - backpack vacuum	CARPET VACUUMING		PER_1000_SQFT	2.5	24,000						HIGH
+D001	aw_L129	Traffic lanes - upright vacuum	CARPET VACUUMING		PER_1000_SQFT	4.5	13,333						HIGH
+D001	aw_L130	Traffic lanes - backpack vacuum	CARPET VACUUMING		PER_1000_SQFT	3	20,000						HIGH
+D001	aw_L135-136	detail vacuum corners, edges, under furniture	DETAIL VACUUM		PER_1000_SQFT	5	12,000			"Using 14"" floor tool backpack to"			HIGH
+D001	aw_L137	Edging along wall - backpack vacuum	DETAIL VACUUM		PER_1000_SQFT	8.5	7,059			"Using 14"" floor tool backpack to"			HIGH
+D001	aw_L142	Dust & spot clean all handrails	STAIRWAYS & LANDINGS		FLOOR	5							HIGH
+D001	aw_L143-144	Vacuum stairs, landings with backpack vacuum	STAIRWAYS & LANDINGS		FLOOR	2							HIGH
+D001	aw_L145	Damp mop with mop/wringer	STAIRWAYS & LANDINGS		FLOOR	3							HIGH
+D001	aw_L146	"Damp mop w/18"" microfiber flat mop"	STAIRWAYS & LANDINGS		FLOOR	2							HIGH
+D001	aw_L147	Check stairwell for litter & debris	STAIRWAYS & LANDINGS		FLOOR	1							HIGH
+D001	aw_L148-149	Vacuum carpeted stairs / clean handrails	STAIRWAYS & LANDINGS		FLOOR	8							HIGH
+D001	aw_L150-151	Pre-spray and extract carpeted stairs	STAIRWAYS & LANDINGS		FLOOR	35							HIGH
+D001	aw_L152	Hand scrub stairs and risers	STAIRWAYS & LANDINGS		FLOOR	60							HIGH
+D001	aw_L156-157	2'x4' fixture - remove tubes-clean lens and reflectors	LIGHT FIXTURES		EA	10							HIGH
+D001	aw_L158-159	Vacuum with backpack with brush attachment on ladder	LIGHT FIXTURES		EA	2							HIGH
+D001	aw_L160	Wall fixtures - dust	LIGHT FIXTURES		EA	.13							HIGH
+D001	aw_L161	Desk lamp - dust	LIGHT FIXTURES		EA	.22							HIGH
+D001	aw_L162	Table lamp and shade - dust	LIGHT FIXTURES		EA	.22							HIGH
+D001	aw_L163-164	"24"" vanity light - wipe cover and lens"	LIGHT FIXTURES		EA	.14							HIGH
+D001	aw_L165-167	"12"" ceiling light - hand dust outside/remove lens and wipe using step ladder"	LIGHT FIXTURES		EA	1.17							HIGH
+D001	aw_L168-169	"16"" dia. Hanging light - hand wipe lens and mounting"	LIGHT FIXTURES		EA	1.75							HIGH
+D001	aw_L170-172	"48"" ceiling fanlight - hand wipe blades top/bottom-clean lens and mountings"	LIGHT FIXTURES		EA	3							HIGH
+D001	aw_L179-180	Vacuum w/backpack with brush attachment	CEILING AIR VENTS		EA	1							HIGH
+D001	aw_L181-182	Hand wipe exterior surface with cloth on a ladder	CEILING AIR VENTS		EA	3							HIGH
+D001	aw_L183-184	Dust with extension pole using brush duster	CEILING AIR VENTS		EA	.35							HIGH
+D001	aw_L185-186	Damp wipe using extension pole with cloth and fixi clamp	CEILING AIR VENTS		EA	1:30							MEDIUM
+D001	aw_L190	Clean and polish by hand with cloth	METAL CLEANING		PER_6_SQFT	3.66						basis=6 square feet	HIGH
+D001	aw_L195-196	Unobstructed using cloth, sponge, bucket and extension pole	WALL WASHING		PER_1000_SQFT	18.5	3,243			Walls painted with semi-gloss or higher luster finish			HIGH
+D001	aw_L197-198	"Unobstructed using 18"" microfiber flat mop"	WALL WASHING		PER_1000_SQFT	8	7,500			Walls painted with semi-gloss or higher luster finish			HIGH
+D001	aw_L201	"Using 18"" Microfiber flat mop"	DUSTING WALLS		PER_1000_SQFT	6	10,000						HIGH
+D001	aw_L204	"Using 18"" Microfiber flat mop"	WASHING		PER_1000_SQFT	7	8,571			vinyl walls			HIGH
+D001	aw_L209-210	switches, doors using Microfiber cloth	SPOT CLEAN WALLS		PER_1000_SQFT	2.00	30,000			Remove hand marks from light			HIGH
+D001	aw_L213-214	Hand dust panels, ceiling, clean door tracks	ELEVATOR CLEANING		EA	1							HIGH
+D001	aw_L215-216	Carpeted floor - detail clean wall panels and door tracks	ELEVATOR CLEANING		EA	1							HIGH
+D001	aw_L217-218	Hard floor elevator - detail clean wall panels and door tracks	ELEVATOR CLEANING		EA	1							HIGH
+D001	aw_L219	Apply polish by hand to panels	ELEVATOR CLEANING		EA	1							HIGH
+D001	aw_L220-221	"Apply polish with hand-held microfiber applicator (4""x18"")"	ELEVATOR CLEANING		EA	1							HIGH
+D001	aw_L231	Spray/wipe 4' by 3' window one side using microfiber cloth	WINDOW WASHING		EA	.40							HIGH
+D001	aw_L232-233	4' x 3' clean window, frame and ledge with squeegee and applicator, wipe with microfiber cloth (per side)	WINDOW WASHING		EA	2.5							HIGH
+D001	aw_L234	Wash with squeegee/applicator 4' by 3' window	WINDOW WASHING		EA	.23							HIGH
+D001	aw_L235	Spot clean entrance door glass (inside & out)	WINDOW WASHING		EA	.57							HIGH
+D001	aw_L236	1' x 6' office door side light, spray and wipe	WINDOW WASHING		EA	.18							HIGH
+D001	aw_L237-238	1' x 6' office door side light, using a squeegee and applicator	WINDOW WASHING		EA	.13							HIGH
+D001	aw_L239-240	"32"" x 6' patio door, spray and wipe (moderately soiled) Inside & out"	WINDOW WASHING		EA	2				moderately soiled			HIGH
+D001	aw_L241-242	"32"" x 6' patio door, using squeegee and applicator Inside & out"	WINDOW WASHING		EA	.20							HIGH
+D001	aw_L246-247	Apply carpet pre-spray with pump-up sprayer	CARPET CARE		PER_1000_SQFT	10	6,000			apply pre-spray			HIGH
+D001	aw_L248-249	Apply carpet pre-spray with electric sprayer	CARPET CARE		PER_1000_SQFT	4.5	13,333			apply pre-spray			HIGH
+D001	aw_L250-251	Apply carpet pre-spray in-line hydro-force sprayer	CARPET CARE		PER_1000_SQFT	4.5	13,333			apply pre-spray			HIGH
+D001	aw_L255-256	Apply soil protection with pump-up sprayer	CARPET CARE		PER_1000_SQFT	10	6,000			apply soil protectant			HIGH
+D001	aw_L257-258	Apply soil protection with electric sprayer	CARPET CARE		PER_1000_SQFT	5	12,000			apply soil protectant			HIGH
+D001	aw_L259-260	Apply soil protection in-line hydro-force sprayer	CARPET CARE		PER_1000_SQFT	5	12,000			apply soil protectant			HIGH
+D001	aw_L264	Apply dry clean compound to carpet	CARPET CARE		PER_1000_SQFT	13	4,500			dry cleaning			HIGH
+D001	aw_L265-268	"Apply dry clean compound to carpet, agitate dry cleaning compound with 24"" brush machine vacuum dry cleaning compound"	CARPET CARE		PER_1000_SQFT	25	2,400			dry cleaning			HIGH
+D001	aw_L272-273	"Rotary shampoo with 17"" 175 rpm floor machine"	CARPET CARE		PER_1000_SQFT	60	1,000			shampoo unobstructed area			HIGH
+D001	aw_L274-275	"Rotary shampoo with 20"" 175 rpm floor machine"	CARPET CARE		PER_1000_SQFT	58	1,033			shampoo unobstructed area			HIGH
+D001	aw_L279-280	"Bonnet cleaning with 17"" floor machine"	CARPET CARE		PER_1000_SQFT	40	1,500			bonnet cleaning unobstructed area			HIGH
+D001	aw_L281-282	"Bonnet cleaning with 20"" floor machine"	CARPET CARE		PER_1000_SQFT	37	1,621			bonnet cleaning unobstructed area			HIGH
+D001	aw_L291	"Portable extractor 13"" floor tool"	CARPET CARE		PER_1000_SQFT	18	3,333			hot water extraction unobstructed area			HIGH
+D001	aw_L292-293	"Self-contained extraction with 16"" floor tool"	CARPET CARE		PER_1000_SQFT	10	6,000			hot water extraction unobstructed area			HIGH
+D001	aw_L294	RX-20 rotary machine	CARPET CARE		PER_1000_SQFT	15	4,000			hot water extraction unobstructed area			HIGH
+D001	aw_L298	Cimex machine	CARPET CARE		PER_1000_SQFT	22	2,727			encapsulation unobstructed area			HIGH
+D001	aw_L299	"17"" rotary floor machine"	CARPET CARE		PER_1000_SQFT	45	1,333			encapsulation unobstructed area			HIGH
+D001	aw_L300	"20"" rotary floor machine"	CARPET CARE		PER_1000_SQFT	35	1,714			encapsulation unobstructed area			HIGH
+D001	aw_L303-305	Remove hardened material, dry vacuum, apply chemical, blot with cloth	CARPET SPOTTING		SPOT	4							HIGH
+D001	aw_L306-308	Using 3-gallon extractor, dry vacuum, apply chemical, extract with carpet claw	CARPET SPOTTING		SPOT	2							HIGH
+D001	aw_L312	Armless chair	FABRIC AND UPHOLSTERY CLEANING		EA	4							HIGH
+D001	aw_L313	Arm chair	FABRIC AND UPHOLSTERY CLEANING		EA	6							HIGH
+D001	aw_L314	Recliner	FABRIC AND UPHOLSTERY CLEANING		EA	30							HIGH
+D001	aw_L315	7' Sofa	FABRIC AND UPHOLSTERY CLEANING		EA	4							HIGH
+D001	aw_L316-317	Office Partitions - 4' x 6' one side	FABRIC AND UPHOLSTERY CLEANING		EA	8							HIGH
+D001	aw_L321-322	Mop on using 24 oz. mop head with bucket & wringer	APPLY SOLUTION TO FLOOR		PER_1000_SQFT	10	6,000						HIGH
+D001	aw_L323-325	"Using 36-gallon solution applicator with 26""-52"" adjustable spreader width"	APPLY SOLUTION TO FLOOR		PER_1000_SQFT	1.2	50,000						HIGH
+D001	aw_L329-330	Pick up solution using 24 oz. mop head with bucket & wringer	SOLUTION PICK-UP		PER_1000_SQFT	55	1,090			unobstructed area			HIGH
+D001	aw_L331	Wet vacuum with floor wand	SOLUTION PICK-UP		PER_1000_SQFT	20	3,000			unobstructed area			HIGH
+D001	aw_L332-333	"Wet vacuum (electric) 28"" front mounted squeegee"	SOLUTION PICK-UP		PER_1000_SQFT	8	7,500			unobstructed area			HIGH
+D001	aw_L334-336	"Manually-powered, 36 gallon solution retriever with 30"" squeegee path"	SOLUTION PICK-UP		PER_1000_SQFT	2	30,000			unobstructed area			HIGH
+D001	aw_L345-346	"Floor cleaning using 12"" spinner floor wand with 1200 psi"	CERAMIC TILE CLEANING USING HIGH		PER_1000_SQFT	35	1,725			PRESSURE MACHINE			HIGH
+D001	aw_L347-349	"Wall cleaning using 7"" spinner hand held wall wand with 1200 psi, wipe dry with 18"" flat mop."	CERAMIC TILE CLEANING USING HIGH		PER_1000_SQFT	63	950			PRESSURE MACHINE			HIGH
+D001	aw_L352	Grout stick	SEALING GROUT		PER_200_SQFT	45	325						HIGH
+D001	aw_L353-358	"Paint brush Rule of thumb: 1 quart of sealer will seal approximately 200 square feet of grout with 12 inch tiles and 1/8"" grout lines. Smaller 4-6"" tiles you will need 24 oz. ¼"" or larger joint lines you will need 25% more sealer."	SEALING GROUT		PER_200_SQFT	60	200						HIGH
+D001	aw_L362-363	Using 3000 psi spinner machine with 4 gallons per minute machine	PERIODIC AND RESTORATIVE CONCRETE		PER_1000_SQFT	40	1,500			CLEANING			HIGH
+D001	aw_L364-365	Using 3000 psi spinner machine with 6 gallons per minute machine	PERIODIC AND RESTORATIVE CONCRETE		PER_1000_SQFT	20	3,000			CLEANING			HIGH
+D001	aw_L369-372	Apply stripper to baseboard, scrub by hand with pad, scape edging with putty knife, rinse with cloth of mop.	BASEBOARD STRIPPING		PER_100_LINEAR_FT	64				vinyl			HIGH
+D001	aw_L376-377	"17"" 175 rpm floor machine Apply solution/scrub/pickup/rinse"	MACHINE SCRUBBING HARD FLOORS		PER_1000_SQFT	81	741						HIGH
+D001	aw_L378-379	"20"" 175 rpm floor machine Apply solution/scrub/pickup/rinse"	MACHINE SCRUBBING HARD FLOORS		PER_1000_SQFT	77	779						HIGH
+D001	aw_L380-381	"20"" Auto scrubber Apply solution/scrub/pickup/rinse"	MACHINE SCRUBBING HARD FLOORS		PER_1000_SQFT	17.5	3,429						HIGH
+D001	aw_L382-383	"30"" Propane machine with brush - scrub only"	MACHINE SCRUBBING HARD FLOORS		PER_1000_SQFT	4	15,000						HIGH
+D001	aw_L387	Field and edges	MACHINE SCREEN WOOD FLOOR		PER_1000_SQFT	3.5	286						HIGH
+D001	aw_L388	Sanding	MACHINE SCREEN WOOD FLOOR		PER_1000_SQFT	8	125						HIGH
+D001	aw_L399-400	"17"" 175 rpm floor machine Apply stripper/scrub/pick-up/rinse"	MACHINE STRIPPING HARD FLOORS		PER_1000_SQFT	91	659						HIGH
+D001	aw_L401-402	"20"" 175 rpm floor machine Apply stripper/scrub/pick-up/rinse"	MACHINE STRIPPING HARD FLOORS		PER_1000_SQFT	87	689						HIGH
+D001	aw_L403-404	"20"" Auto scrubber Apply stripper/scrub/pick-up/rinse"	MACHINE STRIPPING HARD FLOORS		PER_1000_SQFT	27.5	2,181						HIGH
+D001	aw_L405-406	"30"" Propane machine with brush - strip only"	MACHINE STRIPPING HARD FLOORS		PER_1000_SQFT	4	15,000						HIGH
+D001	aw_L410	Standard finish mop head and bucket	APPLY FLOOR FINISH		PER_1000_SQFT	20.00	3,000						HIGH
+D001	aw_L411-412	"Gravity feed applicator - microfiber bucketless flat mop 20"""	APPLY FLOOR FINISH		PER_1000_SQFT	15.00	4,000						HIGH
+D001	aw_L413	"18"" T-bar"	APPLY FLOOR FINISH		PER_1000_SQFT	24	2,500						HIGH
+D001	aw_L414	"28"" Pad application system"	APPLY FLOOR FINISH		PER_1000_SQFT	2	30,000						HIGH
+D001	aw_L417-421	Average 30 minutes per coat	FINISH DRY TIME		COAT	150 minutes						basis=5	HIGH
+D001	aw_L426	"17"" 2000 rpm floor machine"	BURNISHING		PER_1000_SQFT	43	1,396			sweep, mop, burnish, dust mop, unobstructed area			HIGH
+D001	aw_L427	"20"" 2000 rpm floor machine"	BURNISHING		PER_1000_SQFT	39	1,539			sweep, mop, burnish, dust mop, unobstructed area			HIGH
+D001	aw_L428-429	"24"" 2000 rpm battery powered floor machine"	BURNISHING		PER_1000_SQFT	34	1,765			sweep, mop, burnish, dust mop, unobstructed area			HIGH
+D001	aw_L430	"27"" 2000 rpm propane floor machine"	BURNISHING		PER_1000_SQFT	22	2,727			sweep, mop, burnish, dust mop, unobstructed area			HIGH
+D001	aw_L434	"17"" 175 rpm floor machine"	SPRAY BUFFING		PER_1000_SQFT	53	1,132			sweep, mop, buff, unobstructed area			HIGH
+D001	aw_L435	"20"" 175 rpm floor machine"	SPRAY BUFFING		PER_1000_SQFT	49	1,224			sweep, mop, buff, unobstructed area			HIGH
+D001	aw_L436	"17"" 2000 rpm floor machine"	SPRAY BUFFING		PER_1000_SQFT	43	1,396			sweep, mop, buff, unobstructed area			HIGH
+D001	aw_L437	"20"" 2000 rpm floor machine"	SPRAY BUFFING		PER_1000_SQFT	39	1,539			sweep, mop, buff, unobstructed area			HIGH
+D002	p8_l18	Strip/Wax	Hard Floor Care		cents per square foot			.30 - .40 cents per square foot	USD			Project work avg prices	HIGH
+D002	p8_l25	Tile and Grout Cleaning	Tile & Grout		per square foot			.50 cents - $1.25 per square foot	USD			Includes sealing	MEDIUM
+D002	p8_l26	Grout sealing	Tile & Grout		square feet per hour		200 square feet per hour		USD			Setup->cleanup included (note)	HIGH
+D002	p9_l2	Carpet Extraction	Carpet Care		cents per square foot			.25 cents per square foot	USD				HIGH
+D002	p9_l10	Power Washing - Minimum Charge	Power Washing		first hour			$75.00 - $125.00 for the first hour	USD			Then regular hourly	HIGH
+D002	p10_l7	Window Cleaning - Hourly	Window Cleaning		per hour			$65 - $85 per hour	USD				HIGH
+D002	p11_l13	Appliance Cleaning	Misc		per appliance			$15 - $35+ per appliance	USD				HIGH

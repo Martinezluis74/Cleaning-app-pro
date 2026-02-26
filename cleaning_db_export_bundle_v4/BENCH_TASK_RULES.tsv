@@ -1,0 +1,6 @@
+RuleID	TaskID	RuleType	RuleTextShort	Region	SourceDocID	SourceRef	ConfidenceCode	QA_Flags	NotesShort
+RULE-001		INTERPRETATION	Interpret 'x cents per square foot' as USD $x per sqft (e.g., .30 cents => $0.30).	US_BENCHMARK	USER_INPUT	CHAT_2026-02-25	HIGH	USER_DECISION	Prevents absurd $0.0030 interpretation; applies only when text explicitly says 'cents'.
+RULE-002	TSK-175	PRICING_RULE	Minimum charge applies to first hour; then regular hourly rate.	US_BENCHMARK	D002	p9_l10	HIGH		Store as rule to avoid mixing with hourly bands.
+RULE-003	TSK-177	PRICING_RULE	Should never make less than $45/hr for one-man rig.	US_BENCHMARK	D002	p9_l15	HIGH		Benchmark warning statement.
+RULE-004	TSK-180	PRICING_RULE	First time clean: double the regular monthly cleaning price.	US_BENCHMARK	D002	p9_l19	HIGH		Benchmark rule; apply manually.
+RULE-005	TSK-189	PRICING_RULE	Per pane charge is per side; avg around $2.00 per pane/per side (moderate soil).	US_BENCHMARK	D002	p10_l8	HIGH		Short rule for UI/help text.
