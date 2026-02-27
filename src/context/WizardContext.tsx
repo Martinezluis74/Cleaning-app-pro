@@ -13,6 +13,7 @@ const defaultState: WizardState = {
     site: {
         siteType: 'Office',
         buildingClass: 'B',
+        sqft: 2000,
         cleaningFrequency: 5,
         floorMatrix: [
             { id: 1, floorType: 'Carpet', sqft: 2000 },
@@ -107,7 +108,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const { areas, addons, pricingModel, financials, site } = prev;
             if (!pricingModel) return prev;
 
-            let totalSqft = site.floorMatrix?.reduce((acc, curr) => acc + (Number(curr.sqft) || 0), 0) || 0;
+            let totalSqft = site.sqft || 0;
             let totalHours = 0;
 
             const hstRateStr = pricingModel.assumptions.find(a => a.key === 'HST')?.value || 0.13;

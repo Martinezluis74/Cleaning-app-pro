@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 export default function StepSiteProfile() {
     const { state, updateSite } = useWizard();
 
-    const totalSqft = state.site.floorMatrix?.reduce((sum, item) => sum + (Number(item.sqft) || 0), 0) || 0;
+    const totalSqft = Number(state.site.sqft) || 0;
 
     const handleFloorChange = (index: number, field: string, value: any) => {
         const newMatrix = [...(state.site.floorMatrix || [])];
@@ -20,15 +20,26 @@ export default function StepSiteProfile() {
     return (
         <div className="space-y-8">
             <div>
-                <CardTitle className="text-2xl font-bold text-slate-900 mb-2">Paso 2: Levantamiento Técnico</CardTitle>
+                <CardTitle className="text-2xl font-bold text-slate-900 mb-2">Paso 2: Auditoría de Suelos</CardTitle>
                 <CardDescription className="text-slate-500">
-                    Ingresa los datos exactos del edificio. El cálculo de horas se realizará sobre estas medidas.
+                    Ingresa los datos exactos del edificio. El cálculo de horas se basará en el Total SqFt y la Clase.
                 </CardDescription>
             </div>
 
             <div className="space-y-8">
-                {/* BUILDING CLASS & FREQUENCY */}
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-5 bg-slate-50 border border-slate-200 rounded-xl">
+                {/* BUILDING CLASS & FREQUENCY & TSQFT */}
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 p-5 bg-slate-50 border border-slate-200 rounded-xl">
+                    <div className="space-y-2">
+                        <Label className="text-slate-700 font-bold uppercase tracking-widest text-xs">Total SqFt del Edificio</Label>
+                        <Input
+                            type="number"
+                            min="0"
+                            placeholder="Ej. 5000"
+                            value={state.site.sqft || ''}
+                            onChange={e => updateSite({ sqft: Number(e.target.value) })}
+                            className="bg-white border-blue-300 text-blue-900 text-lg font-black h-12 shadow-sm focus-visible:ring-blue-500"
+                        />
+                    </div>
                     <div className="space-y-2">
                         <Label className="text-slate-700 font-bold uppercase tracking-widest text-xs">Clase (Tasa de Producción)</Label>
                         <Select value={state.site.buildingClass} onValueChange={(v: any) => updateSite({ buildingClass: v })}>
@@ -111,36 +122,7 @@ export default function StepSiteProfile() {
                     </div>
                 </div>
 
-                {/* BATHROOMS & FIXTURES */}
-                <div className="space-y-4">
-                    <Label className="text-slate-700 font-bold uppercase tracking-widest text-xs text-blue-600">
-                        Baños y Accesorios
-                    </Label>
-                    <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 p-5 bg-blue-50/50 border border-blue-100 rounded-xl">
-                        {[
-                            { id: 'rooms', label: 'Total Bathrooms' },
-                            { id: 'toilets', label: 'Toilets' },
-                            { id: 'urinals', label: 'Urinales' },
-                            { id: 'sinks', label: 'Lavamanos' },
-                            { id: 'showers', label: 'Duchas' }
-                        ].map((fix) => (
-                            <div key={fix.id} className="space-y-2">
-                                <Label className="text-[10px] font-bold uppercase text-slate-500 whitespace-nowrap">{fix.label}</Label>
-                                <Input
-                                    type="number" min="0"
-                                    value={state.site.fixtures?.[fix.id as keyof typeof state.site.fixtures] || ''}
-                                    onChange={e => updateSite({
-                                        fixtures: {
-                                            ...(state.site.fixtures || { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 }),
-                                            [fix.id]: Number(e.target.value)
-                                        }
-                                    })}
-                                    className="h-12 text-center text-xl bg-white border-white shadow-sm font-black text-blue-900"
-                                />
-                            </div>
-                        ))}
-                    </div>
-                </div>
+
 
             </div>
         </div>

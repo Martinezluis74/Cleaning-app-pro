@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Save, AlertCircle, CheckCircle2 } from 'lucide-react';
 import StepClientProfile from './StepClientProfile';
 import StepSiteProfile from './StepSiteProfile';
+import StepBathroomsProfile from './StepBathroomsProfile';
 import StepAreaManagement from './StepAreaManagement';
 import StepScope from './StepScope';
 import StepSpecials from './StepSpecials';
@@ -19,18 +20,19 @@ export function WalkthroughWizard() {
     const { state, setStep, nextStep, prevStep, updateFinancials } = useWizard();
     const { currentStep, client, totals, areas, pricingModel, financials } = state;
 
-    const progressPercentage = (currentStep / 8) * 100;
+    const progressPercentage = (currentStep / 9) * 100;
 
     const getStepComponent = () => {
         switch (currentStep) {
             case 1: return <StepClientProfile />;
-            case 2: return <StepSiteProfile />;
-            case 3:
-            case 4: return <StepAreaManagement stepNum={currentStep} />;
-            case 5: return <StepScope />;
-            case 6: return <StepSpecials />;
-            case 7: return <StepCompliance />;
-            case 8: return <StepEvidence />;
+            case 2: return <StepSiteProfile />;             // Auditoría de Suelos
+            case 3: return <StepBathroomsProfile />;        // Auditoría de Baños
+            case 4:
+            case 5: return <StepAreaManagement stepNum={currentStep} />;
+            case 6: return <StepScope />;
+            case 7: return <StepSpecials />;
+            case 8: return <StepCompliance />;
+            case 9: return <StepEvidence />;
             default: return <StepClientProfile />;
         }
     };
@@ -66,7 +68,7 @@ export function WalkthroughWizard() {
                         </span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <span className="text-sm font-bold text-slate-500">Step {currentStep} of 8</span>
+                        <span className="text-sm font-bold text-slate-500">Step {currentStep} of 9</span>
                         <div className="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
                             <div className="h-full bg-blue-600 transition-all duration-300" style={{ width: `${progressPercentage}%` }} />
                         </div>
@@ -99,7 +101,7 @@ export function WalkthroughWizard() {
                             Volver Atrás
                         </Button>
 
-                        {currentStep < 8 ? (
+                        {currentStep < 9 ? (
                             <Button
                                 onClick={nextStep}
                                 className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20"
@@ -126,14 +128,14 @@ export function WalkthroughWizard() {
                             <div className="flex flex-col gap-2 text-sm font-medium">
                                 <div className="flex justify-between border-b border-blue-600/30 pb-1">
                                     <span>Total SqFt:</span>
-                                    <span className="font-bold text-white tracking-widest">{totals.totalSqft.toLocaleString()}</span>
+                                    <span className="font-bold text-white tracking-widest">{totals.totalSqft.toLocaleString('en-US')}</span>
                                 </div>
                                 <div className="pt-1">
                                     <span className="text-xs text-blue-200 uppercase tracking-widest font-bold mb-1 block">Mix de Pisos</span>
                                     {state.site.floorMatrix?.filter(f => f.sqft > 0 && f.floorType).map((f, i) => (
                                         <div key={i} className="flex justify-between text-xs py-0.5 text-blue-100">
                                             <span>{f.floorType}</span>
-                                            <span className="font-bold">{Number(f.sqft).toLocaleString()}</span>
+                                            <span className="font-bold">{Number(f.sqft).toLocaleString('en-US')}</span>
                                         </div>
                                     ))}
                                     {(!state.site.floorMatrix || state.site.floorMatrix.every(f => !f.sqft || !f.floorType)) && (

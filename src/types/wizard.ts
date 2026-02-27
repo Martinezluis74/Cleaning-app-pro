@@ -19,6 +19,7 @@ export type FloorEntry = {
 export type SiteProfile = {
     siteType: string;
     buildingClass: 'A' | 'B' | 'C';
+    sqft: number;
     cleaningFrequency: number; // e.g. 1 to 7
     floorMatrix: FloorEntry[]; // Will always have length 6
     fixtures: {
