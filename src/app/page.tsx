@@ -1,4 +1,3 @@
-import { UploadZip } from "@/components/UploadZip";
 import { WalkthroughWizard } from "@/components/Wizard/WalkthroughWizard";
 import { WizardProvider } from "@/context/WizardContext";
 
@@ -23,18 +22,7 @@ export default function Home() {
                 </WizardProvider>
             </div>
 
-            {/* M3 UPLOAD ENGINE (Admin View) */}
-            <div className="w-full max-w-lg text-left mx-auto mt-24 pt-12 border-t border-slate-200">
-                <div className="flex flex-col items-center justify-center mb-8">
-                    <div className="text-center text-xs text-slate-500 font-black uppercase tracking-[0.2em] bg-white px-4 py-1.5 rounded-full ring-1 ring-slate-200 shadow-sm">
-                        Admin / Datasets
-                    </div>
-                    <p className="text-slate-500 text-sm mt-3">Upload TSV Data ZIP to update calculation rules</p>
-                </div>
-                <div className="bg-white ring-1 ring-slate-200 p-6 rounded-2xl shadow-sm">
-                    <UploadZip />
-                </div>
-            </div>
+
 
         </div>
     );
