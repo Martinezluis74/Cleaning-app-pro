@@ -4,12 +4,15 @@ import { useWizard } from '@/context/WizardContext';
 import { CardTitle, CardDescription } from '@/components/ui/card';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import DataSyncModal from './DataSyncModal';
 
 export default function StepClientProfile() {
     const { state, updateClient } = useWizard();
     return (
         <div className="space-y-6 bg-white">
-            <div>
+            <DataSyncModal />
+
+            <div className="border-t-4 border-black pt-6">
                 <CardTitle className="text-3xl font-black text-black mb-2">Paso 1: Perfil del Cliente</CardTitle>
                 <CardDescription className="text-black font-medium text-lg">Datos básicos de la empresa y contacto.</CardDescription>
             </div>

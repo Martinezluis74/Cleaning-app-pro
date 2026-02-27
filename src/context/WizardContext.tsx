@@ -54,6 +54,7 @@ const defaultState: WizardState = {
 
 type WizardContextType = {
     state: WizardState;
+    setState: React.Dispatch<React.SetStateAction<WizardState>>;
     setStep: (step: number) => void;
     nextStep: () => void;
     prevStep: () => void;
@@ -254,7 +255,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
 
     return (
         <WizardContext.Provider value={{
-            state, setStep, nextStep, prevStep,
+            state, setState, setStep, nextStep, prevStep,
             updateClient, updateSite,
             addArea, updateArea, removeArea, duplicateArea,
             addAddon, updateAddon, removeAddon,
