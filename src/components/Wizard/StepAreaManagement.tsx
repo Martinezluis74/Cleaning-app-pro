@@ -23,41 +23,45 @@ export default function StepAreaManagement({ stepNum }: { stepNum: number }) {
     };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 bg-white">
             <div>
-                <CardTitle className="text-2xl font-bold text-slate-900 mb-2">
-                    {stepNum === 3 ? 'Paso 3: Áreas Principales' : 'Paso 4: Inventario por Área'}
+                <CardTitle className="text-3xl font-black text-black mb-2">
+                    {stepNum === 3 ? 'Paso 3: Áreas Principales' : 'Paso 5: Inventario por Área'}
                 </CardTitle>
-                <CardDescription className="text-slate-500">
+                <CardDescription className="text-black font-medium text-lg">
                     Añade zonas, especifica metros cuadrados, tipo de piso y cuenta exacta de accesorios.
                 </CardDescription>
             </div>
 
             <div className="space-y-6">
                 {state.areas.map((area, index) => (
-                    <div key={area.id} className="p-5 border border-slate-200 rounded-2xl bg-white shadow-sm space-y-4">
-                        <div className="flex justify-between items-center pb-3 border-b border-slate-100">
+                    <div key={area.id} className="p-5 border-2 border-black rounded-2xl bg-white shadow-sm space-y-4">
+                        <div className="flex justify-between items-center pb-3 border-b-2 border-black">
                             <Input
                                 value={area.name}
                                 onChange={e => updateArea(area.id, { name: e.target.value })}
-                                className="font-bold text-lg text-slate-900 border-0 shadow-none focus-visible:ring-0 p-0 h-auto w-1/2"
+                                className="font-black text-2xl text-black border-0 shadow-none focus-visible:ring-0 p-0 h-auto w-1/2"
                                 placeholder="Nombre del Área"
                             />
                             <div className="flex gap-2">
-                                <Button size="sm" variant="outline" className="text-blue-600 border-blue-200 hover:bg-blue-50" onClick={() => duplicateArea(area.id)}><Copy className="w-4 h-4" /></Button>
-                                <Button size="sm" variant="outline" className="text-red-600 border-red-200 hover:bg-red-50" onClick={() => removeArea(area.id)}><Trash2 className="w-4 h-4" /></Button>
+                                <Button size="sm" variant="outline" className="text-black font-bold border-2 border-black hover:bg-slate-200" onClick={() => duplicateArea(area.id)}>
+                                    <Copy className="w-4 h-4 mr-1" /> Copiar
+                                </Button>
+                                <Button size="sm" variant="outline" className="text-white bg-black font-bold border-2 border-black hover:bg-slate-800" onClick={() => removeArea(area.id)}>
+                                    <Trash2 className="w-4 h-4 mr-1" /> Borrar
+                                </Button>
                             </div>
                         </div>
 
                         <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div className="space-y-1">
-                                <Label className="text-[10px] font-bold uppercase text-slate-500">Sqft</Label>
-                                <Input type="number" value={area.sqft} onChange={e => updateArea(area.id, { sqft: Number(e.target.value) })} className="h-9 text-sm bg-slate-50 border-slate-200" />
+                                <Label className="text-sm font-black uppercase text-black">Sqft</Label>
+                                <Input type="number" value={area.sqft} onChange={e => updateArea(area.id, { sqft: Number(e.target.value) })} className="h-12 text-lg font-black bg-white border-2 border-black text-black focus-visible:ring-black" />
                             </div>
                             <div className="space-y-1">
-                                <Label className="text-[10px] font-bold uppercase text-slate-500">Tipo Piso</Label>
+                                <Label className="text-sm font-black uppercase text-black">Tipo Piso</Label>
                                 <select
-                                    className="flex h-9 w-full rounded-md border border-slate-200 bg-slate-50 px-3 py-1 text-sm text-slate-900 shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-slate-950"
+                                    className="flex h-12 w-full rounded-md border-2 border-black bg-white px-3 py-1 text-lg font-black text-black shadow-sm transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-black"
                                     value={area.floorType}
                                     onChange={e => updateArea(area.id, { floorType: e.target.value })}
                                 >
@@ -69,25 +73,25 @@ export default function StepAreaManagement({ stepNum }: { stepNum: number }) {
                         </div>
 
                         {/* Fixtures Row */}
-                        <div className="grid grid-cols-3 gap-4 border-t border-slate-100 pt-3">
+                        <div className="grid grid-cols-3 gap-4 border-t-2 border-black pt-3 mt-3">
                             <div className="space-y-1">
-                                <Label className="text-[10px] font-bold uppercase text-blue-600">Toilets</Label>
-                                <Input type="number" min="0" value={area.fixtures?.toilets || 0} onChange={e => updateArea(area.id, { fixtures: { ...area.fixtures, toilets: Number(e.target.value) } })} className="h-9 text-sm bg-blue-50 border-blue-100 text-blue-900 font-bold" />
+                                <Label className="text-xs font-black uppercase text-black">Toilets</Label>
+                                <Input type="number" min="0" value={area.fixtures?.toilets || 0} onChange={e => updateArea(area.id, { fixtures: { ...area.fixtures, toilets: Number(e.target.value) } })} className="h-10 text-lg font-black bg-white border-2 border-black text-black focus-visible:ring-black" />
                             </div>
                             <div className="space-y-1">
-                                <Label className="text-[10px] font-bold uppercase text-blue-600">Urinals</Label>
-                                <Input type="number" min="0" value={area.fixtures?.urinals || 0} onChange={e => updateArea(area.id, { fixtures: { ...area.fixtures, urinals: Number(e.target.value) } })} className="h-9 text-sm bg-blue-50 border-blue-100 text-blue-900 font-bold" />
+                                <Label className="text-xs font-black uppercase text-black">Urinals</Label>
+                                <Input type="number" min="0" value={area.fixtures?.urinals || 0} onChange={e => updateArea(area.id, { fixtures: { ...area.fixtures, urinals: Number(e.target.value) } })} className="h-10 text-lg font-black bg-white border-2 border-black text-black focus-visible:ring-black" />
                             </div>
                             <div className="space-y-1">
-                                <Label className="text-[10px] font-bold uppercase text-blue-600">Sinks</Label>
-                                <Input type="number" min="0" value={area.fixtures?.sinks || 0} onChange={e => updateArea(area.id, { fixtures: { ...area.fixtures, sinks: Number(e.target.value) } })} className="h-9 text-sm bg-blue-50 border-blue-100 text-blue-900 font-bold" />
+                                <Label className="text-xs font-black uppercase text-black">Sinks</Label>
+                                <Input type="number" min="0" value={area.fixtures?.sinks || 0} onChange={e => updateArea(area.id, { fixtures: { ...area.fixtures, sinks: Number(e.target.value) } })} className="h-10 text-lg font-black bg-white border-2 border-black text-black focus-visible:ring-black" />
                             </div>
                         </div>
                     </div>
                 ))}
 
-                <Button onClick={handleAddArea} className="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-300 border-dashed h-12 shadow-sm">
-                    <Plus className="w-4 h-4 mr-2" /> Agregar Nueva Área
+                <Button onClick={handleAddArea} className="w-full bg-white hover:bg-slate-200 text-black font-black border-2 border-black border-dashed h-16 text-lg shadow-sm">
+                    <Plus className="w-6 h-6 mr-2" /> Agregar Nueva Área
                 </Button>
             </div>
         </div>

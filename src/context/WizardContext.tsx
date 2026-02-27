@@ -108,69 +108,69 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const { areas, addons, pricingModel, financials, site } = prev;
             if (!pricingModel) return prev;
 
-            let totalSqft = site.sqft || 0;
+            const safeNum = (val: any) => {
+                const num = Number(val);
+                return isNaN(num) ? 0 : num;
+            };
+
+            let totalSqft = safeNum(site?.sqft);
             let totalHours = 0;
 
-            const hstRateStr = pricingModel.assumptions.find(a => a.key === 'HST')?.value || 0.13;
-            const hstRate = Number(hstRateStr);
+            const hstRateStr = pricingModel.assumptions?.find(a => a.key === 'HST')?.value || 0.13;
+            const hstRate = safeNum(hstRateStr);
 
-            // Determine Production Rate based on Building Class
-            let productionRate = 2500; // Default Class B
-            if (site.buildingClass === 'A') productionRate = 2000;
-            if (site.buildingClass === 'C') productionRate = 3000;
+            let productionRate = 2500;
+            if (site?.buildingClass === 'A') productionRate = 2000;
+            if (site?.buildingClass === 'C') productionRate = 3000;
 
-            // 1. Calculate Base Building Hours
-            const { rooms, toilets, urinals, sinks, showers } = site.fixtures || { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 };
-            const totalBathrooms = rooms || 0;
+            const fixtures = site?.fixtures || { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 };
+            const rooms = safeNum(fixtures.rooms);
+            const toilets = safeNum(fixtures.toilets);
+            const urinals = safeNum(fixtures.urinals);
+            const sinks = safeNum(fixtures.sinks);
+            const showers = safeNum(fixtures.showers);
 
-            // Estimate hours: (Area / Production Rate) + (Fixtures * Mins/Unit / 60)
-            // Timings: Toilet: 3 mins, Urinal: 2 mins, Sink: 1 min, Shower: 5 mins
+            const totalBathrooms = rooms;
             const fixtureHours = ((toilets * 3) + (urinals * 2) + (sinks * 1) + (showers * 5)) / 60;
 
-            // Si hay áreas detalladas (Paso 3 y 4 se mantienen temporalmente), las sumamos.
-            // Pero la base principal ahora viene del Step 2 (Levantamiento Técnico).
             let areasSqft = 0;
             let areasFixtureHours = 0;
             let areasBathrooms = 0;
-            areas.forEach(area => {
-                areasSqft += area.sqft;
-                const { toilets: aT, urinals: aU, sinks: aS } = area.fixtures || { toilets: 0, urinals: 0, sinks: 0 };
-                areasBathrooms += (aT + aU + aS);
-                areasFixtureHours += ((aT * 3) + (aU * 2) + (aS * 1)) / 60;
-            });
 
-            // Usar áreas detalladas si existen, si no, usar el total del edificio
-            const effectiveSqft = areas.length > 0 ? areasSqft : totalSqft;
-            const effectiveBathrooms = areas.length > 0 ? areasBathrooms : totalBathrooms;
-            const effectiveFixtureHours = areas.length > 0 ? areasFixtureHours : fixtureHours;
+            if (areas && areas.length > 0) {
+                areas.forEach(area => {
+                    areasSqft += safeNum(area.sqft);
+                    const af = area.fixtures || { toilets: 0, urinals: 0, sinks: 0 };
+                    const aT = safeNum(af.toilets);
+                    const aU = safeNum(af.urinals);
+                    const aS = safeNum(af.sinks);
+                    areasBathrooms += (aT + aU + aS);
+                    areasFixtureHours += ((aT * 3) + (aU * 2) + (aS * 1)) / 60;
+                });
+            }
 
-            // Base Hours per Day
+            const effectiveSqft = (areas && areas.length > 0) ? areasSqft : totalSqft;
+            const effectiveBathrooms = (areas && areas.length > 0) ? areasBathrooms : totalBathrooms;
+            const effectiveFixtureHours = (areas && areas.length > 0) ? areasFixtureHours : fixtureHours;
+
             const baseDailyHours = (effectiveSqft / productionRate) + effectiveFixtureHours;
 
-            // Adjust Total Hours based on Frequency (assuming rate is hourly, frequency affects weekly/monthly totals. For this mock, we calculate per visit)
-            // If the quote is per month, it would be baseDailyHours * (site.cleaningFrequency * 4.33).
-            // For now, we simulate a single visit or a week's snapshot as `totalHours`. Let's assume daily snapshot to match standard rate cards.
-            totalHours += baseDailyHours;
+            totalHours += safeNum(baseDailyHours);
 
-            // 2. Add Add-ons hours
-            addons.forEach(addon => {
-                // Estimate 1 hour per 500 sqft for addons as a baseline
-                totalHours += (addon.sqft / 500);
-            });
+            if (addons && addons.length > 0) {
+                addons.forEach(addon => {
+                    totalHours += (safeNum(addon.sqft) / 500);
+                });
+            }
 
-            // Financial Calculation: 4-Step Logic
-            const { laborRate, remittances, overheadMargin, profitMargin } = financials;
+            const laborRate = safeNum(financials?.laborRate);
+            const remittances = safeNum(financials?.remittances);
+            const overheadMargin = safeNum(financials?.overheadMargin);
+            const profitMargin = safeNum(financials?.profitMargin);
 
-            // Step 1: Base Cost (Labor + Remittances)
             const baseCost = (laborRate + remittances) * totalHours;
-
-            // Step 2: Overhead
             const costWithOverhead = baseCost + (baseCost * overheadMargin);
-
-            // Step 3: Profit Margin (Subtotal)
             const subtotal = costWithOverhead + (costWithOverhead * profitMargin);
-
-            // Step 4: Tax and Total
             const tax = subtotal * hstRate;
             const finalTotal = subtotal + tax;
 
@@ -179,12 +179,12 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                 totals: {
                     totalSqft: effectiveSqft,
                     totalBathrooms: effectiveBathrooms,
-                    totalHours: Number(totalHours.toFixed(2)),
-                    baseCost: Number(baseCost.toFixed(2)),
-                    costWithOverhead: Number(costWithOverhead.toFixed(2)),
-                    subtotal: Number(subtotal.toFixed(2)),
-                    tax: Number(tax.toFixed(2)),
-                    finalTotal: Number(finalTotal.toFixed(2))
+                    totalHours: safeNum(totalHours.toFixed(2)),
+                    baseCost: safeNum(baseCost.toFixed(2)),
+                    costWithOverhead: safeNum(costWithOverhead.toFixed(2)),
+                    subtotal: safeNum(subtotal.toFixed(2)),
+                    tax: safeNum(tax.toFixed(2)),
+                    finalTotal: safeNum(finalTotal.toFixed(2))
                 }
             };
         });

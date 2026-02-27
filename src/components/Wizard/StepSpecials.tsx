@@ -21,36 +21,31 @@ export default function StepSpecials() {
     };
 
     return (
-        <div className="space-y-6">
+        <div className="space-y-6 bg-white">
             <div>
-                <CardTitle className="text-2xl font-bold text-white mb-2">Paso 6: Add-ons & Servicios Especiales</CardTitle>
-                <CardDescription className="text-slate-400">
+                <CardTitle className="text-3xl font-black text-black mb-2">Paso 6: Servicios Especiales</CardTitle>
+                <CardDescription className="text-black font-medium text-lg">
                     Calcula upsells (Limpieza de alfombras, vidrios, etc) para incrementar el valor del ticket.
                 </CardDescription>
             </div>
 
-            <div className="flex gap-4 mb-6">
-                <CardTitle className="text-2xl font-bold text-slate-900 mb-2">Paso 6: Servicios Especiales</CardTitle>
-                <CardDescription className="text-slate-500">Add-ons y servicios adicionales (Upsells).</CardDescription>
-            </div>
-
             <div className="space-y-4">
                 {state.addons.map(addon => (
-                    <div key={addon.id} className="p-4 border border-slate-200 rounded-xl bg-white shadow-sm flex justify-between items-center">
+                    <div key={addon.id} className="p-5 border-2 border-black rounded-xl bg-white shadow-sm flex justify-between items-center">
                         <div>
-                            <div className="font-bold text-slate-900">{addon.name}</div>
-                            <div className="text-sm text-slate-500">
+                            <div className="font-black text-xl text-black">{addon.name}</div>
+                            <div className="text-lg font-bold text-black mt-1">
                                 {addon.frequency} - Interés: {addon.clientInterest} - {addon.sqft} sqft
                             </div>
                         </div>
-                        <Button size="sm" variant="outline" className="text-red-500 border-red-200 hover:bg-red-50" onClick={() => removeAddon(addon.id)}>
-                            <Trash2 className="w-4 h-4" />
+                        <Button size="lg" variant="outline" className="text-white bg-black border-2 border-black hover:bg-slate-800" onClick={() => removeAddon(addon.id)}>
+                            <Trash2 className="w-5 h-5" />
                         </Button>
                     </div>
                 ))}
 
-                <Button onClick={() => handleAddAddon('Carpet Extraction')} className="w-full bg-slate-50 hover:bg-slate-100 text-slate-700 border border-slate-300 border-dashed">
-                    <Plus className="w-4 h-4 mr-2" /> Sugerir Upsell (Ej. Carpet Extraction)
+                <Button onClick={() => handleAddAddon('Carpet Extraction')} className="w-full bg-white hover:bg-slate-200 text-black font-black text-lg border-2 border-black border-dashed h-16 shadow-sm">
+                    <Plus className="w-6 h-6 mr-2" /> Sugerir Upsell (Ej. Carpet Extraction)
                 </Button>
             </div>
         </div>
