@@ -42,7 +42,8 @@ const defaultState: WizardState = {
     totals: {
         totalSqft: 0,
         totalBathrooms: 0,
-        totalHours: 0,
+        hoursPerVisit: 0,
+        totalHours: 0, // Weekly Hours
         baseCost: 0,
         costWithOverhead: 0,
         subtotal: 0,
@@ -177,7 +178,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
 
             // Calcula el costo basándose únicamente en Mano de Obra
             const laborRate = safeNum(financials?.laborRate);
-            const remittances = safeNum(financials?.remittances);
+            const remittances = laborRate * 0.1865; // 18.65% Cargas Prestacionales automáticas
             const overheadMargin = safeNum(financials?.overheadMargin);
             const profitMargin = safeNum(financials?.profitMargin);
 
@@ -192,6 +193,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                 totals: {
                     totalSqft: effectiveSqft,
                     totalBathrooms: effectiveBathrooms,
+                    hoursPerVisit: safeNum(totalHoursPerVisit.toFixed(2)),
                     totalHours: safeNum(totalWeeklyHours.toFixed(2)),
                     baseCost: safeNum(baseCost.toFixed(2)),
                     costWithOverhead: safeNum(costWithOverhead.toFixed(2)),

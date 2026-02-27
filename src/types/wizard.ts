@@ -89,6 +89,7 @@ export type WizardState = {
     totals: {
         totalSqft: number;
         totalBathrooms: number;
+        hoursPerVisit: number;
         totalHours: number;
         baseCost: number;
         costWithOverhead: number;

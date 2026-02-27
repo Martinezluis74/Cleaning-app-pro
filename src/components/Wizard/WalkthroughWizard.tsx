@@ -10,29 +10,20 @@ import { Save, AlertCircle, CheckCircle2 } from 'lucide-react';
 import StepClientProfile from './StepClientProfile';
 import StepSiteProfile from './StepSiteProfile';
 import StepBathroomsProfile from './StepBathroomsProfile';
-import StepAreaManagement from './StepAreaManagement';
-import StepScope from './StepScope';
-import StepSpecials from './StepSpecials';
-import StepCompliance from './StepCompliance';
-import StepEvidence from './StepEvidence';
+import StepFinancialDashboard from './StepFinancialDashboard';
 
 export function WalkthroughWizard() {
     const { state, setStep, nextStep, prevStep, updateFinancials } = useWizard();
     const { currentStep, client, totals, areas, pricingModel, financials } = state;
 
-    const progressPercentage = (currentStep / 9) * 100;
+    const progressPercentage = (currentStep / 4) * 100;
 
     const getStepComponent = () => {
         switch (currentStep) {
             case 1: return <StepClientProfile />;
             case 2: return <StepSiteProfile />;             // Perfil Base (SqFt, Desks, People)
             case 3: return <StepBathroomsProfile />;        // Baños y Basura
-            case 4:
-            case 5: return <StepAreaManagement stepNum={currentStep} />;
-            case 6: return <StepScope />;
-            case 7: return <StepSpecials />;
-            case 8: return <StepCompliance />;
-            case 9: return <StepEvidence />;
+            case 4: return <StepFinancialDashboard />;      // Cierre Financiero
             default: return <StepClientProfile />;
         }
     };
@@ -80,7 +71,7 @@ export function WalkthroughWizard() {
                         </span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <span className="text-sm font-bold text-black">Step {currentStep} of 9</span>
+                        <span className="text-sm font-bold text-black">Step {currentStep} of 4</span>
                         <div className="w-32 h-2 bg-slate-200 border border-black rounded-full overflow-hidden">
                             <div className="h-full bg-black transition-all duration-300" style={{ width: `${progressPercentage}%` }} />
                         </div>
@@ -113,7 +104,7 @@ export function WalkthroughWizard() {
                             Volver Atrás
                         </Button>
 
-                        {currentStep < 9 ? (
+                        {currentStep < 4 ? (
                             <Button
                                 onClick={nextStep}
                                 className="bg-black hover:bg-slate-800 text-white font-bold border-2 border-black shadow-lg"
@@ -185,36 +176,12 @@ export function WalkthroughWizard() {
 
                         <CardContent className="p-6 space-y-6 bg-white">
                             {/* ALERTS */}
-                            {areas.length === 0 && currentStep > 3 && (
+                            {currentStep > 3 && totals.totalHours === 0 && (
                                 <div className="bg-slate-100 border-2 border-black rounded-lg p-3 flex gap-3 text-sm text-black shadow-sm font-bold">
                                     <AlertCircle className="w-5 h-5 flex-shrink-0" />
-                                    <div><span className="font-black uppercase mark bg-yellow-300 px-1">Review:</span> No has agregado áreas limpiables.</div>
+                                    <div><span className="font-black uppercase mark bg-yellow-300 px-1">Review:</span> No has ingresado datos productivos (SqFt, Escritorios, o Baños).</div>
                                 </div>
                             )}
-
-                            {/* ADJUSTABLE FINANCIALS */}
-                            <div className="bg-white p-4 rounded-xl border-2 border-black shadow-sm space-y-4">
-                                <h4 className="text-xs font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 mb-2">Variables Financieras</h4>
-
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div className="space-y-1">
-                                        <Label className="text-[10px] font-bold uppercase text-black">Labor Rate ($/hr)</Label>
-                                        <Input type="number" step="0.01" value={financials.laborRate} onChange={e => updateFinancials({ laborRate: Number(e.target.value) })} className="h-8 text-sm bg-white border-2 border-black text-black font-bold" />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <Label className="text-[10px] font-bold uppercase text-black">Remittances ($/hr)</Label>
-                                        <Input type="number" step="0.01" value={financials.remittances} onChange={e => updateFinancials({ remittances: Number(e.target.value) })} className="h-8 text-sm bg-white border-2 border-black text-black font-bold" />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <Label className="text-[10px] font-bold uppercase text-black">Overhead (%)</Label>
-                                        <Input type="number" step="0.01" value={financials.overheadMargin} onChange={e => updateFinancials({ overheadMargin: Number(e.target.value) })} className="h-8 text-sm bg-white border-2 border-black text-black font-bold" />
-                                    </div>
-                                    <div className="space-y-1">
-                                        <Label className="text-[10px] font-bold uppercase text-black">Profit (%)</Label>
-                                        <Input type="number" step="0.01" value={financials.profitMargin} onChange={e => updateFinancials({ profitMargin: Number(e.target.value) })} className="h-8 text-sm bg-white border-2 border-black text-black font-bold" />
-                                    </div>
-                                </div>
-                            </div>
 
                             {/* COST BREAKDOWN (Requested feature) */}
                             <div className="bg-white p-4 rounded-xl border-2 border-black shadow-sm space-y-3">
