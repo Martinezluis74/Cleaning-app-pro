@@ -35,17 +35,33 @@ export default function StepSiteProfile() {
                         />
                     </div>
                     <div className="space-y-2">
-                        <Label className="text-black font-bold uppercase tracking-widest text-lg">Clase (Tasa de Producción)</Label>
-                        <Select value={state.site.buildingClass} onValueChange={(v: any) => updateSite({ buildingClass: v })}>
-                            <SelectTrigger className="bg-white border-2 border-black text-black h-12 font-bold text-lg">
-                                <SelectValue placeholder="Seleccione Clase" />
-                            </SelectTrigger>
-                            <SelectContent className="bg-white border-2 border-black text-black font-bold">
-                                <SelectItem value="A">Clase A (Alto tránsito - 2000 sqft/hr)</SelectItem>
-                                <SelectItem value="B">Clase B (Estándar médico/oficina - 2500 sqft/hr)</SelectItem>
-                                <SelectItem value="C">Clase C (Industrial/Básico - 3000 sqft/hr)</SelectItem>
-                            </SelectContent>
-                        </Select>
+                        <Label className="text-black font-bold uppercase tracking-widest text-lg">Cantidad de Escritorios</Label>
+                        <Input
+                            type="number" min="0" placeholder="Ej. 15"
+                            value={state.site.desks || 0}
+                            onChange={e => updateSite({ desks: Number(e.target.value) || 0 })}
+                            className="bg-white border-2 border-black text-black text-xl font-black h-12 shadow-sm focus-visible:ring-black"
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-black font-bold uppercase tracking-widest text-lg">Cantidad de Personas</Label>
+                        <Input
+                            type="number" min="0" placeholder="Ej. 20"
+                            value={state.site.people || 0}
+                            onChange={e => updateSite({ people: Number(e.target.value) || 0 })}
+                            className="bg-white border-2 border-black text-black text-xl font-black h-12 shadow-sm focus-visible:ring-black"
+                        />
+                    </div>
+
+                    <div className="space-y-2">
+                        <Label className="text-black font-bold uppercase tracking-widest text-lg">Cantidad de Canecas</Label>
+                        <Input
+                            type="number" min="0" placeholder="Ej. 10"
+                            value={state.site.trashCans || 0}
+                            onChange={e => updateSite({ trashCans: Number(e.target.value) || 0 })}
+                            className="bg-white border-2 border-black text-black text-xl font-black h-12 shadow-sm focus-visible:ring-black"
+                        />
                     </div>
 
                     <div className="space-y-3">

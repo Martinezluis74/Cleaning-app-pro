@@ -39,6 +39,15 @@ export function WalkthroughWizard() {
         }
     };
 
+    // Calculate fixture impacts for the Sidebar
+    const f = state.site.fixtures || { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 };
+    const totalFixtures = (f.toilets || 0) + (f.urinals || 0) + (f.sinks || 0) + (f.showers || 0);
+    const fixtureHours = (((f.toilets || 0) * 3) + ((f.urinals || 0) * 2) + ((f.sinks || 0) * 1) + ((f.showers || 0) * 5)) / 60;
+    const fixtureLaborCost = fixtureHours * (state.financials.laborRate + state.financials.remittances) * (state.site.cleaningFrequency || 1);
+
+    const frequency = state.site.cleaningFrequency || 1;
+    const hoursPerVisit = (totals.totalHours / frequency).toFixed(2);
+
     const handleSaveQuote = async () => {
         // Here we'd map state to the DB. Since the instructions say "send everything to Neon to not lose it",
         // we make an API call (to be implemented) that saves the WizardState.
@@ -145,14 +154,26 @@ export function WalkthroughWizard() {
                                         <div className="text-xs italic text-slate-500 font-bold">Vacío o Incompleto</div>
                                     )}
                                 </div>
-                                <div className="pt-1 mt-1 border-t border-slate-300">
-                                    <span className="text-xs text-slate-600 uppercase tracking-widest font-bold mb-1 block">Accesorios</span>
+                                <div className="pt-2 mt-2 border-t border-slate-300">
+                                    <span className="text-xs text-black uppercase tracking-widest font-black mb-1 block">Inventario Fijo</span>
                                     <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[10px] text-black uppercase tracking-wide">
-                                        <div className="flex justify-between"><span className="font-bold">Rooms/Baños:</span><span className="font-black">{state.site.fixtures?.rooms || 0}</span></div>
-                                        <div className="flex justify-between"><span className="font-bold">Toilets:</span><span className="font-black">{state.site.fixtures?.toilets || 0}</span></div>
-                                        <div className="flex justify-between"><span className="font-bold">Urinales:</span><span className="font-black">{state.site.fixtures?.urinals || 0}</span></div>
-                                        <div className="flex justify-between"><span className="font-bold">Lavamanos:</span><span className="font-black">{state.site.fixtures?.sinks || 0}</span></div>
-                                        <div className="flex justify-between"><span className="font-bold">Duchas:</span><span className="font-black">{state.site.fixtures?.showers || 0}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Escritorios:</span><span className="font-black">{state.site.desks || 0}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Personas:</span><span className="font-black">{state.site.people || 0}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Canecas:</span><span className="font-black">{state.site.trashCans || 0}</span></div>
+                                    </div>
+                                </div>
+                                <div className="pt-2 mt-2 border-t border-slate-300">
+                                    <span className="text-xs text-black uppercase tracking-widest font-black mb-1 block">Accesorios</span>
+                                    <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[10px] text-black uppercase tracking-wide">
+                                        <div className="flex justify-between"><span className="font-bold">Rooms/Baños:</span><span className="font-black">{f.rooms || 0}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Toilets:</span><span className="font-black">{f.toilets || 0}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Urinales:</span><span className="font-black">{f.urinals || 0}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Lavamanos:</span><span className="font-black">{f.sinks || 0}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Duchas:</span><span className="font-black">{f.showers || 0}</span></div>
+                                    </div>
+                                    <div className="mt-2 pt-2 border-t-2 border-dashed border-slate-300">
+                                        <div className="flex justify-between text-[11px] text-black"><span className="font-black uppercase">Total Accesorios detectados:</span><span className="font-black bg-black text-white px-1 rounded">{totalFixtures}</span></div>
+                                        <div className="flex justify-between text-[11px] text-black mt-1"><span className="font-bold text-slate-600">Impacto en Labor:</span><span className="font-black text-blue-800">+${fixtureLaborCost.toFixed(2)}</span></div>
                                     </div>
                                 </div>
                             </div>
@@ -193,10 +214,20 @@ export function WalkthroughWizard() {
 
                             {/* COST BREAKDOWN (Requested feature) */}
                             <div className="bg-white p-4 rounded-xl border-2 border-black shadow-sm space-y-3">
-                                <h4 className="text-xs font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 mb-2">Desglose Financiero</h4>
+                                <h4 className="text-xs font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 mb-2">Desglose Financiero (Mano de Obra)</h4>
 
                                 <div className="flex justify-between text-xs items-center text-black font-bold">
-                                    <span>Labor & Remit ({totals.totalHours} hrs)</span>
+                                    <span>Horas por Visita</span>
+                                    <span className="font-black">{hoursPerVisit} hrs</span>
+                                </div>
+
+                                <div className="flex justify-between text-xs items-center text-black font-bold border-b border-slate-300 pb-2 mb-2">
+                                    <span>Frecuencia Semanal</span>
+                                    <span className="font-black">{frequency}x</span>
+                                </div>
+
+                                <div className="flex justify-between text-xs items-center text-black font-bold">
+                                    <span>Labor & Remit ({totals.totalHours} hrs/sem)</span>
                                     <span className="font-black">${totals.baseCost.toFixed(2)}</span>
                                 </div>
 
@@ -216,7 +247,7 @@ export function WalkthroughWizard() {
                                 </div>
 
                                 <div className="pt-3 mt-3 border-t-2 border-black flex justify-between items-end">
-                                    <span className="text-sm font-black uppercase tracking-widest text-black">Total Final</span>
+                                    <span className="text-sm font-black uppercase tracking-widest text-black">Total Semanal Final</span>
                                     <span className="text-3xl font-black text-black tracking-tighter">${totals.finalTotal.toFixed(2)}</span>
                                 </div>
                             </div>

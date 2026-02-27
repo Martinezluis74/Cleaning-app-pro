@@ -12,9 +12,11 @@ const defaultState: WizardState = {
     client: { name: '', email: '', phone: '', company: '' },
     site: {
         siteType: 'Office',
-        buildingClass: 'B',
         sqft: 0,
         cleaningFrequency: 5,
+        desks: 0,
+        people: 0,
+        trashCans: 0,
         floorMatrix: [
             { id: 1, floorType: 'Carpet', sqft: 0 },
             { id: 2, floorType: 'VCT', sqft: 0 },
@@ -114,14 +116,20 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             };
 
             let totalSqft = safeNum(site?.sqft);
-            let totalHours = 0;
 
             const hstRateStr = pricingModel.assumptions?.find(a => a.key === 'HST')?.value || 0.13;
             const hstRate = safeNum(hstRateStr);
 
-            let productionRate = 2500;
-            if (site?.buildingClass === 'A') productionRate = 2000;
-            if (site?.buildingClass === 'C') productionRate = 3000;
+            const prodRateStr = pricingModel.assumptions?.find(a => a.key === 'ProductionRate')?.value;
+            const productionRate = prodRateStr ? safeNum(prodRateStr) : 2500;
+
+            const floorHours = totalSqft / productionRate;
+
+            const desks = safeNum(site?.desks);
+            const deskHours = (desks * 2) / 60; // 2 minutos por escritorio (Wipe down)
+
+            const trashCans = safeNum(site?.trashCans);
+            const trashHours = (trashCans * 1.5) / 60; // 1.5 minutos por caneca
 
             const fixtures = site?.fixtures || { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 };
             const rooms = safeNum(fixtures.rooms);
@@ -129,8 +137,8 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const urinals = safeNum(fixtures.urinals);
             const sinks = safeNum(fixtures.sinks);
             const showers = safeNum(fixtures.showers);
-
             const totalBathrooms = rooms;
+
             const fixtureHours = ((toilets * 3) + (urinals * 2) + (sinks * 1) + (showers * 5)) / 60;
 
             let areasSqft = 0;
@@ -153,22 +161,27 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const effectiveBathrooms = (areas && areas.length > 0) ? areasBathrooms : totalBathrooms;
             const effectiveFixtureHours = (areas && areas.length > 0) ? areasFixtureHours : fixtureHours;
 
-            const baseDailyHours = (effectiveSqft / productionRate) + effectiveFixtureHours;
-
-            totalHours += safeNum(baseDailyHours);
+            // Suma de minutos totales convertida a Horas por Visita
+            const baseDailyHours = (effectiveSqft / productionRate) + deskHours + trashHours + effectiveFixtureHours;
+            let totalHoursPerVisit = safeNum(baseDailyHours);
 
             if (addons && addons.length > 0) {
                 addons.forEach(addon => {
-                    totalHours += (safeNum(addon.sqft) / 500);
+                    totalHoursPerVisit += (safeNum(addon.sqft) / 500);
                 });
             }
 
+            // Multiplica por la Frecuencia para dar el total de horas semanales
+            const frequency = safeNum(site?.cleaningFrequency) || 1;
+            const totalWeeklyHours = totalHoursPerVisit * frequency;
+
+            // Calcula el costo basándose únicamente en Mano de Obra
             const laborRate = safeNum(financials?.laborRate);
             const remittances = safeNum(financials?.remittances);
             const overheadMargin = safeNum(financials?.overheadMargin);
             const profitMargin = safeNum(financials?.profitMargin);
 
-            const baseCost = (laborRate + remittances) * totalHours;
+            const baseCost = (laborRate + remittances) * totalWeeklyHours;
             const costWithOverhead = baseCost + (baseCost * overheadMargin);
             const subtotal = costWithOverhead + (costWithOverhead * profitMargin);
             const tax = subtotal * hstRate;
@@ -179,7 +192,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                 totals: {
                     totalSqft: effectiveSqft,
                     totalBathrooms: effectiveBathrooms,
-                    totalHours: safeNum(totalHours.toFixed(2)),
+                    totalHours: safeNum(totalWeeklyHours.toFixed(2)),
                     baseCost: safeNum(baseCost.toFixed(2)),
                     costWithOverhead: safeNum(costWithOverhead.toFixed(2)),
                     subtotal: safeNum(subtotal.toFixed(2)),
