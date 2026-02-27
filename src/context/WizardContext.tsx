@@ -13,10 +13,16 @@ const defaultState: WizardState = {
     site: {
         siteType: 'Office',
         buildingClass: 'B',
-        sqft: 2000,
         cleaningFrequency: 5,
-        floorType: 'Carpet',
-        fixtures: { toilets: 2, urinals: 0, sinks: 2 },
+        floorMatrix: [
+            { id: 1, floorType: 'Carpet', sqft: 2000 },
+            { id: 2, floorType: 'VCT', sqft: 0 },
+            { id: 3, floorType: 'Ceramic Tile', sqft: 0 },
+            { id: 4, floorType: '', sqft: 0 },
+            { id: 5, floorType: '', sqft: 0 },
+            { id: 6, floorType: '', sqft: 0 }
+        ],
+        fixtures: { rooms: 2, toilets: 2, urinals: 0, sinks: 2, showers: 0 },
         accessHours: 'After 6 PM'
     },
     areas: [],
@@ -101,7 +107,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const { areas, addons, pricingModel, financials, site } = prev;
             if (!pricingModel) return prev;
 
-            let totalSqft = site.sqft || 0;
+            let totalSqft = site.floorMatrix?.reduce((acc, curr) => acc + (Number(curr.sqft) || 0), 0) || 0;
             let totalHours = 0;
 
             const hstRateStr = pricingModel.assumptions.find(a => a.key === 'HST')?.value || 0.13;
@@ -113,12 +119,12 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             if (site.buildingClass === 'C') productionRate = 3000;
 
             // 1. Calculate Base Building Hours
-            const { toilets, urinals, sinks } = site.fixtures || { toilets: 0, urinals: 0, sinks: 0 };
-            const totalBathrooms = toilets + urinals + sinks;
+            const { rooms, toilets, urinals, sinks, showers } = site.fixtures || { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 };
+            const totalBathrooms = rooms || 0;
 
             // Estimate hours: (Area / Production Rate) + (Fixtures * Mins/Unit / 60)
-            // Timings: Toilet: 3 mins, Urinal: 2 mins, Sink: 1 min
-            const fixtureHours = ((toilets * 3) + (urinals * 2) + (sinks * 1)) / 60;
+            // Timings: Toilet: 3 mins, Urinal: 2 mins, Sink: 1 min, Shower: 5 mins
+            const fixtureHours = ((toilets * 3) + (urinals * 2) + (sinks * 1) + (showers * 5)) / 60;
 
             // Si hay áreas detalladas (Paso 3 y 4 se mantienen temporalmente), las sumamos.
             // Pero la base principal ahora viene del Step 2 (Levantamiento Técnico).

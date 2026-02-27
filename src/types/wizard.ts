@@ -10,16 +10,23 @@ export type ClientProfile = {
     company: string;
 };
 
+export type FloorEntry = {
+    id: number;
+    floorType: string; // 'Carpet', 'Hardwood', 'VCT', 'Ceramic', 'Concrete', ''
+    sqft: number;
+};
+
 export type SiteProfile = {
     siteType: string;
     buildingClass: 'A' | 'B' | 'C';
-    sqft: number;
     cleaningFrequency: number; // e.g. 1 to 7
-    floorType: string; // 'Carpet', 'Hardwood', 'VCT', 'Ceramic', 'Concrete'
+    floorMatrix: FloorEntry[]; // Will always have length 6
     fixtures: {
+        rooms: number;
         toilets: number;
         urinals: number;
         sinks: number;
+        showers: number;
     };
     accessHours: string;
 };

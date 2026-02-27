@@ -123,18 +123,32 @@ export function WalkthroughWizard() {
                         <div className="bg-blue-700 text-white p-6 relative overflow-hidden">
                             <div className="absolute inset-0 opacity-20 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] mix-blend-overlay"></div>
                             <h3 className="text-xs font-black uppercase tracking-widest text-blue-200 mb-2">Resumen Dinámico</h3>
-                            <div className="flex flex-col gap-1">
-                                <div className="text-sm font-medium flex justify-between">
-                                    <span>Áreas Registradas:</span>
-                                    <span className="font-bold">{areas.length}</span>
+                            <div className="flex flex-col gap-2 text-sm font-medium">
+                                <div className="flex justify-between border-b border-blue-600/30 pb-1">
+                                    <span>Total SqFt:</span>
+                                    <span className="font-bold text-white tracking-widest">{totals.totalSqft.toLocaleString()}</span>
                                 </div>
-                                <div className="text-sm font-medium flex justify-between">
-                                    <span>Total Sqft:</span>
-                                    <span className="font-bold">{totals.totalSqft.toLocaleString()} sqft</span>
+                                <div className="pt-1">
+                                    <span className="text-xs text-blue-200 uppercase tracking-widest font-bold mb-1 block">Mix de Pisos</span>
+                                    {state.site.floorMatrix?.filter(f => f.sqft > 0 && f.floorType).map((f, i) => (
+                                        <div key={i} className="flex justify-between text-xs py-0.5 text-blue-100">
+                                            <span>{f.floorType}</span>
+                                            <span className="font-bold">{Number(f.sqft).toLocaleString()}</span>
+                                        </div>
+                                    ))}
+                                    {(!state.site.floorMatrix || state.site.floorMatrix.every(f => !f.sqft || !f.floorType)) && (
+                                        <div className="text-xs italic text-blue-300">Vacío o Incompleto</div>
+                                    )}
                                 </div>
-                                <div className="text-sm font-medium flex justify-between">
-                                    <span>Baños:</span>
-                                    <span className="font-bold">{totals.totalBathrooms}</span>
+                                <div className="pt-1 mt-1 border-t border-blue-600/30">
+                                    <span className="text-xs text-blue-200 uppercase tracking-widest font-bold mb-1 block">Accesorios</span>
+                                    <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[10px] text-blue-100 uppercase tracking-wide">
+                                        <div className="flex justify-between"><span className="opacity-70">Rooms/Baños:</span><span className="font-bold text-white">{state.site.fixtures?.rooms || 0}</span></div>
+                                        <div className="flex justify-between"><span className="opacity-70">Toilets:</span><span className="font-bold text-white">{state.site.fixtures?.toilets || 0}</span></div>
+                                        <div className="flex justify-between"><span className="opacity-70">Urinales:</span><span className="font-bold text-white">{state.site.fixtures?.urinals || 0}</span></div>
+                                        <div className="flex justify-between"><span className="opacity-70">Lavamanos:</span><span className="font-bold text-white">{state.site.fixtures?.sinks || 0}</span></div>
+                                        <div className="flex justify-between"><span className="opacity-70">Duchas:</span><span className="font-bold text-white">{state.site.fixtures?.showers || 0}</span></div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
