@@ -9,7 +9,6 @@ import { Label } from '@/components/ui/label';
 import { Save, AlertCircle, CheckCircle2 } from 'lucide-react';
 import StepClientProfile from './StepClientProfile';
 import StepSiteProfile from './StepSiteProfile';
-import StepFloorMix from './StepFloorMix';
 import StepBathroomsProfile from './StepBathroomsProfile';
 import StepAreaManagement from './StepAreaManagement';
 import StepScope from './StepScope';
@@ -21,20 +20,19 @@ export function WalkthroughWizard() {
     const { state, setStep, nextStep, prevStep, updateFinancials } = useWizard();
     const { currentStep, client, totals, areas, pricingModel, financials } = state;
 
-    const progressPercentage = (currentStep / 10) * 100;
+    const progressPercentage = (currentStep / 9) * 100;
 
     const getStepComponent = () => {
         switch (currentStep) {
             case 1: return <StepClientProfile />;
-            case 2: return <StepSiteProfile />;             // Perfil Base (Total SqFt)
-            case 3: return <StepFloorMix />;                // Mix de Pisos
-            case 4: return <StepBathroomsProfile />;        // Baños y Accesorios
-            case 5:
-            case 6: return <StepAreaManagement stepNum={currentStep} />;
-            case 7: return <StepScope />;
-            case 8: return <StepSpecials />;
-            case 9: return <StepCompliance />;
-            case 10: return <StepEvidence />;
+            case 2: return <StepSiteProfile />;             // Perfil Base (SqFt, Desks, People)
+            case 3: return <StepBathroomsProfile />;        // Baños y Basura
+            case 4:
+            case 5: return <StepAreaManagement stepNum={currentStep} />;
+            case 6: return <StepScope />;
+            case 7: return <StepSpecials />;
+            case 8: return <StepCompliance />;
+            case 9: return <StepEvidence />;
             default: return <StepClientProfile />;
         }
     };
@@ -44,6 +42,9 @@ export function WalkthroughWizard() {
     const totalFixtures = (f.toilets || 0) + (f.urinals || 0) + (f.sinks || 0) + (f.showers || 0);
     const fixtureHours = (((f.toilets || 0) * 3) + ((f.urinals || 0) * 2) + ((f.sinks || 0) * 1) + ((f.showers || 0) * 5)) / 60;
     const fixtureLaborCost = fixtureHours * (state.financials.laborRate + state.financials.remittances) * (state.site.cleaningFrequency || 1);
+
+    const trashTarget = state.site.trashCans || 0;
+    const trashLaborCost = ((trashTarget * 1.5) / 60) * (state.financials.laborRate + state.financials.remittances) * (state.site.cleaningFrequency || 1);
 
     const frequency = state.site.cleaningFrequency || 1;
     const hoursPerVisit = (totals.totalHours / frequency).toFixed(2);
@@ -79,7 +80,7 @@ export function WalkthroughWizard() {
                         </span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <span className="text-sm font-bold text-black">Step {currentStep} of 10</span>
+                        <span className="text-sm font-bold text-black">Step {currentStep} of 9</span>
                         <div className="w-32 h-2 bg-slate-200 border border-black rounded-full overflow-hidden">
                             <div className="h-full bg-black transition-all duration-300" style={{ width: `${progressPercentage}%` }} />
                         </div>
@@ -112,7 +113,7 @@ export function WalkthroughWizard() {
                             Volver Atrás
                         </Button>
 
-                        {currentStep < 10 ? (
+                        {currentStep < 9 ? (
                             <Button
                                 onClick={nextStep}
                                 className="bg-black hover:bg-slate-800 text-white font-bold border-2 border-black shadow-lg"
@@ -155,11 +156,14 @@ export function WalkthroughWizard() {
                                     )}
                                 </div>
                                 <div className="pt-2 mt-2 border-t border-slate-300">
-                                    <span className="text-xs text-black uppercase tracking-widest font-black mb-1 block">Inventario Fijo</span>
+                                    <span className="text-xs text-black uppercase tracking-widest font-black mb-1 block">Inventario Fijo y Recolección</span>
                                     <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[10px] text-black uppercase tracking-wide">
                                         <div className="flex justify-between"><span className="font-bold">Escritorios:</span><span className="font-black">{state.site.desks || 0}</span></div>
                                         <div className="flex justify-between"><span className="font-bold">Personas:</span><span className="font-black">{state.site.people || 0}</span></div>
                                         <div className="flex justify-between"><span className="font-bold">Canecas:</span><span className="font-black">{state.site.trashCans || 0}</span></div>
+                                    </div>
+                                    <div className="mt-2 pt-2 border-t-2 border-dashed border-slate-300">
+                                        <div className="flex justify-between text-[11px] text-black mt-1"><span className="font-bold text-slate-600">Impacto Labor (Recolección):</span><span className="font-black text-blue-800">+${trashLaborCost.toFixed(2)}</span></div>
                                     </div>
                                 </div>
                                 <div className="pt-2 mt-2 border-t border-slate-300">

@@ -11,15 +11,32 @@ export default function StepBathroomsProfile() {
     return (
         <div className="space-y-8 bg-white">
             <div>
-                <CardTitle className="text-3xl font-black text-black mb-2">Paso 4: Auditoría de Baños</CardTitle>
+                <CardTitle className="text-3xl font-black text-black mb-2">Paso 3: Auditoría de Higiene y Basura</CardTitle>
                 <CardDescription className="text-black font-medium text-lg">
-                    Ingresa el recuento exacto de cuartos de baño y sus accesorios. Estos aportarán minutos adicionales al cálculo base de labor.
+                    Sección dedicada a la recolección de residuos y la higiene detallada. Ambos renglones impactan el costo laboral.
                 </CardDescription>
             </div>
 
             <div className="space-y-4">
                 <Label className="text-black font-black uppercase tracking-widest text-lg border-b-2 border-black pb-2 block">
-                    Desglose de Baños y Accesorios
+                    1. Recolección de Basura
+                </Label>
+                <div className="p-5 bg-white border-2 border-black rounded-xl shadow-sm">
+                    <div className="space-y-2 max-w-sm">
+                        <Label className="text-sm font-black uppercase text-black block">Cantidad de Canecas de Basura</Label>
+                        <Input
+                            type="number" min="0" placeholder="Ej. 10"
+                            value={state.site.trashCans || 0}
+                            onChange={e => updateSite({ trashCans: Number(e.target.value) || 0 })}
+                            className="bg-white border-2 border-black text-black text-xl font-black h-12 shadow-sm focus-visible:ring-black"
+                        />
+                    </div>
+                </div>
+            </div>
+
+            <div className="space-y-4">
+                <Label className="text-black font-black uppercase tracking-widest text-lg border-b-2 border-black pb-2 block">
+                    2. Desglose de Baños y Accesorios
                 </Label>
                 <div className="grid grid-cols-2 lg:grid-cols-5 gap-4 p-5 bg-white border-2 border-black rounded-xl shadow-sm">
                     {[

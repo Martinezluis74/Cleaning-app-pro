@@ -54,15 +54,7 @@ export default function StepSiteProfile() {
                         />
                     </div>
 
-                    <div className="space-y-2">
-                        <Label className="text-black font-bold uppercase tracking-widest text-lg">Cantidad de Canecas</Label>
-                        <Input
-                            type="number" min="0" placeholder="Ej. 10"
-                            value={state.site.trashCans || 0}
-                            onChange={e => updateSite({ trashCans: Number(e.target.value) || 0 })}
-                            className="bg-white border-2 border-black text-black text-xl font-black h-12 shadow-sm focus-visible:ring-black"
-                        />
-                    </div>
+
 
                     <div className="space-y-3">
                         <Label className="text-black font-bold uppercase tracking-widest text-lg">Frecuencia Semanal</Label>
