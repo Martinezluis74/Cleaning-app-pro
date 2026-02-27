@@ -11,7 +11,7 @@ export default function StepBathroomsProfile() {
     return (
         <div className="space-y-8">
             <div>
-                <CardTitle className="text-2xl font-bold text-slate-900 mb-2">Paso 3: Auditoría de Baños</CardTitle>
+                <CardTitle className="text-2xl font-bold text-slate-900 mb-2">Paso 4: Auditoría de Baños</CardTitle>
                 <CardDescription className="text-slate-500">
                     Ingresa el recuento exacto de cuartos de baño y sus accesorios. Estos aportarán minutos adicionales al cálculo base de labor.
                 </CardDescription>

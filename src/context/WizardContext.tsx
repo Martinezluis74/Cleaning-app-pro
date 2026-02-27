@@ -13,17 +13,17 @@ const defaultState: WizardState = {
     site: {
         siteType: 'Office',
         buildingClass: 'B',
-        sqft: 2000,
+        sqft: 0,
         cleaningFrequency: 5,
         floorMatrix: [
-            { id: 1, floorType: 'Carpet', sqft: 2000 },
+            { id: 1, floorType: 'Carpet', sqft: 0 },
             { id: 2, floorType: 'VCT', sqft: 0 },
             { id: 3, floorType: 'Ceramic Tile', sqft: 0 },
             { id: 4, floorType: '', sqft: 0 },
             { id: 5, floorType: '', sqft: 0 },
             { id: 6, floorType: '', sqft: 0 }
         ],
-        fixtures: { rooms: 2, toilets: 2, urinals: 0, sinks: 2, showers: 0 },
+        fixtures: { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 },
         accessHours: 'After 6 PM'
     },
     areas: [],

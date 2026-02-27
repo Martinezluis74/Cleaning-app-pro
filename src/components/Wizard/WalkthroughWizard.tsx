@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Save, AlertCircle, CheckCircle2 } from 'lucide-react';
 import StepClientProfile from './StepClientProfile';
 import StepSiteProfile from './StepSiteProfile';
+import StepFloorMix from './StepFloorMix';
 import StepBathroomsProfile from './StepBathroomsProfile';
 import StepAreaManagement from './StepAreaManagement';
 import StepScope from './StepScope';
@@ -20,19 +21,20 @@ export function WalkthroughWizard() {
     const { state, setStep, nextStep, prevStep, updateFinancials } = useWizard();
     const { currentStep, client, totals, areas, pricingModel, financials } = state;
 
-    const progressPercentage = (currentStep / 9) * 100;
+    const progressPercentage = (currentStep / 10) * 100;
 
     const getStepComponent = () => {
         switch (currentStep) {
             case 1: return <StepClientProfile />;
-            case 2: return <StepSiteProfile />;             // Auditoría de Suelos
-            case 3: return <StepBathroomsProfile />;        // Auditoría de Baños
-            case 4:
-            case 5: return <StepAreaManagement stepNum={currentStep} />;
-            case 6: return <StepScope />;
-            case 7: return <StepSpecials />;
-            case 8: return <StepCompliance />;
-            case 9: return <StepEvidence />;
+            case 2: return <StepSiteProfile />;             // Perfil Base (Total SqFt)
+            case 3: return <StepFloorMix />;                // Mix de Pisos
+            case 4: return <StepBathroomsProfile />;        // Baños y Accesorios
+            case 5:
+            case 6: return <StepAreaManagement stepNum={currentStep} />;
+            case 7: return <StepScope />;
+            case 8: return <StepSpecials />;
+            case 9: return <StepCompliance />;
+            case 10: return <StepEvidence />;
             default: return <StepClientProfile />;
         }
     };
@@ -68,7 +70,7 @@ export function WalkthroughWizard() {
                         </span>
                     </div>
                     <div className="flex items-center gap-4">
-                        <span className="text-sm font-bold text-slate-500">Step {currentStep} of 9</span>
+                        <span className="text-sm font-bold text-slate-500">Step {currentStep} of 10</span>
                         <div className="w-32 h-2 bg-slate-200 rounded-full overflow-hidden">
                             <div className="h-full bg-blue-600 transition-all duration-300" style={{ width: `${progressPercentage}%` }} />
                         </div>
@@ -101,7 +103,7 @@ export function WalkthroughWizard() {
                             Volver Atrás
                         </Button>
 
-                        {currentStep < 9 ? (
+                        {currentStep < 10 ? (
                             <Button
                                 onClick={nextStep}
                                 className="bg-blue-600 hover:bg-blue-700 text-white shadow-lg shadow-blue-500/20"
