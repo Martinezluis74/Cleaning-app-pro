@@ -22,7 +22,11 @@ export default function DataSyncModal() {
     };
 
     const processFile = async () => {
-        if (!selectedFile) return;
+        if (!selectedFile) {
+            setStatus('error');
+            setMessage('Por favor, selecciona un archivo primero.');
+            return;
+        }
 
         setStatus('processing');
         setMessage('Extrayendo Bundle...');
@@ -31,8 +35,12 @@ export default function DataSyncModal() {
             const zip = await JSZip.loadAsync(selectedFile);
             let extractedTasks: Array<{ taskId: string; priceValue: number }> = [];
 
-            // Look for DimTask.tsv specifically
-            const taskFile = Object.keys(zip.files).find(name => name.toLowerCase().includes('dimtask.tsv'));
+            // Look for DimTask.tsv flexibly (ignoring path differences, e.g., 'folder/DimTask.tsv' or 'DimTask.tsv')
+            const taskFile = Object.keys(zip.files).find(name => {
+                const lower = name.toLowerCase();
+                // We just need the file to end in or contain dimtask.tsv, not be a directory
+                return lower.includes('dimtask.tsv') && !zip.files[name].dir;
+            });
 
             if (taskFile) {
                 const textContent = await zip.files[taskFile].async('text');
@@ -50,23 +58,25 @@ export default function DataSyncModal() {
                     }
                 });
 
-                // Simulating extraction of Variables/Assumptions from another TSV if needed, 
-                // but specifically injecting Custom Task Prices to Context
+                if (extractedTasks.length > 0) {
+                    setState((prev: any) => ({
+                        ...prev,
+                        pricingModel: {
+                            ...prev.pricingModel,
+                            taskPrices: extractedTasks,
+                            assumptions: prev.pricingModel?.assumptions || []
+                        }
+                    }));
 
-                setState((prev: any) => ({
-                    ...prev,
-                    pricingModel: {
-                        ...prev.pricingModel,
-                        taskPrices: extractedTasks,
-                        assumptions: prev.pricingModel?.assumptions || []
-                    }
-                }));
-
-                setStatus('success');
-                setMessage('Data Synced Successfully 🎉');
+                    setStatus('success');
+                    setMessage('DATA SYNCED SUCCESSFULLY');
+                } else {
+                    setStatus('error');
+                    setMessage('El archivo DimTask.tsv fue encontrado pero no contenía datos legibles.');
+                }
             } else {
                 setStatus('error');
-                setMessage('DimTask.tsv no se encontró en el archivo ZIP.');
+                setMessage('DimTask.tsv no se encontró en la raíz ni en las carpetas del archivo ZIP.');
             }
 
         } catch (error) {
@@ -133,10 +143,10 @@ export default function DataSyncModal() {
                 onClick={processFile}
                 disabled={status === 'idle' || status === 'processing' || status === 'success' || status === 'error'}
                 className={`w-full font-black uppercase tracking-widest text-lg p-4 rounded-xl border-4 shadow-lg transition-transform ${status === 'ready'
-                        ? 'bg-black text-white hover:bg-slate-800 border-black active:scale-95 cursor-pointer'
-                        : status === 'processing'
-                            ? 'bg-slate-800 text-white border-black cursor-not-allowed opacity-80'
-                            : 'bg-slate-300 text-slate-500 border-slate-400 cursor-not-allowed opacity-50'
+                    ? 'bg-black text-white hover:bg-slate-800 border-black active:scale-95 cursor-pointer'
+                    : status === 'processing'
+                        ? 'bg-slate-800 text-white border-black cursor-not-allowed opacity-80'
+                        : 'bg-slate-300 text-slate-500 border-slate-400 cursor-not-allowed opacity-50'
                     }`}
             >
                 {status === 'processing' ? 'Processing...' : status === 'success' ? 'DATA SYNCED SUCCESSFULLY' : 'Upload and Sync Data'}
