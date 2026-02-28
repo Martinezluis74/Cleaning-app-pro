@@ -38,12 +38,18 @@ export default function DataSyncModal() {
             const allFiles = Object.keys(zip.files);
             console.log("Archivos encontrados en el ZIP:", allFiles);
 
-            // Look for DimTask flexibly (ignoring path differences, case, and checking .tsv, .csv, .txt extensions)
+            // Look for DimTask flexibly (stripping underscores so DIM_TASK matches dimtask)
             const taskFile = allFiles.find(name => {
-                const lower = name.trim().toLowerCase();
-                const isCorrectExtension = lower.endsWith('.tsv') || lower.endsWith('.csv') || lower.endsWith('.txt');
-                // We just need the file to end in or contain dimtask and have a valid extension, not be a directory
-                return lower.includes('dimtask') && isCorrectExtension && !zip.files[name].dir;
+                const cleanName = name.toLowerCase().replace(/_/g, '');
+                const isCorrectExtension = cleanName.endsWith('.tsv') || cleanName.endsWith('.csv') || cleanName.endsWith('.txt');
+                return cleanName.includes('dimtask') && isCorrectExtension && !zip.files[name].dir;
+            });
+
+            // Aligned hook for Inventory (optional extraction as requested by the user's logic rule)
+            const inventoryFile = allFiles.find(name => {
+                const cleanName = name.toLowerCase().replace(/_/g, '');
+                const isExt = cleanName.endsWith('.tsv') || cleanName.endsWith('.csv') || cleanName.endsWith('.txt');
+                return cleanName.includes('inventory') && isExt && !zip.files[name].dir;
             });
 
             if (taskFile) {
@@ -51,8 +57,15 @@ export default function DataSyncModal() {
                 const parsed = Papa.parse(textContent, { header: true, skipEmptyLines: true });
 
                 parsed.data.forEach((row: any) => {
-                    const taskId = row['TaskID']?.trim() || row['taskid']?.trim();
-                    const prodRate = row['ProductionRate'] || row['productionrate'];
+                    // Sanitize keys to handle "ProductionRate", "Production_Rate", "Production Rate"
+                    const cleanRow: any = {};
+                    Object.keys(row).forEach(k => {
+                        const cleanKey = k.replace(/[^a-zA-Z0-9]/g, '').toLowerCase();
+                        cleanRow[cleanKey] = row[k];
+                    });
+
+                    const taskId = cleanRow['taskid']?.toString().trim();
+                    const prodRate = cleanRow['productionrate'];
 
                     if (taskId && prodRate) {
                         extractedTasks.push({
