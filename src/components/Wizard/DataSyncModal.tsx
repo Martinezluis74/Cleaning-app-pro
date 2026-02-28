@@ -84,9 +84,9 @@ export default function DataSyncModal() {
             </div>
 
             <div className={`relative border-4 border-dashed rounded-xl p-8 flex flex-col items-center justify-center transition-all ${status === 'error' ? 'border-red-600 bg-red-50' :
-                    status === 'success' ? 'border-green-600 bg-green-50' :
-                        status === 'ready' ? 'border-black bg-slate-100' :
-                            'border-black bg-slate-50 hover:bg-slate-100'
+                status === 'success' ? 'border-green-600 bg-green-50' :
+                    status === 'ready' ? 'border-black bg-slate-100' :
+                        'border-black bg-slate-50 hover:bg-slate-100'
                 }`}>
                 <input
                     type="file"
@@ -129,23 +129,18 @@ export default function DataSyncModal() {
             </div>
 
             {/* ACTION BUTTON */}
-            {status === 'ready' && (
-                <button
-                    onClick={processFile}
-                    className="w-full bg-black text-white hover:bg-slate-800 font-black uppercase tracking-widest text-lg p-4 rounded-xl border-4 border-black shadow-lg transition-transform active:scale-95"
-                >
-                    Upload and Sync Data
-                </button>
-            )}
-
-            {status === 'processing' && (
-                <button
-                    disabled
-                    className="w-full bg-slate-400 text-white font-black uppercase tracking-widest text-lg p-4 rounded-xl border-4 border-slate-500 cursor-not-allowed"
-                >
-                    Processing...
-                </button>
-            )}
+            <button
+                onClick={processFile}
+                disabled={status === 'idle' || status === 'processing' || status === 'success' || status === 'error'}
+                className={`w-full font-black uppercase tracking-widest text-lg p-4 rounded-xl border-4 shadow-lg transition-transform ${status === 'ready'
+                        ? 'bg-black text-white hover:bg-slate-800 border-black active:scale-95 cursor-pointer'
+                        : status === 'processing'
+                            ? 'bg-slate-800 text-white border-black cursor-not-allowed opacity-80'
+                            : 'bg-slate-300 text-slate-500 border-slate-400 cursor-not-allowed opacity-50'
+                    }`}
+            >
+                {status === 'processing' ? 'Processing...' : status === 'success' ? 'DATA SYNCED SUCCESSFULLY' : 'Upload and Sync Data'}
+            </button>
         </div>
     );
 }
