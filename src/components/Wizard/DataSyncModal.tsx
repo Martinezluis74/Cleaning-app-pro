@@ -8,18 +8,27 @@ import { UploadCloud, CheckCircle2, AlertCircle } from 'lucide-react';
 
 export default function DataSyncModal() {
     const { state, setState } = useWizard();
-    const [status, setStatus] = useState<'idle' | 'processing' | 'success' | 'error'>('idle');
+    const [status, setStatus] = useState<'idle' | 'ready' | 'processing' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState<string>('');
+    const [selectedFile, setSelectedFile] = useState<File | null>(null);
 
-    const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
         if (!file) return;
+
+        setSelectedFile(file);
+        setStatus('ready');
+        setMessage(`Listo para cargar: ${file.name}`);
+    };
+
+    const processFile = async () => {
+        if (!selectedFile) return;
 
         setStatus('processing');
         setMessage('Extrayendo Bundle...');
 
         try {
-            const zip = await JSZip.loadAsync(file);
+            const zip = await JSZip.loadAsync(selectedFile);
             let extractedTasks: Array<{ taskId: string; priceValue: number }> = [];
 
             // Look for DimTask.tsv specifically
@@ -75,20 +84,24 @@ export default function DataSyncModal() {
             </div>
 
             <div className={`relative border-4 border-dashed rounded-xl p-8 flex flex-col items-center justify-center transition-all ${status === 'error' ? 'border-red-600 bg-red-50' :
-                status === 'success' ? 'border-green-600 bg-green-50' :
-                    'border-black bg-slate-50 hover:bg-slate-100'
+                    status === 'success' ? 'border-green-600 bg-green-50' :
+                        status === 'ready' ? 'border-black bg-slate-100' :
+                            'border-black bg-slate-50 hover:bg-slate-100'
                 }`}>
                 <input
                     type="file"
                     accept=".zip"
-                    onChange={handleFileUpload}
+                    onChange={handleFileSelect}
                     className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
+                    disabled={status === 'processing' || status === 'success'}
                 />
 
-                {status === 'idle' && (
+                {(status === 'idle' || status === 'ready') && (
                     <>
                         <UploadCloud className="w-12 h-12 text-black mb-3" />
-                        <span className="font-black text-black text-lg uppercase tracking-widest">Upload Dataset Bundle (.zip)</span>
+                        <span className="font-black text-black text-lg uppercase tracking-widest">
+                            {status === 'ready' ? message : 'Upload Dataset Bundle (.zip)'}
+                        </span>
                         <span className="text-xs font-bold text-slate-600 mt-2">Haz clic aquí o arrastra un archivo</span>
                     </>
                 )}
@@ -96,14 +109,14 @@ export default function DataSyncModal() {
                 {status === 'processing' && (
                     <div className="flex flex-col items-center">
                         <div className="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin mb-3"></div>
-                        <span className="font-black text-black text-lg uppercase">{message}</span>
+                        <span className="font-black text-black text-lg uppercase">Processing...</span>
                     </div>
                 )}
 
                 {status === 'success' && (
                     <div className="flex flex-col items-center text-green-700">
                         <CheckCircle2 className="w-12 h-12 mb-3" />
-                        <span className="font-black text-xl uppercase tracking-widest">{message}</span>
+                        <span className="font-black text-xl uppercase tracking-widest">DATA SYNCED SUCCESSFULLY</span>
                     </div>
                 )}
 
@@ -114,6 +127,25 @@ export default function DataSyncModal() {
                     </div>
                 )}
             </div>
+
+            {/* ACTION BUTTON */}
+            {status === 'ready' && (
+                <button
+                    onClick={processFile}
+                    className="w-full bg-black text-white hover:bg-slate-800 font-black uppercase tracking-widest text-lg p-4 rounded-xl border-4 border-black shadow-lg transition-transform active:scale-95"
+                >
+                    Upload and Sync Data
+                </button>
+            )}
+
+            {status === 'processing' && (
+                <button
+                    disabled
+                    className="w-full bg-slate-400 text-white font-black uppercase tracking-widest text-lg p-4 rounded-xl border-4 border-slate-500 cursor-not-allowed"
+                >
+                    Processing...
+                </button>
+            )}
         </div>
     );
 }
