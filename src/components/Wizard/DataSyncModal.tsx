@@ -35,11 +35,15 @@ export default function DataSyncModal() {
             const zip = await JSZip.loadAsync(selectedFile);
             let extractedTasks: Array<{ taskId: string; priceValue: number }> = [];
 
-            // Look for DimTask.tsv flexibly (ignoring path differences, e.g., 'folder/DimTask.tsv' or 'DimTask.tsv')
-            const taskFile = Object.keys(zip.files).find(name => {
-                const lower = name.toLowerCase();
-                // We just need the file to end in or contain dimtask.tsv, not be a directory
-                return lower.includes('dimtask.tsv') && !zip.files[name].dir;
+            const allFiles = Object.keys(zip.files);
+            console.log("Archivos encontrados en el ZIP:", allFiles);
+
+            // Look for DimTask flexibly (ignoring path differences, case, and checking .tsv, .csv, .txt extensions)
+            const taskFile = allFiles.find(name => {
+                const lower = name.trim().toLowerCase();
+                const isCorrectExtension = lower.endsWith('.tsv') || lower.endsWith('.csv') || lower.endsWith('.txt');
+                // We just need the file to end in or contain dimtask and have a valid extension, not be a directory
+                return lower.includes('dimtask') && isCorrectExtension && !zip.files[name].dir;
             });
 
             if (taskFile) {
@@ -72,11 +76,11 @@ export default function DataSyncModal() {
                     setMessage('DATA SYNCED SUCCESSFULLY');
                 } else {
                     setStatus('error');
-                    setMessage('El archivo DimTask.tsv fue encontrado pero no contenía datos legibles.');
+                    setMessage(`El archivo ${taskFile} fue encontrado pero no contenía datos de tarifas de labor legibles.`);
                 }
             } else {
                 setStatus('error');
-                setMessage('DimTask.tsv no se encontró en la raíz ni en las carpetas del archivo ZIP.');
+                setMessage('No se encontró ningún archivo DimTask (.tsv, .csv, .txt) en el ZIP. Revisa la consola para ver qué archivos hay.');
             }
 
         } catch (error) {
