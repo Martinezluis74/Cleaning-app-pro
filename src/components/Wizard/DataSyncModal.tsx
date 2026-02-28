@@ -11,6 +11,7 @@ export default function DataSyncModal() {
     const [status, setStatus] = useState<'idle' | 'ready' | 'processing' | 'success' | 'error'>('idle');
     const [message, setMessage] = useState<string>('');
     const [selectedFile, setSelectedFile] = useState<File | null>(null);
+    const [debugData, setDebugData] = useState<{ headers: string[], rows: any[] } | null>(null);
 
     const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
         const file = e.target.files?.[0];
@@ -39,11 +40,20 @@ export default function DataSyncModal() {
             console.log("Archivos encontrados en el ZIP:", allFiles);
 
             // Look for DimTask flexibly (stripping underscores so DIM_TASK matches dimtask)
-            const taskFile = allFiles.find(name => {
+            let taskFile = allFiles.find(name => {
                 const cleanName = name.toLowerCase().replace(/_/g, '');
                 const isCorrectExtension = cleanName.endsWith('.tsv') || cleanName.endsWith('.csv') || cleanName.endsWith('.txt');
                 return cleanName.includes('dimtask') && isCorrectExtension && !zip.files[name].dir;
             });
+
+            // Extreme Fallback: If no dimtask found, find ANY file with 'task'
+            if (!taskFile) {
+                taskFile = allFiles.find(name => {
+                    const cleanName = name.toLowerCase().replace(/_/g, '');
+                    const isExt = cleanName.endsWith('.tsv') || cleanName.endsWith('.csv') || cleanName.endsWith('.txt');
+                    return cleanName.includes('task') && isExt && !zip.files[name].dir;
+                });
+            }
 
             // Aligned hook for Inventory (optional extraction as requested by the user's logic rule)
             const inventoryFile = allFiles.find(name => {
@@ -53,8 +63,17 @@ export default function DataSyncModal() {
             });
 
             if (taskFile) {
-                const textContent = await zip.files[taskFile].async('text');
+                let textContent = await zip.files[taskFile].async('text');
+
+                // BOM Removal and character normalizer
+                textContent = textContent.replace(/^\uFEFF/, '').trim();
+
                 const parsed = Papa.parse(textContent, { header: true, skipEmptyLines: true });
+
+                // Store first 5 rows for debug visibility
+                const headers = parsed.meta.fields || [];
+                const first5Rows = parsed.data.slice(0, 5);
+                setDebugData({ headers, rows: first5Rows });
 
                 parsed.data.forEach((row: any) => {
                     // Sanitize keys to handle "ProductionRate", "Production_Rate", "Production Rate"
@@ -65,14 +84,31 @@ export default function DataSyncModal() {
                     });
 
                     // Handle multiple variations for Task ID
-                    const taskId = cleanRow['taskid']?.toString().trim() ||
+                    let taskId = cleanRow['taskid']?.toString().trim() ||
                         cleanRow['task']?.toString().trim() ||
                         cleanRow['id']?.toString().trim();
 
                     // Handle multiple variations for Production Rate
-                    const rawRate = cleanRow['productionrate'] ||
+                    let rawRate = cleanRow['productionrate'] ||
                         cleanRow['rate'] ||
                         cleanRow['laborrate'];
+
+                    // EXTREME FALLBACK: If explicit taskId/rate are null, fallback to index/content sniffing
+                    if (!taskId || rawRate === undefined) {
+                        const values = Object.values(row);
+                        // Sniff taskId: usually the first or second column that is a string or short number
+                        if (!taskId && values.length > 0) taskId = values[0]?.toString().trim();
+
+                        // Sniff rate: look for a decimal number in the values
+                        if (rawRate === undefined) {
+                            const numericValue = values.find(v => {
+                                const str = v?.toString() || '';
+                                const num = parseFloat(str.replace(/[^0-9.]/g, ''));
+                                return !isNaN(num) && str.includes('.'); // Rates often have decimals
+                            });
+                            if (numericValue !== undefined) rawRate = numericValue as string;
+                        }
+                    }
 
                     if (taskId && rawRate !== undefined) {
                         // Clean the string before parsing a float (e.g. if it has "$15.5" -> 15.5)
@@ -170,16 +206,45 @@ export default function DataSyncModal() {
             {/* ACTION BUTTON */}
             <button
                 onClick={processFile}
-                disabled={status === 'idle' || status === 'processing' || status === 'success' || status === 'error'}
-                className={`w-full font-black uppercase tracking-widest text-lg p-4 rounded-xl border-4 shadow-lg transition-transform ${status === 'ready'
+                disabled={status === 'idle' || status === 'processing' || status === 'success'}
+                className={`w-full font-black uppercase tracking-widest text-lg p-4 rounded-xl border-4 shadow-lg transition-transform ${status === 'ready' || status === 'error'
                     ? 'bg-black text-white hover:bg-slate-800 border-black active:scale-95 cursor-pointer'
                     : status === 'processing'
                         ? 'bg-slate-800 text-white border-black cursor-not-allowed opacity-80'
                         : 'bg-slate-300 text-slate-500 border-slate-400 cursor-not-allowed opacity-50'
                     }`}
             >
-                {status === 'processing' ? 'Processing...' : status === 'success' ? 'DATA SYNCED SUCCESSFULLY' : 'Upload and Sync Data'}
+                {status === 'processing' ? 'Processing...' : status === 'success' ? 'DATA SYNCED SUCCESSFULLY' : status === 'error' ? 'Retry Extraction' : 'Upload and Sync Data'}
             </button>
+
+            {/* VISUAL DEBUGGER */}
+            {debugData && (
+                <div className="mt-6 border-4 border-slate-200 rounded-xl overflow-hidden bg-slate-50">
+                    <div className="bg-slate-200 p-2 text-center text-xs font-black uppercase text-slate-600 tracking-widest">
+                        Debug: Primeras 5 Filas Extraídas
+                    </div>
+                    <div className="overflow-x-auto">
+                        <table className="w-full text-left text-xs text-slate-600">
+                            <thead className="bg-slate-100 border-b-2 border-slate-300">
+                                <tr>
+                                    {debugData.headers.map((h, i) => (
+                                        <th key={i} className="p-2 font-bold whitespace-nowrap">{h}</th>
+                                    ))}
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {debugData.rows.map((row, i) => (
+                                    <tr key={i} className="border-b border-slate-200">
+                                        {debugData.headers.map((h, j) => (
+                                            <td key={j} className="p-2">{row[h]}</td>
+                                        ))}
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            )}
         </div>
     );
 }
