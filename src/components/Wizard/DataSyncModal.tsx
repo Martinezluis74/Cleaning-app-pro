@@ -64,14 +64,26 @@ export default function DataSyncModal() {
                         cleanRow[cleanKey] = row[k];
                     });
 
-                    const taskId = cleanRow['taskid']?.toString().trim();
-                    const prodRate = cleanRow['productionrate'];
+                    // Handle multiple variations for Task ID
+                    const taskId = cleanRow['taskid']?.toString().trim() ||
+                        cleanRow['task']?.toString().trim() ||
+                        cleanRow['id']?.toString().trim();
 
-                    if (taskId && prodRate) {
-                        extractedTasks.push({
-                            taskId: taskId,
-                            priceValue: Number(prodRate)
-                        });
+                    // Handle multiple variations for Production Rate
+                    const rawRate = cleanRow['productionrate'] ||
+                        cleanRow['rate'] ||
+                        cleanRow['laborrate'];
+
+                    if (taskId && rawRate !== undefined) {
+                        // Clean the string before parsing a float (e.g. if it has "$15.5" -> 15.5)
+                        const numericRate = parseFloat(rawRate.toString().replace(/[^0-9.]/g, ''));
+
+                        if (!isNaN(numericRate)) {
+                            extractedTasks.push({
+                                taskId: taskId,
+                                priceValue: numericRate
+                            });
+                        }
                     }
                 });
 
@@ -86,7 +98,7 @@ export default function DataSyncModal() {
                     }));
 
                     setStatus('success');
-                    setMessage('DATA SYNCED SUCCESSFULLY');
+                    setMessage(`Success! ${extractedTasks.length} tasks loaded 🎉`);
                 } else {
                     setStatus('error');
                     setMessage(`El archivo ${taskFile} fue encontrado pero no contenía datos de tarifas de labor legibles.`);
