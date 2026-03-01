@@ -37,17 +37,22 @@ const defaultState: WizardState = {
         laborRate: 17.60,
         remittances: 2.50,
         overheadMargin: 0.15,
-        profitMargin: 0.20
+        profitMargin: 0.20,
+        discountPercentage: 0
     },
     pricingModel: null,
     totals: {
         totalSqft: 0,
         totalBathrooms: 0,
+        calculatedHoursPerVisit: 0,
         hoursPerVisit: 0,
+        bufferHours: 0,
         totalHours: 0, // Weekly Hours
         baseCost: 0,
+        actualCost: 0,
         costWithOverhead: 0,
         subtotal: 0,
+        discountAmount: 0,
         tax: 0,
         finalTotal: 0
     }
@@ -62,6 +67,7 @@ type WizardContextType = {
 
     updateClient: (data: Partial<ClientProfile>) => void;
     updateSite: (data: Partial<SiteProfile>) => void;
+    updateFinancials: (data: Partial<WizardState['financials']>) => void;
 
     addArea: (area: Area) => void;
     updateArea: (id: string, element: Partial<Area>) => void;
@@ -74,8 +80,6 @@ type WizardContextType = {
 
     updateCompliance: (data: Partial<ComplianceData>) => void;
     updateEvidence: (data: Partial<EvidenceData>) => void;
-
-    updateFinancials: (data: Partial<WizardState['financials']>) => void;
 
     calculateTotals: () => void;
 };
@@ -193,9 +197,11 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const effectiveBathrooms = (areas && areas.length > 0) ? areasBathrooms : totalBathrooms;
             const effectiveFixtureHours = (areas && areas.length > 0) ? areasFixtureHours : fixtureHours;
 
-            // Suma de minutos totales convertida a Horas por Visita
+            // Suma de minutos totales convertida a Horas por Visita (REAL TIME)
             const baseDailyHours = (areas && areas.length > 0 ? (effectiveSqft / defaultProductionRate) : floorHours) + deskHours + trashHours + effectiveFixtureHours;
-            let totalHoursPerVisit = safeNum(baseDailyHours);
+            const calculatedHoursPerVisit = safeNum(baseDailyHours);
+
+            let totalHoursPerVisit = calculatedHoursPerVisit;
 
             if (addons && addons.length > 0) {
                 addons.forEach(addon => {
@@ -203,32 +209,54 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                 });
             }
 
+            // Aplicar Regla del Mínimo Facturable (3.0 horas)
+            const billableHoursPerVisit = Math.max(3.0, totalHoursPerVisit);
+            const bufferHours = Math.max(0, billableHoursPerVisit - totalHoursPerVisit);
+
             // Multiplica por la Frecuencia para dar el total de horas semanales
             const frequency = safeNum(site?.cleaningFrequency) || 1;
-            const totalWeeklyHours = totalHoursPerVisit * frequency;
+            const totalWeeklyBillableHours = billableHoursPerVisit * frequency;
+            const totalWeeklyCalculatedHours = totalHoursPerVisit * frequency;
 
-            // Calcula el costo basándose únicamente en Mano de Obra
+            // Calcula el costo
             const laborRate = safeNum(financials?.laborRate);
             const remittances = laborRate * 0.1865; // 18.65% Cargas Prestacionales automáticas
+            const fullyLoadedLaborRate = laborRate + remittances;
+
+            // Actual Cost (Costo real interno de nómina)
+            const actualCost = fullyLoadedLaborRate * totalWeeklyCalculatedHours;
+
+            // Base Cost (Costo facturable para el cliente)
+            const baseCost = fullyLoadedLaborRate * totalWeeklyBillableHours;
+
             const overheadMargin = safeNum(financials?.overheadMargin);
             const profitMargin = safeNum(financials?.profitMargin);
+            const discountPercentage = safeNum(financials?.discountPercentage) / 100; // Si puso 10, es 0.10
 
-            const baseCost = (laborRate + remittances) * totalWeeklyHours;
             const costWithOverhead = baseCost + (baseCost * overheadMargin);
-            const subtotal = costWithOverhead + (costWithOverhead * profitMargin);
-            const tax = subtotal * hstRate;
-            const finalTotal = subtotal + tax;
+            const rawSubtotal = costWithOverhead + (costWithOverhead * profitMargin);
+
+            // Apply Discount to Subtotal
+            const discountAmount = rawSubtotal * discountPercentage;
+            const discountedSubtotal = rawSubtotal - discountAmount;
+
+            const tax = discountedSubtotal * hstRate;
+            const finalTotal = discountedSubtotal + tax;
 
             return {
                 ...prev,
                 totals: {
                     totalSqft: effectiveSqft,
                     totalBathrooms: effectiveBathrooms,
-                    hoursPerVisit: safeNum(totalHoursPerVisit.toFixed(2)),
-                    totalHours: safeNum(totalWeeklyHours.toFixed(2)),
+                    calculatedHoursPerVisit: safeNum(totalHoursPerVisit.toFixed(2)),
+                    hoursPerVisit: safeNum(billableHoursPerVisit.toFixed(2)),
+                    bufferHours: safeNum(bufferHours.toFixed(2)),
+                    totalHours: safeNum(totalWeeklyBillableHours.toFixed(2)),
                     baseCost: safeNum(baseCost.toFixed(2)),
+                    actualCost: safeNum(actualCost.toFixed(2)),
                     costWithOverhead: safeNum(costWithOverhead.toFixed(2)),
-                    subtotal: safeNum(subtotal.toFixed(2)),
+                    subtotal: safeNum(discountedSubtotal.toFixed(2)),
+                    discountAmount: safeNum(discountAmount.toFixed(2)),
                     tax: safeNum(tax.toFixed(2)),
                     finalTotal: safeNum(finalTotal.toFixed(2))
                 }
@@ -240,6 +268,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
     const nextStep = () => setState(prev => ({ ...prev, currentStep: Math.min(prev.currentStep + 1, 8) }));
     const prevStep = () => setState(prev => ({ ...prev, currentStep: Math.max(prev.currentStep - 1, 1) }));
 
+    const updateFinancials = (data: Partial<WizardState['financials']>) => setState(prev => ({ ...prev, financials: { ...prev.financials, ...data } }));
     const updateClient = (data: Partial<ClientProfile>) => setState(prev => ({ ...prev, client: { ...prev.client, ...data } }));
     const updateSite = (data: Partial<SiteProfile>) => setState(prev => ({ ...prev, site: { ...prev.site, ...data } }));
 
@@ -280,17 +309,17 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
     const updateCompliance = (data: Partial<ComplianceData>) => setState(prev => ({ ...prev, compliance: { ...prev.compliance, ...data } }));
     const updateEvidence = (data: Partial<EvidenceData>) => setState(prev => ({ ...prev, evidence: { ...prev.evidence, ...data } }));
 
-    // Financials
-    const updateFinancials = (data: Partial<WizardState['financials']>) => setState(prev => ({ ...prev, financials: { ...prev.financials, ...data } }));
 
     return (
         <WizardContext.Provider value={{
-            state, setState, setStep, nextStep, prevStep,
-            updateClient, updateSite,
+            state, setState, setStep, nextStep,
+            prevStep,
+            updateFinancials,
+            updateClient,
+            updateSite,
             addArea, updateArea, removeArea, duplicateArea,
             addAddon, updateAddon, removeAddon,
             updateCompliance, updateEvidence,
-            updateFinancials,
             calculateTotals: recalculateTotals
         }}>
             {children}

@@ -87,6 +87,7 @@ export type WizardState = {
         remittances: number;
         overheadMargin: number; // Percentage (e.g., 0.15 for 15%)
         profitMargin: number; // Percentage (e.g., 0.20 for 20%)
+        discountPercentage: number; // Percentage (e.g. 0.10 for 10%)
     };
 
     // Dynamic Pricing (fetched from API)
@@ -96,11 +97,15 @@ export type WizardState = {
     totals: {
         totalSqft: number;
         totalBathrooms: number;
-        hoursPerVisit: number;
-        totalHours: number;
+        calculatedHoursPerVisit: number; // Exact time derived from math
+        hoursPerVisit: number; // Minimum 3.0 billable rule
+        bufferHours: number; // Discrepancy (Billable - Calculated)
+        totalHours: number; // Weekly Total
         baseCost: number;
+        actualCost: number; // True cost of raw labor + remittances
         costWithOverhead: number;
         subtotal: number;
+        discountAmount: number;
         tax: number;
         finalTotal: number;
     }
