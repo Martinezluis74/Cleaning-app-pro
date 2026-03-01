@@ -25,6 +25,7 @@ const defaultState: WizardState = {
             { id: 5, floorType: '', sqft: 0 },
             { id: 6, floorType: '', sqft: 0 }
         ],
+        floorList: [],
         fixtures: { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 },
         accessHours: 'After 6 PM'
     },
@@ -123,9 +124,38 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const hstRate = safeNum(hstRateStr);
 
             const prodRateStr = pricingModel.assumptions?.find(a => a.key === 'ProductionRate')?.value;
-            const productionRate = prodRateStr ? safeNum(prodRateStr) : 2500;
+            const defaultProductionRate = prodRateStr ? safeNum(prodRateStr) : 2500;
 
-            const floorHours = totalSqft / productionRate;
+            let floorHours = 0;
+
+            // Multimaterial Floor Math (Vacuum vs Dust+Wet Mopping)
+            const findRate = (keywords: string[], fallback: number) => {
+                const found = pricingModel.taskPrices?.find(t =>
+                    keywords.some(kw => t.taskId.toLowerCase().includes(kw))
+                );
+                return found ? found.priceValue : fallback;
+            };
+
+            const vacuumRate = findRate(['vacuuming', 'vacuum', 'alfombra', 'carpet'], 2500);
+            const dustMopRate = findRate(['dust mopping', 'dust mop', 'sweeping'], 4000);
+            const wetMopRate = findRate(['wet mopping', 'wet mop', 'trapear'], 3500);
+
+            if (site.floorList && site.floorList.length > 0) {
+                totalSqft = 0; // recalc total SqFt based on list explicitly
+                site.floorList.forEach(f => {
+                    const sqft = safeNum(f.sqft);
+                    totalSqft += sqft;
+
+                    if (f.floorType.toLowerCase().includes('alfombra') || f.floorType.toLowerCase().includes('carpet')) {
+                        floorHours += (sqft / vacuumRate);
+                    } else if (f.floorType.trim() !== '') {
+                        // Duro (Baldosa/Concreto/Vinilo -> Dust + Wet)
+                        floorHours += (sqft / dustMopRate) + (sqft / wetMopRate);
+                    }
+                });
+            } else {
+                floorHours = totalSqft / defaultProductionRate; // Manual fallback bridge
+            }
 
             const desks = safeNum(site?.desks);
             const deskHours = (desks * 2) / 60; // 2 minutos por escritorio (Wipe down)
@@ -164,7 +194,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const effectiveFixtureHours = (areas && areas.length > 0) ? areasFixtureHours : fixtureHours;
 
             // Suma de minutos totales convertida a Horas por Visita
-            const baseDailyHours = (effectiveSqft / productionRate) + deskHours + trashHours + effectiveFixtureHours;
+            const baseDailyHours = (areas && areas.length > 0 ? (effectiveSqft / defaultProductionRate) : floorHours) + deskHours + trashHours + effectiveFixtureHours;
             let totalHoursPerVisit = safeNum(baseDailyHours);
 
             if (addons && addons.length > 0) {

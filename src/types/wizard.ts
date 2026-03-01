@@ -16,14 +16,21 @@ export type FloorEntry = {
     sqft: number;
 };
 
+export type FloorRow = {
+    id: string;
+    floorType: string; // 'Carpet', 'Concrete', 'Vinyl', 'Tile', ''
+    sqft: number;
+};
+
 export type SiteProfile = {
     siteType: string;
-    sqft: number;
+    sqft: number; // Keep this mainly as a sum aggregate if needed, or backward compatibility
+    floorList: FloorRow[];
     cleaningFrequency: number; // e.g. 1 to 7
     desks: number;
     people: number;
     trashCans: number;
-    floorMatrix: FloorEntry[]; // Will always have length 6
+    floorMatrix: FloorEntry[]; // Legacy Matrix
     fixtures: {
         rooms: number;
         toilets: number;
