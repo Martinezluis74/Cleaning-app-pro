@@ -35,6 +35,7 @@ const defaultState: WizardState = {
     evidence: { walkthroughNotes: '', photosAttached: false },
     financials: {
         laborRate: 17.60,
+        hourlyPayRate: 18.00,
         remittances: 2.50,
         overheadMargin: 0.15,
         profitMargin: 0.20,
@@ -54,7 +55,9 @@ const defaultState: WizardState = {
         subtotal: 0,
         discountAmount: 0,
         tax: 0,
-        finalTotal: 0
+        finalTotal: 0,
+        grossProfit: 0,
+        marginPercentage: 0
     }
 };
 
@@ -220,13 +223,14 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
 
             // Calcula el costo
             const laborRate = safeNum(financials?.laborRate);
+            const hourlyPayRate = financials?.hourlyPayRate !== undefined ? safeNum(financials.hourlyPayRate) : 18.00;
             const remittances = laborRate * 0.1865; // 18.65% Cargas Prestacionales automáticas
             const fullyLoadedLaborRate = laborRate + remittances;
 
-            // Actual Cost (Costo real interno de nómina)
-            const actualCost = fullyLoadedLaborRate * totalWeeklyCalculatedHours;
+            // Actual Cost / Total Labor Cost (Cálculo interno de empleado)
+            const actualCost = hourlyPayRate * totalWeeklyCalculatedHours;
 
-            // Base Cost (Costo facturable para el cliente)
+            // Base Cost (Costo base facturable para el modelo)
             const baseCost = fullyLoadedLaborRate * totalWeeklyBillableHours;
 
             const overheadMargin = safeNum(financials?.overheadMargin);
@@ -243,6 +247,10 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const tax = discountedSubtotal * hstRate;
             const finalTotal = discountedSubtotal + tax;
 
+            // Gross Profit Analysis
+            const grossProfit = discountedSubtotal - actualCost;
+            const marginPercentage = discountedSubtotal > 0 ? (grossProfit / discountedSubtotal) * 100 : 0;
+
             return {
                 ...prev,
                 totals: {
@@ -258,7 +266,9 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                     subtotal: safeNum(discountedSubtotal.toFixed(2)),
                     discountAmount: safeNum(discountAmount.toFixed(2)),
                     tax: safeNum(tax.toFixed(2)),
-                    finalTotal: safeNum(finalTotal.toFixed(2))
+                    finalTotal: safeNum(finalTotal.toFixed(2)),
+                    grossProfit: safeNum(grossProfit.toFixed(2)),
+                    marginPercentage: safeNum(marginPercentage.toFixed(2))
                 }
             };
         });

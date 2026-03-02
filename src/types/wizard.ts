@@ -83,7 +83,8 @@ export type WizardState = {
 
     // Financial Variables (Editable in Sidebar)
     financials: {
-        laborRate: number;
+        laborRate: number; // Keep for legacy / other logic but prefer hourlyPayRate
+        hourlyPayRate: number; // New metric asked by user (e.g. 18.00)
         remittances: number;
         overheadMargin: number; // Percentage (e.g., 0.15 for 15%)
         profitMargin: number; // Percentage (e.g., 0.20 for 20%)
@@ -108,5 +109,7 @@ export type WizardState = {
         discountAmount: number;
         tax: number;
         finalTotal: number;
+        grossProfit: number;
+        marginPercentage: number;
     }
 };

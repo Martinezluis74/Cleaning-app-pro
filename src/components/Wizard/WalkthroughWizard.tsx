@@ -184,46 +184,44 @@ export function WalkthroughWizard() {
                             )}
 
                             {totals.subtotal < totals.actualCost && totals.actualCost > 0 && (
-                                <div className="bg-red-50 border-2 border-red-600 rounded-lg p-3 flex gap-3 text-sm text-red-900 shadow-sm font-bold">
-                                    <AlertCircle className="w-5 h-5 flex-shrink-0 text-red-600" />
-                                    <div><span className="font-black uppercase mark bg-red-600 text-white px-1">Alerta Roja:</span> El descuento hace que el cobro sea menor al costo real de labor (${totals.actualCost.toFixed(2)}).</div>
+                                <div className="bg-red-600 border-4 border-red-900 rounded-lg p-4 flex gap-3 text-sm text-white shadow-lg font-bold animate-pulse">
+                                    <AlertCircle className="w-6 h-6 flex-shrink-0 text-white" />
+                                    <div><span className="font-black uppercase bg-white text-red-800 px-1 border border-red-900">LOW MARGIN ALERT:</span><br /> El Precio de Venta (${Number(totals.subtotal).toFixed(2)}) cayó por debajo del Total Labor Cost (${Number(totals.actualCost).toFixed(2)}). Estás operando en pérdida.</div>
                                 </div>
                             )}
 
                             {/* COST BREAKDOWN (Requested feature) */}
                             <div className="bg-white p-4 rounded-xl border-2 border-black shadow-sm space-y-3">
-                                <h4 className="text-xs font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 mb-2">Desglose Financiero</h4>
+                                <h4 className="text-sm font-black uppercase tracking-widest text-black border-b-2 border-black pb-2 mb-2">Desglose Financiero</h4>
 
-                                <div className="flex justify-between text-[11px] items-center text-slate-400 font-bold">
-                                    <span>Calculated Labor (Internal)</span>
+                                <div className="flex justify-between text-[11px] items-center text-slate-500 font-bold">
+                                    <span>Real Labor Time</span>
                                     <span>{Number(totals.calculatedHoursPerVisit).toFixed(2)} hrs</span>
                                 </div>
-
                                 <div className="flex justify-between text-xs items-center text-black font-bold">
-                                    <span>Minimum Billable Time</span>
-                                    <span className="font-black border-2 border-black px-1">{Number(hoursPerVisit).toFixed(2)} hrs</span>
-                                </div>
-
-                                {Number(totals.bufferHours) > 0 && (
-                                    <div className="flex justify-between text-[11px] items-center text-green-700 font-bold mb-2">
-                                        <span>Negotiation Buffer</span>
-                                        <span className="font-black">+{Number(totals.bufferHours).toFixed(2)} hrs</span>
-                                    </div>
-                                )}
-
-                                <div className="flex justify-between text-xs items-center text-black font-bold border-t border-slate-300 pt-2 mt-2">
-                                    <span>Labor & Remit ({Number(totals.totalHours).toFixed(2)} hrs/sem)</span>
-                                    <span className="font-black">${Number(totals.baseCost).toFixed(2)}</span>
-                                </div>
-
-                                <div className="flex justify-between text-xs items-center text-black font-bold">
-                                    <span>+ Overhead ({(financials.overheadMargin * 100).toFixed(0)}%)</span>
-                                    <span className="font-black">${Number(totals.costWithOverhead).toFixed(2)}</span>
+                                    <span>Billable Time (Min 3.0h)</span>
+                                    <span className="font-black border-2 border-black px-1 bg-slate-50">{Number(hoursPerVisit).toFixed(2)} hrs</span>
                                 </div>
 
                                 <div className="flex justify-between text-xs items-center text-black font-bold border-t border-slate-300 pt-2 mt-2">
-                                    <span>+ Profit ({(financials.profitMargin * 100).toFixed(0)}%) = Subtotal</span>
-                                    <span className="text-sm font-black">${Number(totals.subtotal).toFixed(2)}</span>
+                                    <span>Hourly Pay Rate ($)</span>
+                                    <Input
+                                        type="number" min="0" step="0.5"
+                                        placeholder="18.00"
+                                        value={financials.hourlyPayRate || ''}
+                                        onChange={e => updateFinancials({ hourlyPayRate: Number(e.target.value) || 0 })}
+                                        className="w-20 h-8 text-right font-black border-2 border-black text-xs p-1"
+                                    />
+                                </div>
+
+                                <div className="flex justify-between text-sm items-center text-black font-black bg-slate-100 p-2 rounded border border-slate-300 mt-2">
+                                    <span>Total Labor Cost</span>
+                                    <span>${Number(totals.actualCost).toFixed(2)}</span>
+                                </div>
+
+                                <div className="flex justify-between text-xs items-center text-black font-bold border-t border-slate-300 pt-2 mt-2">
+                                    <span>Price Before Discount</span>
+                                    <span className="font-black">${(Number(totals.subtotal) + Number(totals.discountAmount)).toFixed(2)}</span>
                                 </div>
 
                                 <div className="flex justify-between text-xs items-center text-black font-bold mt-2">
@@ -231,17 +229,31 @@ export function WalkthroughWizard() {
                                     <Input
                                         type="number" min="0" max="100"
                                         placeholder="0"
-                                        value={financials.discountPercentage ? (financials.discountPercentage) : ''}
+                                        value={financials.discountPercentage || ''}
                                         onChange={e => updateFinancials({ discountPercentage: Number(e.target.value) || 0 })}
                                         className="w-16 h-8 text-right font-black border-2 border-black text-xs p-1"
                                     />
                                 </div>
                                 {Number(totals.discountAmount) > 0 && (
-                                    <div className="flex justify-between text-[11px] items-center text-red-600 font-bold">
-                                        <span className="flex-1 text-right pr-2">- Discount Applied</span>
+                                    <div className="flex justify-between text-[11px] items-center text-red-600 font-bold mb-2">
+                                        <span className="flex-1 text-right pr-2">Discount Applied:</span>
                                         <span className="font-black">-${Number(totals.discountAmount).toFixed(2)}</span>
                                     </div>
                                 )}
+
+                                <div className="flex justify-between text-sm items-center text-black font-black border-t-2 border-black pt-2 mt-2">
+                                    <span>Subtotal (Revenue)</span>
+                                    <span className="text-lg">${Number(totals.subtotal).toFixed(2)}</span>
+                                </div>
+
+                                <div className="flex justify-between text-sm items-center text-green-700 font-black bg-green-50 p-2 rounded border-2 border-green-200 mt-2">
+                                    <span>Gross Profit</span>
+                                    <span>${Number(totals.grossProfit).toFixed(2)}</span>
+                                </div>
+                                <div className="flex justify-between text-[11px] items-center text-green-800 font-bold mt-1 px-2">
+                                    <span>Margin %</span>
+                                    <span className="font-black bg-white px-1 border border-green-200">{Number(totals.marginPercentage).toFixed(2)}%</span>
+                                </div>
 
                                 <div className="flex justify-between text-xs items-center text-black font-bold">
                                     <span>HST (13%)</span>
