@@ -29,10 +29,39 @@ export function WalkthroughWizard() {
     };
 
     // Calculate fixture impacts for the Sidebar
-    const f = state.site.fixtures || { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 };
-    const totalFixtures = (f.toilets || 0) + (f.urinals || 0) + (f.sinks || 0) + (f.showers || 0);
-    const fixtureHours = (((f.toilets || 0) * 3) + ((f.urinals || 0) * 2) + ((f.sinks || 0) * 1) + ((f.showers || 0) * 5)) / 60;
-    const fixtureLaborCost = fixtureHours * (state.financials.laborRate + state.financials.remittances) * (state.site.cleaningFrequency || 1);
+    const showers = state.site.fixtures?.showers || 0;
+    const restrooms = state.site.restrooms || [];
+
+    let totalRestrooms = state.site.fixtures?.rooms || 0;
+    let totalToilets = state.site.fixtures?.toilets || 0;
+    let totalUrinals = state.site.fixtures?.urinals || 0;
+    let totalSinks = state.site.fixtures?.sinks || 0;
+    let fixtureMins = 0;
+
+    if (restrooms.length > 0) {
+        totalRestrooms = restrooms.length;
+        totalToilets = 0; totalUrinals = 0; totalSinks = 0;
+        restrooms.forEach(r => {
+            const t = Number(r.toilets) || 0;
+            const u = Number(r.urinals) || 0;
+            const s = Number(r.sinks) || 0;
+            totalToilets += t; totalUrinals += u; totalSinks += s;
+
+            let rMins = (t * 3) + (u * 2) + (s * 1);
+            if (r.trafficLevel === 'Medium') rMins *= 1.15;
+            else if (r.trafficLevel === 'High') rMins *= 1.30;
+            if (r.restockingOnly) rMins *= 0.20;
+            fixtureMins += rMins;
+        });
+        fixtureMins += (showers * 10);
+    } else {
+        fixtureMins = (totalToilets * 3) + (totalUrinals * 2) + (totalSinks * 1) + (showers * 10);
+    }
+
+    const totalFixtures = totalToilets + totalUrinals + totalSinks + showers;
+    const fixtureHours = fixtureMins / 60;
+    const baseLaborRate = (state.financials.hourlyPayRate || 18.0) * (state.site.cleaningFrequency || 1);
+    const fixtureLaborCost = fixtureHours * baseLaborRate;
 
     const trashTarget = state.site.trashCans || 0;
     const trashLaborCost = ((trashTarget * 1.5) / 60) * (state.financials.laborRate + state.financials.remittances) * (state.site.cleaningFrequency || 1);
@@ -160,15 +189,16 @@ export function WalkthroughWizard() {
                                 <div className="pt-2 mt-2 border-t border-slate-300">
                                     <span className="text-xs text-black uppercase tracking-widest font-black mb-1 block">Accesorios</span>
                                     <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-[10px] text-black uppercase tracking-wide">
-                                        <div className="flex justify-between"><span className="font-bold">Rooms/Baños:</span><span className="font-black">{f.rooms || 0}</span></div>
-                                        <div className="flex justify-between"><span className="font-bold">Toilets:</span><span className="font-black">{f.toilets || 0}</span></div>
-                                        <div className="flex justify-between"><span className="font-bold">Urinales:</span><span className="font-black">{f.urinals || 0}</span></div>
-                                        <div className="flex justify-between"><span className="font-bold">Lavamanos:</span><span className="font-black">{f.sinks || 0}</span></div>
-                                        <div className="flex justify-between"><span className="font-bold">Duchas:</span><span className="font-black">{f.showers || 0}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Restrooms:</span><span className="font-black">{totalRestrooms}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Toilets:</span><span className="font-black">{totalToilets}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Urinales:</span><span className="font-black">{totalUrinals}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Lavamanos:</span><span className="font-black">{totalSinks}</span></div>
+                                        <div className="flex justify-between"><span className="font-bold">Duchas:</span><span className="font-black">{showers}</span></div>
                                     </div>
                                     <div className="mt-2 pt-2 border-t-2 border-dashed border-slate-300">
                                         <div className="flex justify-between text-[11px] text-black"><span className="font-black uppercase">Total Accesorios detectados:</span><span className="font-black bg-black text-white px-1 rounded">{totalFixtures}</span></div>
-                                        <div className="flex justify-between text-[11px] text-black mt-1"><span className="font-bold text-slate-600">Impacto en Labor:</span><span className="font-black text-blue-800">+${fixtureLaborCost.toFixed(2)}</span></div>
+                                        <div className="flex justify-between text-[11px] text-black mt-1"><span className="font-bold text-slate-600">Bathrooms Labor:</span><span className="font-black">{fixtureHours.toFixed(2)} hrs</span></div>
+                                        <div className="flex justify-between text-[11px] text-black mt-1"><span className="font-bold text-slate-600">Labor Cost (Internal):</span><span className="font-black text-blue-800">+${fixtureLaborCost.toFixed(2)}</span></div>
                                     </div>
                                 </div>
                             </div>

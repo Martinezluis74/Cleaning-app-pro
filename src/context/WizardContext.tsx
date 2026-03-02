@@ -27,6 +27,7 @@ const defaultState: WizardState = {
         ],
         floorList: [],
         fixtures: { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 },
+        restrooms: [],
         accessHours: 'After 6 PM'
     },
     areas: [],
@@ -176,9 +177,34 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const urinals = safeNum(fixtures.urinals);
             const sinks = safeNum(fixtures.sinks);
             const showers = safeNum(fixtures.showers);
-            const totalBathrooms = rooms;
 
-            const fixtureHours = ((toilets * 3) + (urinals * 2) + (sinks * 1) + (showers * 5)) / 60;
+            // Dynamic Fixture Logic (Phase 12)
+            const tRate = findRate(['toilet', 'inodoro'], 3.0);
+            const uRate = findRate(['urinal', 'urinario'], 2.0);
+            const sRate = findRate(['sink', 'lavamanos'], 1.0);
+            const shRate = findRate(['shower', 'ducha'], 10.0);
+
+            let totalBathrooms = rooms;
+            let fixtureMins = 0;
+
+            if (site.restrooms && site.restrooms.length > 0) {
+                totalBathrooms = site.restrooms.length;
+                site.restrooms.forEach(r => {
+                    let rMins = (safeNum(r.toilets) * tRate) + (safeNum(r.urinals) * uRate) + (safeNum(r.sinks) * sRate);
+
+                    if (r.trafficLevel === 'Medium') rMins *= 1.15;
+                    else if (r.trafficLevel === 'High') rMins *= 1.30;
+
+                    if (r.restockingOnly) rMins *= 0.20;
+
+                    fixtureMins += rMins;
+                });
+                fixtureMins += (showers * shRate); // Legacy showers kept alive
+            } else {
+                fixtureMins = (toilets * tRate) + (urinals * uRate) + (sinks * sRate) + (showers * shRate);
+            }
+
+            const fixtureHours = fixtureMins / 60;
 
             let areasSqft = 0;
             let areasFixtureHours = 0;
@@ -191,8 +217,8 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                     const aT = safeNum(af.toilets);
                     const aU = safeNum(af.urinals);
                     const aS = safeNum(af.sinks);
-                    areasBathrooms += (aT + aU + aS);
-                    areasFixtureHours += ((aT * 3) + (aU * 2) + (aS * 1)) / 60;
+                    areasBathrooms += (aT + aU + aS); // Note: technically this is total fixtures, not rooms. Legacy logic intact.
+                    areasFixtureHours += ((aT * tRate) + (aU * uRate) + (aS * sRate)) / 60;
                 });
             }
 

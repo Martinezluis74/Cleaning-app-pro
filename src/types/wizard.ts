@@ -22,6 +22,16 @@ export type FloorRow = {
     sqft: number;
 };
 
+export type RestroomGroup = {
+    id: string;
+    name: string; // e.g. 'Men’s L1', 'Women’s Executive'
+    toilets: number;
+    urinals: number;
+    sinks: number;
+    trafficLevel: 'Low' | 'Medium' | 'High';
+    restockingOnly: boolean;
+};
+
 export type SiteProfile = {
     siteType: string;
     sqft: number; // Keep this mainly as a sum aggregate if needed, or backward compatibility
@@ -38,6 +48,7 @@ export type SiteProfile = {
         sinks: number;
         showers: number;
     };
+    restrooms: RestroomGroup[]; // Phase 12 list
     accessHours: string;
 };
 
