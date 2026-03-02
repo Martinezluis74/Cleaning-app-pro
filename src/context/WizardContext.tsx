@@ -28,6 +28,7 @@ const defaultState: WizardState = {
         floorList: [],
         fixtures: { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 },
         restrooms: [],
+        specialties: { stripAndWaxSqft: 0, carpetExtractionSqft: 0, interiorWindowsCount: 0 },
         accessHours: 'After 6 PM'
     },
     areas: [],
@@ -62,7 +63,9 @@ const defaultState: WizardState = {
         monthlyBasePrice: 0,
         volumeDiscountApplied: false,
         volumeDiscountAmount: 0,
-        monthlySubtotal: 0
+        monthlySubtotal: 0,
+        oneTimeServicesPrice: 0,
+        totalFirstMonth: 0
     }
 };
 
@@ -289,6 +292,26 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const manualMonthlyDiscountAmount = (monthlyBasePrice - volumeDiscountAmount) * discountPercentage;
             const monthlySubtotal = monthlyBasePrice - volumeDiscountAmount - manualMonthlyDiscountAmount;
 
+            // Phase 14: Specialty Services (One-Time)
+            const stripRate = findRate(['strip', 'wax', 'pvc'], 200);   // Fallback: 200 sqft/hr
+            const extractRate = findRate(['extraction', 'carpet cleaning'], 800); // Fallback: 800 sqft/hr
+            const windowRate = findRate(['window', 'vidrio'], 20);      // Fallback: 20 windows/hr
+
+            const spec = site.specialties || { stripAndWaxSqft: 0, carpetExtractionSqft: 0, interiorWindowsCount: 0 };
+            const oneTimeHours =
+                (safeNum(spec.stripAndWaxSqft) / stripRate) +
+                (safeNum(spec.carpetExtractionSqft) / extractRate) +
+                (safeNum(spec.interiorWindowsCount) / windowRate);
+
+            // Apply overhead and margin uniquely (no frequency)
+            const oneTimeLaborCost = oneTimeHours * fullyLoadedLaborRate;
+            const oneTimeOverhead = oneTimeLaborCost + (oneTimeLaborCost * overheadMargin);
+            let oneTimePriceRaw = oneTimeOverhead + (oneTimeOverhead * profitMargin);
+
+            // Respect manual discount % for one-time
+            const oneTimeServicesPrice = oneTimePriceRaw - (oneTimePriceRaw * discountPercentage);
+            const totalFirstMonth = monthlySubtotal + oneTimeServicesPrice;
+
             return {
                 ...prev,
                 totals: {
@@ -310,7 +333,9 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                     monthlyBasePrice: safeNum(monthlyBasePrice.toFixed(2)),
                     volumeDiscountApplied,
                     volumeDiscountAmount: safeNum(volumeDiscountAmount.toFixed(2)),
-                    monthlySubtotal: safeNum(monthlySubtotal.toFixed(2))
+                    monthlySubtotal: safeNum(monthlySubtotal.toFixed(2)),
+                    oneTimeServicesPrice: safeNum(oneTimeServicesPrice.toFixed(2)),
+                    totalFirstMonth: safeNum(totalFirstMonth.toFixed(2))
                 }
             };
         });

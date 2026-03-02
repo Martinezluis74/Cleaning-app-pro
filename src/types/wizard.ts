@@ -49,6 +49,11 @@ export type SiteProfile = {
         showers: number;
     };
     restrooms: RestroomGroup[]; // Phase 12 list
+    specialties?: { // Phase 14
+        stripAndWaxSqft: number;
+        carpetExtractionSqft: number;
+        interiorWindowsCount: number;
+    };
     accessHours: string;
 };
 
@@ -128,5 +133,9 @@ export type WizardState = {
         volumeDiscountApplied: boolean;
         volumeDiscountAmount: number;
         monthlySubtotal: number;
+
+        // Phase 14: Specialty Services
+        oneTimeServicesPrice: number;
+        totalFirstMonth: number;
     }
 };
