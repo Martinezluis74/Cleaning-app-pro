@@ -167,58 +167,6 @@ export default function StepBathroomsProfile() {
                 </div>
             </div>
 
-            {/* Phase 14: Specialty Services (One-Time) */}
-            <div className="space-y-4 pt-6 mt-4 border-t-4 border-dashed border-black">
-                <Label className="text-black font-black uppercase tracking-widest text-lg pb-2 block">
-                    3. Specialty Services (One-Time)
-                </Label>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-5 bg-slate-100 border-2 border-black rounded-xl shadow-sm">
-                    <div className="space-y-2">
-                        <Label className="text-sm font-black uppercase text-black">Strip & Wax (PVC) - SqFt</Label>
-                        <Input
-                            type="number" min="0" placeholder="0"
-                            value={state.site.specialties?.stripAndWaxSqft || ''}
-                            onChange={e => updateSite({
-                                specialties: {
-                                    ...(state.site.specialties || { stripAndWaxSqft: 0, carpetExtractionSqft: 0, interiorWindowsCount: 0 }),
-                                    stripAndWaxSqft: Number(e.target.value) || 0
-                                }
-                            })}
-                            className="h-16 text-center text-3xl bg-white border-2 border-black font-black text-black focus-visible:ring-black rounded"
-                        />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label className="text-sm font-black uppercase text-black">Carpet Extraction - SqFt</Label>
-                        <Input
-                            type="number" min="0" placeholder="0"
-                            value={state.site.specialties?.carpetExtractionSqft || ''}
-                            onChange={e => updateSite({
-                                specialties: {
-                                    ...(state.site.specialties || { stripAndWaxSqft: 0, carpetExtractionSqft: 0, interiorWindowsCount: 0 }),
-                                    carpetExtractionSqft: Number(e.target.value) || 0
-                                }
-                            })}
-                            className="h-16 text-center text-3xl bg-white border-2 border-black font-black text-black focus-visible:ring-black rounded"
-                        />
-                    </div>
-
-                    <div className="space-y-2">
-                        <Label className="text-sm font-black uppercase text-black">Interior Windows - Count</Label>
-                        <Input
-                            type="number" min="0" placeholder="0"
-                            value={state.site.specialties?.interiorWindowsCount || ''}
-                            onChange={e => updateSite({
-                                specialties: {
-                                    ...(state.site.specialties || { stripAndWaxSqft: 0, carpetExtractionSqft: 0, interiorWindowsCount: 0 }),
-                                    interiorWindowsCount: Number(e.target.value) || 0
-                                }
-                            })}
-                            className="h-16 text-center text-3xl bg-white border-2 border-black font-black text-black focus-visible:ring-black rounded"
-                        />
-                    </div>
-                </div>
-            </div>
         </div>
     );
 }

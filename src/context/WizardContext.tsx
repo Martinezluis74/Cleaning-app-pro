@@ -28,7 +28,6 @@ const defaultState: WizardState = {
         floorList: [],
         fixtures: { rooms: 0, toilets: 0, urinals: 0, sinks: 0, showers: 0 },
         restrooms: [],
-        specialties: { stripAndWaxSqft: 0, carpetExtractionSqft: 0, interiorWindowsCount: 0 },
         accessHours: 'After 6 PM'
     },
     areas: [],
@@ -63,9 +62,7 @@ const defaultState: WizardState = {
         monthlyBasePrice: 0,
         volumeDiscountApplied: false,
         volumeDiscountAmount: 0,
-        monthlySubtotal: 0,
-        oneTimeServicesPrice: 0,
-        totalFirstMonth: 0
+        monthlySubtotal: 0
     }
 };
 
@@ -292,30 +289,6 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const manualMonthlyDiscountAmount = (monthlyBasePrice - volumeDiscountAmount) * discountPercentage;
             const monthlySubtotal = monthlyBasePrice - volumeDiscountAmount - manualMonthlyDiscountAmount;
 
-            // Phase 14 & 15: Specialty Services (One-Time)
-            const stripRate = findRate(['strip', 'wax', 'pvc'], 200);   // Fallback: 200 sqft/hr
-            const extractRate = findRate(['extraction', 'carpet cleaning'], 500); // Fallback: 500 sqft/hr
-            const windowRate = findRate(['window', 'vidrio'], 20);      // Fallback: 20 windows/hr
-
-            const spec = site.specialties || { stripAndWaxSqft: 0, carpetExtractionSqft: 0, interiorWindowsCount: 0 };
-
-            const stripSqft = safeNum(spec.stripAndWaxSqft);
-            const extractSqft = safeNum(spec.carpetExtractionSqft);
-            const windowCount = safeNum(spec.interiorWindowsCount);
-
-            const oneTimeHours =
-                (stripSqft / stripRate) +
-                (extractSqft / extractRate) +
-                (windowCount / windowRate);
-
-            // Phase 15: Add Chemical Supplies Cost ($0.15 for Strip, $0.05 for Carpet)
-            const specialtySuppliesCost = (stripSqft * 0.15) + (extractSqft * 0.05);
-
-            // Phase 15: Exact Formula -> (Hours * Hourly Pay Rate) + Supplies
-            const oneTimeServicesPrice = (oneTimeHours * hourlyPayRate) + specialtySuppliesCost;
-
-            const totalFirstMonth = monthlySubtotal + oneTimeServicesPrice;
-
             return {
                 ...prev,
                 totals: {
@@ -337,9 +310,7 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                     monthlyBasePrice: safeNum(monthlyBasePrice.toFixed(2)),
                     volumeDiscountApplied,
                     volumeDiscountAmount: safeNum(volumeDiscountAmount.toFixed(2)),
-                    monthlySubtotal: safeNum(monthlySubtotal.toFixed(2)),
-                    oneTimeServicesPrice: safeNum(oneTimeServicesPrice.toFixed(2)),
-                    totalFirstMonth: safeNum(totalFirstMonth.toFixed(2))
+                    monthlySubtotal: safeNum(monthlySubtotal.toFixed(2))
                 }
             };
         });
