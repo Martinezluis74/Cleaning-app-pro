@@ -292,24 +292,28 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const manualMonthlyDiscountAmount = (monthlyBasePrice - volumeDiscountAmount) * discountPercentage;
             const monthlySubtotal = monthlyBasePrice - volumeDiscountAmount - manualMonthlyDiscountAmount;
 
-            // Phase 14: Specialty Services (One-Time)
+            // Phase 14 & 15: Specialty Services (One-Time)
             const stripRate = findRate(['strip', 'wax', 'pvc'], 200);   // Fallback: 200 sqft/hr
-            const extractRate = findRate(['extraction', 'carpet cleaning'], 800); // Fallback: 800 sqft/hr
+            const extractRate = findRate(['extraction', 'carpet cleaning'], 500); // Fallback: 500 sqft/hr
             const windowRate = findRate(['window', 'vidrio'], 20);      // Fallback: 20 windows/hr
 
             const spec = site.specialties || { stripAndWaxSqft: 0, carpetExtractionSqft: 0, interiorWindowsCount: 0 };
+
+            const stripSqft = safeNum(spec.stripAndWaxSqft);
+            const extractSqft = safeNum(spec.carpetExtractionSqft);
+            const windowCount = safeNum(spec.interiorWindowsCount);
+
             const oneTimeHours =
-                (safeNum(spec.stripAndWaxSqft) / stripRate) +
-                (safeNum(spec.carpetExtractionSqft) / extractRate) +
-                (safeNum(spec.interiorWindowsCount) / windowRate);
+                (stripSqft / stripRate) +
+                (extractSqft / extractRate) +
+                (windowCount / windowRate);
 
-            // Apply overhead and margin uniquely (no frequency)
-            const oneTimeLaborCost = oneTimeHours * fullyLoadedLaborRate;
-            const oneTimeOverhead = oneTimeLaborCost + (oneTimeLaborCost * overheadMargin);
-            let oneTimePriceRaw = oneTimeOverhead + (oneTimeOverhead * profitMargin);
+            // Phase 15: Add Chemical Supplies Cost ($0.15 for Strip, $0.05 for Carpet)
+            const specialtySuppliesCost = (stripSqft * 0.15) + (extractSqft * 0.05);
 
-            // Respect manual discount % for one-time
-            const oneTimeServicesPrice = oneTimePriceRaw - (oneTimePriceRaw * discountPercentage);
+            // Phase 15: Exact Formula -> (Hours * Hourly Pay Rate) + Supplies
+            const oneTimeServicesPrice = (oneTimeHours * hourlyPayRate) + specialtySuppliesCost;
+
             const totalFirstMonth = monthlySubtotal + oneTimeServicesPrice;
 
             return {

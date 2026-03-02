@@ -302,20 +302,16 @@ export function WalkthroughWizard() {
                                     </div>
                                 </div>
 
-                                {Number(totals.oneTimeServicesPrice) > 0 && (
-                                    <>
-                                        <div className="flex justify-between text-[11px] items-center text-slate-700 font-bold mt-3 px-2">
-                                            <span>One-Time Services</span>
-                                            <span className="font-black">+${Number(totals.oneTimeServicesPrice).toFixed(2)}</span>
-                                        </div>
-                                        <div className="bg-black text-white border-2 border-black rounded-lg p-3 mt-2 space-y-1">
-                                            <div className="flex justify-between text-base items-center font-black">
-                                                <span className="uppercase tracking-widest text-xs">Total First Month</span>
-                                                <span className="text-xl">${Number(totals.totalFirstMonth).toFixed(2)}</span>
-                                            </div>
-                                        </div>
-                                    </>
-                                )}
+                                <div className="flex justify-between text-[11px] items-center text-slate-700 font-bold mt-3 px-2">
+                                    <span>One-Time Services</span>
+                                    <span className="font-black">+${Number(totals.oneTimeServicesPrice).toFixed(2)}</span>
+                                </div>
+                                <div className="bg-black text-white border-2 border-black rounded-lg p-3 mt-2 space-y-1">
+                                    <div className="flex justify-between text-base items-center font-black">
+                                        <span className="uppercase tracking-widest text-xs">Total First Month</span>
+                                        <span className="text-xl">${Number(totals.totalFirstMonth).toFixed(2)}</span>
+                                    </div>
+                                </div>
 
                                 <div className="flex justify-between text-xs items-center text-black font-bold mt-4">
                                     <span>HST (13%)</span>
