@@ -6,7 +6,8 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
-import { Save, AlertCircle, CheckCircle2 } from 'lucide-react';
+import { Save, AlertCircle, CheckCircle2, FileText } from 'lucide-react';
+import { generateProposalPDF } from '@/utils/generatePDF';
 import StepClientProfile from './StepClientProfile';
 import StepSiteProfile from './StepSiteProfile';
 import StepBathroomsProfile from './StepBathroomsProfile';
@@ -114,8 +115,8 @@ export function WalkthroughWizard() {
                 <button
                     onClick={() => setActiveTab('janitorial')}
                     className={`px-8 py-2 font-black uppercase tracking-widest text-sm rounded-full transition-all border-2 ${activeTab === 'janitorial'
-                            ? 'bg-black text-white border-black shadow-lg scale-105'
-                            : 'bg-white text-slate-500 border-transparent hover:border-slate-300 hover:text-black'
+                        ? 'bg-black text-white border-black shadow-lg scale-105'
+                        : 'bg-white text-slate-500 border-transparent hover:border-slate-300 hover:text-black'
                         }`}
                 >
                     Janitorial (Recurring)
@@ -123,8 +124,8 @@ export function WalkthroughWizard() {
                 <button
                     onClick={() => setActiveTab('specialty')}
                     className={`px-8 py-2 font-black uppercase tracking-widest text-sm rounded-full transition-all border-2 ${activeTab === 'specialty'
-                            ? 'bg-black text-white border-black shadow-lg scale-105'
-                            : 'bg-white text-slate-500 border-transparent hover:border-slate-300 hover:text-black'
+                        ? 'bg-black text-white border-black shadow-lg scale-105'
+                        : 'bg-white text-slate-500 border-transparent hover:border-slate-300 hover:text-black'
                         }`}
                 >
                     Specialty / Project Work
@@ -346,6 +347,16 @@ export function WalkthroughWizard() {
                                     <div className="pt-3 mt-3 border-t-2 border-black flex justify-between items-end">
                                         <span className="text-sm font-black uppercase tracking-widest text-black">Total Semanal Final</span>
                                         <span className="text-3xl font-black text-black tracking-tighter">${Number(totals.finalTotal).toFixed(2)}</span>
+                                    </div>
+
+                                    <div className="pt-4 mt-4 border-t-2 border-dashed border-slate-300">
+                                        <Button
+                                            onClick={() => generateProposalPDF(state)}
+                                            disabled={totals.totalSqft === 0}
+                                            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-black py-6 text-lg border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all hover:translate-y-1 hover:shadow-[1px_1px_0px_0px_rgba(0,0,0,1)]"
+                                        >
+                                            <FileText className="w-5 h-5 mr-2" /> GENERATE PROPOSAL (PDF)
+                                        </Button>
                                     </div>
                                 </div>
                             </CardContent>
