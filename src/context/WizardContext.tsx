@@ -58,7 +58,11 @@ const defaultState: WizardState = {
         tax: 0,
         finalTotal: 0,
         grossProfit: 0,
-        marginPercentage: 0
+        marginPercentage: 0,
+        monthlyBasePrice: 0,
+        volumeDiscountApplied: false,
+        volumeDiscountAmount: 0,
+        monthlySubtotal: 0
     }
 };
 
@@ -267,8 +271,8 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             const rawSubtotal = costWithOverhead + (costWithOverhead * profitMargin);
 
             // Apply Discount to Subtotal
-            const discountAmount = rawSubtotal * discountPercentage;
-            const discountedSubtotal = rawSubtotal - discountAmount;
+            const manualDiscountAmount = rawSubtotal * discountPercentage;
+            const discountedSubtotal = rawSubtotal - manualDiscountAmount;
 
             const tax = discountedSubtotal * hstRate;
             const finalTotal = discountedSubtotal + tax;
@@ -276,6 +280,14 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             // Gross Profit Analysis
             const grossProfit = discountedSubtotal - actualCost;
             const marginPercentage = discountedSubtotal > 0 ? (grossProfit / discountedSubtotal) * 100 : 0;
+
+            // Phase 13: Monthly Volume Discount Logic
+            const monthlyBasePrice = rawSubtotal * 4.33;
+            const volumeDiscountApplied = frequency >= 3;
+            const volumeDiscountAmount = volumeDiscountApplied ? (monthlyBasePrice * 0.10) : 0;
+            // The user also has a manual discount % on the form that we should respect on the monthly level
+            const manualMonthlyDiscountAmount = (monthlyBasePrice - volumeDiscountAmount) * discountPercentage;
+            const monthlySubtotal = monthlyBasePrice - volumeDiscountAmount - manualMonthlyDiscountAmount;
 
             return {
                 ...prev,
@@ -290,11 +302,15 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                     actualCost: safeNum(actualCost.toFixed(2)),
                     costWithOverhead: safeNum(costWithOverhead.toFixed(2)),
                     subtotal: safeNum(discountedSubtotal.toFixed(2)),
-                    discountAmount: safeNum(discountAmount.toFixed(2)),
+                    discountAmount: safeNum(manualDiscountAmount.toFixed(2)),
                     tax: safeNum(tax.toFixed(2)),
                     finalTotal: safeNum(finalTotal.toFixed(2)),
                     grossProfit: safeNum(grossProfit.toFixed(2)),
-                    marginPercentage: safeNum(marginPercentage.toFixed(2))
+                    marginPercentage: safeNum(marginPercentage.toFixed(2)),
+                    monthlyBasePrice: safeNum(monthlyBasePrice.toFixed(2)),
+                    volumeDiscountApplied,
+                    volumeDiscountAmount: safeNum(volumeDiscountAmount.toFixed(2)),
+                    monthlySubtotal: safeNum(monthlySubtotal.toFixed(2))
                 }
             };
         });

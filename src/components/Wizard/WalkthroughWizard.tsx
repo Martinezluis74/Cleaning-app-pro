@@ -280,9 +280,26 @@ export function WalkthroughWizard() {
                                     <span>Gross Profit</span>
                                     <span>${Number(totals.grossProfit).toFixed(2)}</span>
                                 </div>
-                                <div className="flex justify-between text-[11px] items-center text-green-800 font-bold mt-1 px-2">
+                                <div className="flex justify-between text-[11px] items-center text-green-800 font-bold mt-1 px-2 mb-2">
                                     <span>Margin %</span>
                                     <span className="font-black bg-white px-1 border border-green-200">{Number(totals.marginPercentage).toFixed(2)}%</span>
+                                </div>
+
+                                <div className="bg-slate-50 border-2 border-black rounded-lg p-3 mt-4 space-y-1 relative overflow-hidden">
+                                    <div className="flex justify-between text-base items-center text-black font-black">
+                                        <span>Monthly Total</span>
+                                        <span className="text-xl">${Number(totals.monthlySubtotal).toFixed(2)}</span>
+                                    </div>
+                                    <div className="flex justify-between items-center mt-1">
+                                        <span className="text-[10px] text-slate-500 font-bold uppercase tracking-wider">
+                                            {state.site.cleaningFrequency || 1} vis/week × 4.33 wks
+                                        </span>
+                                        {totals.volumeDiscountApplied && (
+                                            <span className="text-[10px] text-green-600 font-black uppercase tracking-wider text-right">
+                                                (10% Volume Discount Applied)
+                                            </span>
+                                        )}
+                                    </div>
                                 </div>
 
                                 <div className="flex justify-between text-xs items-center text-black font-bold">

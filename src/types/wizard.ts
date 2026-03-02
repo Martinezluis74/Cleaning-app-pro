@@ -122,5 +122,11 @@ export type WizardState = {
         finalTotal: number;
         grossProfit: number;
         marginPercentage: number;
+
+        // Phase 13: Monthly Logic
+        monthlyBasePrice: number;
+        volumeDiscountApplied: boolean;
+        volumeDiscountAmount: number;
+        monthlySubtotal: number;
     }
 };
