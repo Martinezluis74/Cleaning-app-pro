@@ -12,6 +12,7 @@ import StepClientProfile from './StepClientProfile';
 import StepSiteProfile from './StepSiteProfile';
 import StepBathroomsProfile from './StepBathroomsProfile';
 import StepFinancialDashboard from './StepFinancialDashboard';
+import StepSpecialtyCalculator from './StepSpecialtyCalculator';
 
 export function WalkthroughWizard() {
     const [activeTab, setActiveTab] = React.useState<'janitorial' | 'specialty'>('janitorial');
@@ -132,15 +133,10 @@ export function WalkthroughWizard() {
                 </button>
             </div>
 
-            {/* TAB 2: SPECIALTY PLACEHOLDER */}
+            {/* TAB 2: SPECIALTY SERVICES */}
             {activeTab === 'specialty' && (
-                <div className="flex-grow flex items-center justify-center p-12 bg-slate-50">
-                    <div className="bg-white border-4 border-dashed border-slate-300 rounded-3xl p-12 text-center shadow-xl max-w-2xl">
-                        <AlertCircle className="w-16 h-16 text-slate-400 mx-auto mb-6" />
-                        <h2 className="text-3xl font-black uppercase tracking-wider text-black mb-4">Specialty Services Calculator</h2>
-                        <p className="text-lg text-slate-500 font-bold uppercase tracking-widest">Under Construction</p>
-                        <p className="text-sm text-slate-400 mt-4 max-w-md mx-auto">Esta sección estará dedicada exclusivamente al cálculo aislado de trabajo en pisos, extracción de alfombras y proyectos únicos desligados del contrato mensual.</p>
-                    </div>
+                <div className="flex-grow flex p-6 bg-slate-50">
+                    <StepSpecialtyCalculator />
                 </div>
             )}
 
