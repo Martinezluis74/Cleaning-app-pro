@@ -56,12 +56,7 @@ export const generateProposalPDF = (state: WizardState) => {
 
     const finalY = (doc as any).lastAutoTable.finalY + 15;
 
-    // Monthly Investment (Calculated derived from monthlySubtotal)
-    // We isolate and calculate purely monthly values to hide internal weekly margins/buffer
-    const monthlySubtotal = totals.monthlySubtotal;
-    const monthlyTax = monthlySubtotal * 0.13;
-    const monthlyTotal = monthlySubtotal + monthlyTax;
-
+    // Monthly Investment: Direct 1-to-1 mapping from live React Context to prevent drift
     doc.setFontSize(16);
     doc.setFont("helvetica", "bold");
     doc.text('MONTHLY INVESTMENT', 14, finalY);
@@ -70,9 +65,9 @@ export const generateProposalPDF = (state: WizardState) => {
         startY: finalY + 5,
         head: [['Description', 'Amount']],
         body: [
-            ['Monthly Contract Value', `$${monthlySubtotal.toFixed(2)}`],
-            ['HST (13%)', `$${monthlyTax.toFixed(2)}`],
-            ['TOTAL MONTHLY VALUE', `$${monthlyTotal.toFixed(2)}`]
+            ['Monthly Contract Value', `$${totals.monthlySubtotal.toFixed(2)}`],
+            ['HST (13%)', `$${totals.monthlyTax.toFixed(2)}`],
+            ['TOTAL MONTHLY VALUE', `$${totals.monthlyTotal.toFixed(2)}`]
         ],
         theme: 'grid',
         headStyles: { fillColor: [0, 0, 0], textColor: [255, 255, 255], fontStyle: 'bold' },

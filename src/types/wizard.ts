@@ -128,5 +128,7 @@ export type WizardState = {
         volumeDiscountApplied: boolean;
         volumeDiscountAmount: number;
         monthlySubtotal: number;
+        monthlyTax: number;
+        monthlyTotal: number;
     }
 };

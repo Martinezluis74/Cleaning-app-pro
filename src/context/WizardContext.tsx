@@ -62,7 +62,9 @@ const defaultState: WizardState = {
         monthlyBasePrice: 0,
         volumeDiscountApplied: false,
         volumeDiscountAmount: 0,
-        monthlySubtotal: 0
+        monthlySubtotal: 0,
+        monthlyTax: 0,
+        monthlyTotal: 0
     }
 };
 
@@ -288,6 +290,8 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
             // The user also has a manual discount % on the form that we should respect on the monthly level
             const manualMonthlyDiscountAmount = (monthlyBasePrice - volumeDiscountAmount) * discountPercentage;
             const monthlySubtotal = monthlyBasePrice - volumeDiscountAmount - manualMonthlyDiscountAmount;
+            const monthlyTax = monthlySubtotal * 0.13;
+            const monthlyTotal = monthlySubtotal + monthlyTax;
 
             return {
                 ...prev,
@@ -310,7 +314,9 @@ export function WizardProvider({ children }: { children: React.ReactNode }) {
                     monthlyBasePrice: safeNum(monthlyBasePrice.toFixed(2)),
                     volumeDiscountApplied,
                     volumeDiscountAmount: safeNum(volumeDiscountAmount.toFixed(2)),
-                    monthlySubtotal: safeNum(monthlySubtotal.toFixed(2))
+                    monthlySubtotal: safeNum(monthlySubtotal.toFixed(2)),
+                    monthlyTax: safeNum(monthlyTax.toFixed(2)),
+                    monthlyTotal: safeNum(monthlyTotal.toFixed(2))
                 }
             };
         });
