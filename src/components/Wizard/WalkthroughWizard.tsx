@@ -112,7 +112,7 @@ export function WalkthroughWizard() {
             </div>
 
             {/* 2. TABS NAVIGATION */}
-            <div className="bg-slate-100 border-b-2 border-black flex items-center justify-center gap-4 py-3 shadow-inner">
+            <div className="bg-slate-100 border-b-2 border-black flex items-center justify-center gap-4 py-3 shadow-inner print:hidden">
                 <button
                     onClick={() => setActiveTab('janitorial')}
                     className={`px-8 py-2 font-black uppercase tracking-widest text-sm rounded-full transition-all border-2 ${activeTab === 'janitorial'
