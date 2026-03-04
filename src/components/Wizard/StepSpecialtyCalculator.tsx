@@ -206,48 +206,48 @@ export default function StepSpecialtyCalculator() {
             </div>
 
             {/* PRINT INVOICE VIEW */}
-            <div className="hidden print:block w-full max-w-[8.5in] mx-auto bg-white text-black font-sans py-10 px-8">
+            <div className="hidden print:block print:w-full print:h-[95vh] print:flex print:flex-col print:justify-between print:overflow-hidden w-full max-w-[8.5in] mx-auto bg-white text-black font-sans py-10 px-8 print:py-0 print:px-0">
                 {/* Header */}
-                <div className="border-b-4 border-black pb-6 mb-10 flex justify-between items-end">
+                <div className="border-b-4 border-black pb-6 mb-10 print:pb-2 print:mb-4 flex justify-between items-end shrink-0">
                     <div>
-                        <h1 className="text-4xl font-black uppercase tracking-widest text-blue-900">Blue Gloves Cleaning</h1>
-                        <h2 className="text-2xl font-bold uppercase tracking-wider mt-2">Service Proposal</h2>
+                        <h1 className="text-4xl print:text-2xl font-black uppercase tracking-widest text-blue-900">Blue Gloves Cleaning</h1>
+                        <h2 className="text-2xl print:text-lg font-bold uppercase tracking-wider mt-2 print:mt-1">Service Proposal</h2>
                     </div>
                     <div className="text-right">
                         <p className="text-slate-500 font-bold uppercase tracking-widest text-sm">Date</p>
-                        <p className="text-black font-black text-lg">{new Date().toLocaleDateString()}</p>
+                        <p className="text-black font-black text-lg print:text-base">{new Date().toLocaleDateString()}</p>
                     </div>
                 </div>
 
                 {/* Scope of Work */}
-                <div className="mb-16 min-h-[400px]">
-                    <h3 className="text-xl font-black uppercase tracking-widest bg-black text-white p-3 mb-6">Scope of Work</h3>
-                    <div className="space-y-10">
+                <div className="mb-16 print:mb-4 min-h-[400px] print:min-h-0 flex-grow">
+                    <h3 className="text-xl print:text-lg font-black uppercase tracking-widest bg-black text-white p-3 print:p-2 mb-6 print:mb-4">Scope of Work</h3>
+                    <div className="space-y-10 print:space-y-4">
 
                         {Number(stripSqft) > 0 && (
-                            <div className="border-l-4 border-blue-600 pl-6">
-                                <h4 className="text-xl font-black uppercase tracking-wider">Floor Restoration: Strip & Wax (PVC)</h4>
-                                <p className="text-slate-600 font-bold mt-2 text-lg">Total Area: {Number(stripSqft).toLocaleString()} SqFt</p>
-                                <div className="mt-6 flex justify-between items-end border-b-2 border-slate-200 pb-2">
-                                    <span className="text-sm font-bold uppercase tracking-widest text-slate-500">Project Investment:</span>
-                                    <span className="text-3xl font-black">${stripVals.total.toFixed(2)}</span>
+                            <div className="border-l-4 border-blue-600 pl-6 print:pl-4 print:break-inside-avoid">
+                                <h4 className="text-xl print:text-lg font-black uppercase tracking-wider">Floor Restoration: Strip & Wax (PVC)</h4>
+                                <p className="text-slate-600 font-bold mt-2 print:mt-1 text-lg print:text-sm">Total Area: {Number(stripSqft).toLocaleString()} SqFt</p>
+                                <div className="mt-6 print:mt-2 flex justify-between items-end border-b-2 border-slate-200 pb-2 print:pb-1">
+                                    <span className="text-sm print:text-xs font-bold uppercase tracking-widest text-slate-500">Project Investment:</span>
+                                    <span className="text-3xl print:text-xl font-black">${stripVals.total.toFixed(2)}</span>
                                 </div>
                             </div>
                         )}
 
                         {Number(scrubSqft) > 0 && (
-                            <div className="border-l-4 border-blue-600 pl-6 pt-4">
-                                <h4 className="text-xl font-black uppercase tracking-wider">Floor Restoration: Scrub & Wax (Top Scrub & 3 Coats)</h4>
-                                <p className="text-slate-600 font-bold mt-2 text-lg">Total Area: {Number(scrubSqft).toLocaleString()} SqFt</p>
-                                <div className="mt-6 flex justify-between items-end border-b-2 border-slate-200 pb-2">
-                                    <span className="text-sm font-bold uppercase tracking-widest text-slate-500">Project Investment:</span>
-                                    <span className="text-3xl font-black">${scrubVals.total.toFixed(2)}</span>
+                            <div className="border-l-4 border-blue-600 pl-6 print:pl-4 pt-4 print:pt-2 print:break-inside-avoid">
+                                <h4 className="text-xl print:text-lg font-black uppercase tracking-wider">Floor Restoration: Scrub & Wax (Top Scrub & 3 Coats)</h4>
+                                <p className="text-slate-600 font-bold mt-2 print:mt-1 text-lg print:text-sm">Total Area: {Number(scrubSqft).toLocaleString()} SqFt</p>
+                                <div className="mt-6 print:mt-2 flex justify-between items-end border-b-2 border-slate-200 pb-2 print:pb-1">
+                                    <span className="text-sm print:text-xs font-bold uppercase tracking-widest text-slate-500">Project Investment:</span>
+                                    <span className="text-3xl print:text-xl font-black">${scrubVals.total.toFixed(2)}</span>
                                 </div>
                             </div>
                         )}
 
                         {(Number(stripSqft) === 0 && Number(scrubSqft) === 0) && (
-                            <p className="text-slate-500 italic text-lg text-center py-10 border-2 border-dashed border-slate-300">
+                            <p className="text-slate-500 italic text-lg print:text-sm text-center py-10 print:py-4 border-2 border-dashed border-slate-300">
                                 No specialty services selected.
                             </p>
                         )}
@@ -255,16 +255,16 @@ export default function StepSpecialtyCalculator() {
                 </div>
 
                 {/* Signatures */}
-                <div className="mt-auto pt-10 border-t-2 border-slate-300 grid grid-cols-2 gap-16">
+                <div className="mt-auto pt-10 print:pt-4 border-t-2 border-slate-300 grid grid-cols-2 gap-16 print:gap-8 shrink-0 print:break-inside-avoid">
                     <div>
-                        <p className="font-bold uppercase tracking-widest text-sm text-slate-500 mb-12">Accepted by Blue Gloves Cleaning</p>
+                        <p className="font-bold uppercase tracking-widest text-sm print:text-xs text-slate-500 mb-12 print:mb-8">Accepted by Blue Gloves Cleaning</p>
                         <div className="border-b-2 border-black w-full"></div>
-                        <p className="text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">Authorized Signature</p>
+                        <p className="text-xs font-bold text-slate-400 mt-3 print:mt-1 uppercase tracking-wider">Authorized Signature</p>
                     </div>
                     <div>
-                        <p className="font-bold uppercase tracking-widest text-sm text-slate-500 mb-12">Client Acceptance</p>
+                        <p className="font-bold uppercase tracking-widest text-sm print:text-xs text-slate-500 mb-12 print:mb-8">Client Acceptance</p>
                         <div className="border-b-2 border-black w-full"></div>
-                        <p className="text-xs font-bold text-slate-400 mt-3 uppercase tracking-wider">Client Signature & Date</p>
+                        <p className="text-xs font-bold text-slate-400 mt-3 print:mt-1 uppercase tracking-wider">Client Signature & Date</p>
                     </div>
                 </div>
             </div>
