@@ -15,7 +15,7 @@ import StepFinancialDashboard from './StepFinancialDashboard';
 import StepSpecialtyCalculator from './StepSpecialtyCalculator';
 
 export function WalkthroughWizard() {
-    const [activeTab, setActiveTab] = React.useState<'janitorial' | 'specialty'>('janitorial');
+    const [activeTab, setActiveTab] = React.useState<'janitorial' | 'specialty' | 'windows'>('janitorial');
     const { state, setStep, nextStep, prevStep, updateFinancials } = useWizard();
     const { currentStep, client, totals, areas, pricingModel, financials } = state;
 
@@ -131,12 +131,31 @@ export function WalkthroughWizard() {
                 >
                     Specialty / Project Work
                 </button>
+                <button
+                    onClick={() => setActiveTab('windows')}
+                    className={`px-8 py-2 font-black uppercase tracking-widest text-sm rounded-full transition-all border-2 ${activeTab === 'windows'
+                        ? 'bg-black text-white border-black shadow-lg scale-105'
+                        : 'bg-white text-slate-500 border-transparent hover:border-slate-300 hover:text-black'
+                        }`}
+                >
+                    Tab 3: Window Cleaning
+                </button>
             </div>
 
             {/* TAB 2: SPECIALTY SERVICES */}
             {activeTab === 'specialty' && (
                 <div className="flex-grow flex p-6 bg-slate-50">
                     <StepSpecialtyCalculator />
+                </div>
+            )}
+
+            {/* TAB 3: WINDOW CLEANING */}
+            {activeTab === 'windows' && (
+                <div className="flex-grow flex items-center justify-center p-6 bg-slate-50">
+                    <div className="border-4 border-dashed border-slate-300 p-12 text-center rounded-2xl w-full max-w-4xl bg-white shadow-sm">
+                        <h2 className="text-3xl font-black uppercase tracking-widest text-slate-400 mb-4">Window Cleaning Module</h2>
+                        <h3 className="text-xl font-bold uppercase tracking-widest text-blue-500">Ready for Logic</h3>
+                    </div>
                 </div>
             )}
 
