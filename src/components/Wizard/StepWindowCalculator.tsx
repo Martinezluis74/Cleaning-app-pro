@@ -4,36 +4,52 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 export default function StepWindowCalculator() {
-    // ---- Window Types State (Quantities) ----
-    const [qtyBasic, setQtyBasic] = useState<number | ''>(''); // 0.40 min
-    const [qtyDeep, setQtyDeep] = useState<number | ''>('');   // 2.5 min
-    const [qtyPatio, setQtyPatio] = useState<number | ''>(''); // 2.0 min
+    // ---- Window Inputs State ----
+    const [qty, setQty] = useState<number | ''>('');
+    const [scope, setScope] = useState<'Exterior Only' | 'Exterior & Interior'>('Exterior Only');
+    const [condition, setCondition] = useState<'Standard Maintenance' | 'Post-Construction'>('Standard Maintenance');
+    const [floorLevel, setFloorLevel] = useState<'1st Floor' | '2nd Floor' | '3rd Floor'>('1st Floor');
+    const [buffing, setBuffing] = useState<boolean>(false);
 
     // ---- Financial State ----
+    const [tripCost, setTripCost] = useState<number | ''>('');
     const [overhead, setOverhead] = useState<number | ''>(0);
     const [markup, setMarkup] = useState<number | ''>(45);
 
     // ---- Calculation Engine ----
     const windowVals = useMemo(() => {
-        const qB = Number(qtyBasic) || 0;
-        const qD = Number(qtyDeep) || 0;
-        const qP = Number(qtyPatio) || 0;
+        const q = Number(qty) || 0;
         const ov = Number(overhead) || 0;
         const mk = Number(markup) || 0;
+        const trip = Number(tripCost) || 0;
 
-        // Total minutes
-        const totalMinutes = (qB * 0.40) + (qD * 2.5) + (qP * 2.0);
+        // Multipliers
+        const sides = scope === 'Exterior & Interior' ? 2 : 1;
+        const conditionMult = condition === 'Post-Construction' ? 2.0 : 1.0;
+        let floorMult = 1.0;
+        if (floorLevel === '2nd Floor') floorMult = 1.2;
+        if (floorLevel === '3rd Floor') floorMult = 1.5;
 
-        // Base Labor Rate ($27/hr = $0.45/min)
-        const baseLaborCost = totalMinutes * 0.45;
+        // Base times per side
+        const baseTimePerSide = 3;
+        const buffingPerSide = buffing ? 1 : 0;
 
-        // Apply Overhead
-        const costWithOverhead = baseLaborCost * (1 + (ov / 100));
+        // Window Unit Time
+        const baseTimeCurrent = baseTimePerSide * sides;
+        const buffingCurrent = buffingPerSide * sides;
 
-        // Apply Markup: Cost / (1 - Margin)
+        // Total minutes formula: Quantity * [(Tiempo Base + Buffing) * Condición * Altura]
+        const totalMinutes = q * ((baseTimeCurrent + buffingCurrent) * conditionMult * floorMult);
+
+        // Labor Rate ($27/hr = $0.45/min)
+        const laborCost = totalMinutes * 0.45;
+        const totalBaseCost = laborCost + trip;
+
+        // Apply Overhead & Markup
+        const costWithOverhead = totalBaseCost * (1 + (ov / 100));
         const finalPrice = mk < 100 ? costWithOverhead / (1 - (mk / 100)) : costWithOverhead;
 
-        // Time Formatting (Hours and Minutes)
+        // Time Formatting
         const hours = Math.floor(totalMinutes / 60);
         const mins = Math.round(totalMinutes % 60);
         const timeString = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
@@ -41,10 +57,12 @@ export default function StepWindowCalculator() {
         return {
             totalMinutes,
             timeString,
-            baseLaborCost,
+            laborCost,
+            tripCost: trip,
+            totalBaseCost,
             finalPrice
         };
-    }, [qtyBasic, qtyDeep, qtyPatio, overhead, markup]);
+    }, [qty, scope, condition, floorLevel, buffing, tripCost, overhead, markup]);
 
     return (
         <div className="w-full">
@@ -68,45 +86,88 @@ export default function StepWindowCalculator() {
                         </CardTitle>
                     </CardHeader>
                     <CardContent className="p-6 grid grid-cols-1 md:grid-cols-2 gap-8">
-                        {/* Inputs: Quantities & Financials */}
+                        {/* Inputs: Quantities & Settings */}
                         <div className="space-y-6">
 
                             <div className="p-4 bg-blue-50 border-2 border-blue-200 rounded-lg space-y-4">
-                                <h3 className="font-black uppercase tracking-widest text-blue-900 border-b-2 border-blue-200 pb-2">Panel Quantities</h3>
+                                <h3 className="font-black uppercase tracking-widest text-blue-900 border-b-2 border-blue-200 pb-2">Window Specifications</h3>
+
                                 <div className="space-y-2">
-                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Basic Spray & Wipe (Qty)</Label>
+                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Quantity of Windows</Label>
                                     <Input
                                         type="number"
-                                        value={qtyBasic}
-                                        onChange={(e) => setQtyBasic(e.target.value ? Number(e.target.value) : '')}
+                                        value={qty}
+                                        onChange={(e) => setQty(e.target.value ? Number(e.target.value) : '')}
                                         className="border-2 border-black font-bold text-lg"
                                         placeholder="0"
                                     />
                                 </div>
+
                                 <div className="space-y-2">
-                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Deep Clean Squeegee/Frame (Qty)</Label>
-                                    <Input
-                                        type="number"
-                                        value={qtyDeep}
-                                        onChange={(e) => setQtyDeep(e.target.value ? Number(e.target.value) : '')}
-                                        className="border-2 border-black font-bold text-lg"
-                                        placeholder="0"
-                                    />
+                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Scope of Work</Label>
+                                    <select
+                                        value={scope}
+                                        onChange={(e) => setScope(e.target.value as any)}
+                                        className="flex h-10 w-full rounded-md border-2 border-black bg-white px-3 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                        <option value="Exterior Only">Exterior Only (1 Side)</option>
+                                        <option value="Exterior & Interior">Exterior & Interior (2 Sides)</option>
+                                    </select>
                                 </div>
+
                                 <div className="space-y-2">
-                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Large Patio Doors (Qty)</Label>
-                                    <Input
-                                        type="number"
-                                        value={qtyPatio}
-                                        onChange={(e) => setQtyPatio(e.target.value ? Number(e.target.value) : '')}
-                                        className="border-2 border-black font-bold text-lg"
-                                        placeholder="0"
+                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Condition</Label>
+                                    <select
+                                        value={condition}
+                                        onChange={(e) => setCondition(e.target.value as any)}
+                                        className="flex h-10 w-full rounded-md border-2 border-black bg-white px-3 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                        <option value="Standard Maintenance">Standard Maintenance</option>
+                                        <option value="Post-Construction">Post-Construction (x2.0 Labor)</option>
+                                    </select>
+                                </div>
+
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Floor Level</Label>
+                                    <select
+                                        value={floorLevel}
+                                        onChange={(e) => setFloorLevel(e.target.value as any)}
+                                        className="flex h-10 w-full rounded-md border-2 border-black bg-white px-3 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    >
+                                        <option value="1st Floor">1st Floor</option>
+                                        <option value="2nd Floor">2nd Floor (x1.2 Labor)</option>
+                                        <option value="3rd Floor">3rd Floor (x1.5 Labor)</option>
+                                    </select>
+                                </div>
+
+                                <div className="flex items-center space-x-3 pt-2">
+                                    <input
+                                        type="checkbox"
+                                        id="buffing"
+                                        checked={buffing}
+                                        onChange={(e) => setBuffing(e.target.checked)}
+                                        className="w-5 h-5 border-2 border-black rounded"
                                     />
+                                    <Label htmlFor="buffing" className="text-sm font-bold uppercase tracking-wider text-slate-700 cursor-pointer">
+                                        Include Detail Buffing (+1 min / side)
+                                    </Label>
                                 </div>
                             </div>
 
                             <div className="p-4 bg-slate-50 border-2 border-slate-200 rounded-lg space-y-4">
                                 <h3 className="font-black uppercase tracking-widest text-slate-700 border-b-2 border-slate-200 pb-2">Financial Overrides</h3>
+
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Trip Cost ($)</Label>
+                                    <Input
+                                        type="number"
+                                        value={tripCost}
+                                        onChange={(e) => setTripCost(e.target.value ? Number(e.target.value) : '')}
+                                        className="border-2 border-black font-bold text-lg"
+                                        placeholder="0.00"
+                                    />
+                                </div>
+
                                 <div className="grid grid-cols-2 gap-4">
                                     <div className="space-y-2">
                                         <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Overhead (%)</Label>
@@ -139,8 +200,13 @@ export default function StepWindowCalculator() {
                             </div>
 
                             <div className="flex justify-between border-b border-gray-700 pb-2 items-end">
-                                <span className="font-bold uppercase tracking-widest text-sm text-gray-400">Base Labor Cost:</span>
-                                <span className="font-black text-xl">${windowVals.baseLaborCost.toFixed(2)}</span>
+                                <span className="font-bold uppercase tracking-widest text-sm text-gray-400">Labor Cost:</span>
+                                <span className="font-black text-xl">${windowVals.laborCost.toFixed(2)}</span>
+                            </div>
+
+                            <div className="flex justify-between border-b border-gray-700 pb-2 items-end">
+                                <span className="font-bold uppercase tracking-widest text-sm text-gray-400">Fixed Trip Cost:</span>
+                                <span className="font-black text-xl">${windowVals.tripCost.toFixed(2)}</span>
                             </div>
 
                             <div className="flex justify-between pt-4 items-end">
@@ -173,13 +239,15 @@ export default function StepWindowCalculator() {
                     <h3 className="text-xl print:text-lg font-black uppercase tracking-widest bg-black text-white p-3 print:p-2 mb-6 print:mb-4">Scope of Work</h3>
                     <div className="space-y-10 print:space-y-4">
 
-                        {windowVals.totalMinutes > 0 && (
+                        {Number(qty) > 0 && (
                             <div className="border-l-4 border-blue-600 pl-6 print:pl-4 print:break-inside-avoid">
                                 <h4 className="text-xl print:text-lg font-black uppercase tracking-wider">Professional Window Cleaning</h4>
                                 <div className="mt-4 print:mt-2 space-y-1">
-                                    {Number(qtyBasic) > 0 && <p className="text-slate-600 font-bold text-lg print:text-sm">• Basic Spray & Wipe: {Number(qtyBasic).toLocaleString()} panels</p>}
-                                    {Number(qtyDeep) > 0 && <p className="text-slate-600 font-bold text-lg print:text-sm">• Deep Clean Squeegee/Frame: {Number(qtyDeep).toLocaleString()} panels</p>}
-                                    {Number(qtyPatio) > 0 && <p className="text-slate-600 font-bold text-lg print:text-sm">• Large Patio Doors: {Number(qtyPatio).toLocaleString()} doors</p>}
+                                    <p className="text-slate-600 font-bold text-lg print:text-sm">• Windows Traced: {Number(qty).toLocaleString()} Panels</p>
+                                    <p className="text-slate-600 font-bold text-lg print:text-sm">• Cleaning Scope: {scope}</p>
+                                    <p className="text-slate-600 font-bold text-lg print:text-sm">• Site Condition: {condition}</p>
+                                    <p className="text-slate-600 font-bold text-lg print:text-sm">• Height Restriction: {floorLevel}</p>
+                                    <p className="text-slate-600 font-bold text-lg print:text-sm">• Detail Buffing: {buffing ? 'Included' : 'Not Included'}</p>
                                 </div>
                                 <div className="mt-8 print:mt-4 flex justify-between items-end border-b-2 border-slate-200 pb-2 print:pb-1">
                                     <span className="text-sm print:text-xs font-bold uppercase tracking-widest text-slate-500">Project Investment:</span>
@@ -188,7 +256,7 @@ export default function StepWindowCalculator() {
                             </div>
                         )}
 
-                        {windowVals.totalMinutes === 0 && (
+                        {Number(qty) === 0 && (
                             <p className="text-slate-500 italic text-lg print:text-sm text-center py-10 print:py-4 border-2 border-dashed border-slate-300">
                                 No window cleaning services selected.
                             </p>
