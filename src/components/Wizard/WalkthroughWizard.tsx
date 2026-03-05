@@ -13,6 +13,7 @@ import StepSiteProfile from './StepSiteProfile';
 import StepBathroomsProfile from './StepBathroomsProfile';
 import StepFinancialDashboard from './StepFinancialDashboard';
 import StepSpecialtyCalculator from './StepSpecialtyCalculator';
+import StepWindowCalculator from './StepWindowCalculator';
 
 export function WalkthroughWizard() {
     const [activeTab, setActiveTab] = React.useState<'janitorial' | 'specialty' | 'windows'>('janitorial');
@@ -151,11 +152,8 @@ export function WalkthroughWizard() {
 
             {/* TAB 3: WINDOW CLEANING */}
             {activeTab === 'windows' && (
-                <div className="flex-grow flex items-center justify-center p-6 bg-slate-50">
-                    <div className="border-4 border-dashed border-slate-300 p-12 text-center rounded-2xl w-full max-w-4xl bg-white shadow-sm">
-                        <h2 className="text-3xl font-black uppercase tracking-widest text-slate-400 mb-4">Window Cleaning Module</h2>
-                        <h3 className="text-xl font-bold uppercase tracking-widest text-blue-500">Ready for Logic</h3>
-                    </div>
+                <div className="flex-grow flex p-6 bg-slate-50">
+                    <StepWindowCalculator />
                 </div>
             )}
 
