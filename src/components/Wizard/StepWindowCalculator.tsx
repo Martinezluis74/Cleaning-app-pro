@@ -5,10 +5,12 @@ import { Label } from '@/components/ui/label';
 
 export default function StepWindowCalculator() {
     // ---- Window Inputs State ----
-    const [qty, setQty] = useState<number | ''>('');
+    const [qty1st, setQty1st] = useState<number | ''>('');
+    const [qty2nd, setQty2nd] = useState<number | ''>('');
+    const [qty3rd, setQty3rd] = useState<number | ''>('');
+
     const [scope, setScope] = useState<'Exterior Only' | 'Exterior & Interior'>('Exterior Only');
     const [condition, setCondition] = useState<'Standard Maintenance' | 'Post-Construction'>('Standard Maintenance');
-    const [floorLevel, setFloorLevel] = useState<'1st Floor' | '2nd Floor' | '3rd Floor'>('1st Floor');
     const [buffing, setBuffing] = useState<boolean>(false);
 
     // ---- Financial State ----
@@ -18,7 +20,9 @@ export default function StepWindowCalculator() {
 
     // ---- Calculation Engine ----
     const windowVals = useMemo(() => {
-        const q = Number(qty) || 0;
+        const q1 = Number(qty1st) || 0;
+        const q2 = Number(qty2nd) || 0;
+        const q3 = Number(qty3rd) || 0;
         const ov = Number(overhead) || 0;
         const mk = Number(markup) || 0;
         const trip = Number(tripCost) || 0;
@@ -26,20 +30,23 @@ export default function StepWindowCalculator() {
         // Multipliers
         const sides = scope === 'Exterior & Interior' ? 2 : 1;
         const conditionMult = condition === 'Post-Construction' ? 2.0 : 1.0;
-        let floorMult = 1.0;
-        if (floorLevel === '2nd Floor') floorMult = 1.2;
-        if (floorLevel === '3rd Floor') floorMult = 1.5;
 
         // Base times per side
         const baseTimePerSide = 3;
         const buffingPerSide = buffing ? 1 : 0;
 
-        // Window Unit Time
+        // Window Unit Time (Base Minutes per window)
         const baseTimeCurrent = baseTimePerSide * sides;
         const buffingCurrent = buffingPerSide * sides;
 
-        // Total minutes formula: Quantity * [(Tiempo Base + Buffing) * Condición * Altura]
-        const totalMinutes = q * ((baseTimeCurrent + buffingCurrent) * conditionMult * floorMult);
+        // Minutos Base Ajustados por Condicion = (3 mins + buffing) * Sides * Condition
+        const adjustedMinsPerWindow = (baseTimeCurrent + buffingCurrent) * conditionMult;
+
+        // Total minutes formula based on specific floor counts
+        const totalMinutes =
+            (q1 * adjustedMinsPerWindow * 1.0) +
+            (q2 * adjustedMinsPerWindow * 1.2) +
+            (q3 * adjustedMinsPerWindow * 1.5);
 
         // Labor Rate ($27/hr = $0.45/min)
         const laborCost = totalMinutes * 0.45;
@@ -55,6 +62,7 @@ export default function StepWindowCalculator() {
         const timeString = hours > 0 ? `${hours}h ${mins}m` : `${mins}m`;
 
         return {
+            totalQty: q1 + q2 + q3,
             totalMinutes,
             timeString,
             laborCost,
@@ -62,7 +70,7 @@ export default function StepWindowCalculator() {
             totalBaseCost,
             finalPrice
         };
-    }, [qty, scope, condition, floorLevel, buffing, tripCost, overhead, markup]);
+    }, [qty1st, qty2nd, qty3rd, scope, condition, buffing, tripCost, overhead, markup]);
 
     return (
         <div className="w-full">
@@ -93,17 +101,37 @@ export default function StepWindowCalculator() {
                                 <h3 className="font-black uppercase tracking-widest text-blue-900 border-b-2 border-blue-200 pb-2">Window Specifications</h3>
 
                                 <div className="space-y-2">
-                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Quantity of Windows</Label>
+                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">1st Floor Windows (Qty)</Label>
                                     <Input
                                         type="number"
-                                        value={qty}
-                                        onChange={(e) => setQty(e.target.value ? Number(e.target.value) : '')}
+                                        value={qty1st}
+                                        onChange={(e) => setQty1st(e.target.value ? Number(e.target.value) : '')}
+                                        className="border-2 border-black font-bold text-lg"
+                                        placeholder="0"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">2nd Floor Windows (Qty)</Label>
+                                    <Input
+                                        type="number"
+                                        value={qty2nd}
+                                        onChange={(e) => setQty2nd(e.target.value ? Number(e.target.value) : '')}
+                                        className="border-2 border-black font-bold text-lg"
+                                        placeholder="0"
+                                    />
+                                </div>
+                                <div className="space-y-2">
+                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">3rd Floor Windows (Qty)</Label>
+                                    <Input
+                                        type="number"
+                                        value={qty3rd}
+                                        onChange={(e) => setQty3rd(e.target.value ? Number(e.target.value) : '')}
                                         className="border-2 border-black font-bold text-lg"
                                         placeholder="0"
                                     />
                                 </div>
 
-                                <div className="space-y-2">
+                                <div className="space-y-2 pt-2">
                                     <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Scope of Work</Label>
                                     <select
                                         value={scope}
@@ -124,19 +152,6 @@ export default function StepWindowCalculator() {
                                     >
                                         <option value="Standard Maintenance">Standard Maintenance</option>
                                         <option value="Post-Construction">Post-Construction (x2.0 Labor)</option>
-                                    </select>
-                                </div>
-
-                                <div className="space-y-2">
-                                    <Label className="text-sm font-bold uppercase tracking-wider text-slate-700">Floor Level</Label>
-                                    <select
-                                        value={floorLevel}
-                                        onChange={(e) => setFloorLevel(e.target.value as any)}
-                                        className="flex h-10 w-full rounded-md border-2 border-black bg-white px-3 py-2 text-sm font-bold focus:outline-none focus:ring-2 focus:ring-blue-500"
-                                    >
-                                        <option value="1st Floor">1st Floor</option>
-                                        <option value="2nd Floor">2nd Floor (x1.2 Labor)</option>
-                                        <option value="3rd Floor">3rd Floor (x1.5 Labor)</option>
                                     </select>
                                 </div>
 
@@ -239,14 +254,18 @@ export default function StepWindowCalculator() {
                     <h3 className="text-xl print:text-lg font-black uppercase tracking-widest bg-black text-white p-3 print:p-2 mb-6 print:mb-4">Scope of Work</h3>
                     <div className="space-y-10 print:space-y-4">
 
-                        {Number(qty) > 0 && (
+                        {windowVals.totalQty > 0 && (
                             <div className="border-l-4 border-blue-600 pl-6 print:pl-4 print:break-inside-avoid">
                                 <h4 className="text-xl print:text-lg font-black uppercase tracking-wider">Professional Window Cleaning</h4>
                                 <div className="mt-4 print:mt-2 space-y-1">
-                                    <p className="text-slate-600 font-bold text-lg print:text-sm">• Windows Traced: {Number(qty).toLocaleString()} Panels</p>
+                                    <p className="text-slate-600 font-bold text-lg print:text-sm mb-2">Windows Traced by Level:</p>
+                                    <ul className="list-disc list-inside text-slate-600 font-bold text-lg print:text-sm pl-2 mb-4">
+                                        {Number(qty1st) > 0 && <li>1st Floor: {Number(qty1st).toLocaleString()} panels</li>}
+                                        {Number(qty2nd) > 0 && <li>2nd Floor: {Number(qty2nd).toLocaleString()} panels</li>}
+                                        {Number(qty3rd) > 0 && <li>3rd Floor: {Number(qty3rd).toLocaleString()} panels</li>}
+                                    </ul>
                                     <p className="text-slate-600 font-bold text-lg print:text-sm">• Cleaning Scope: {scope}</p>
                                     <p className="text-slate-600 font-bold text-lg print:text-sm">• Site Condition: {condition}</p>
-                                    <p className="text-slate-600 font-bold text-lg print:text-sm">• Height Restriction: {floorLevel}</p>
                                     <p className="text-slate-600 font-bold text-lg print:text-sm">• Detail Buffing: {buffing ? 'Included' : 'Not Included'}</p>
                                 </div>
                                 <div className="mt-8 print:mt-4 flex justify-between items-end border-b-2 border-slate-200 pb-2 print:pb-1">
@@ -256,7 +275,7 @@ export default function StepWindowCalculator() {
                             </div>
                         )}
 
-                        {Number(qty) === 0 && (
+                        {windowVals.totalQty === 0 && (
                             <p className="text-slate-500 italic text-lg print:text-sm text-center py-10 print:py-4 border-2 border-dashed border-slate-300">
                                 No window cleaning services selected.
                             </p>
